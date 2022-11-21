@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MNGFeaturesComponent } from './mng-features.component';
+import { ColorPickerComponent } from './color-picker.component';
 
-describe('MNGFeaturesComponent', () => {
-  let component: MNGFeaturesComponent;
-  let fixture: ComponentFixture<MNGFeaturesComponent>;
+describe('ColorPickerComponent', () => {
+  let component: ColorPickerComponent;
+  let fixture: ComponentFixture<ColorPickerComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MNGFeaturesComponent ]
+      declarations: [ ColorPickerComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(MNGFeaturesComponent);
+    fixture = TestBed.createComponent(ColorPickerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

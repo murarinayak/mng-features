@@ -7,7 +7,7 @@
       "projectType": "library",
       "root": "projects/mng-features",
       "sourceRoot": "projects/mng-features/src",
-      "prefix": "lib",
+      "prefix": "mng",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",

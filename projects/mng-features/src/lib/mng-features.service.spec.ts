@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { MngFeaturesService } from './mng-features.service';
+import { MNGFeaturesService } from './mng-features.service';
 
-describe('MngFeaturesService', () => {
-  let service: MngFeaturesService;
+describe('MNGFeaturesService', () => {
+  let service: MNGFeaturesService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(MngFeaturesService);
+    service = TestBed.inject(MNGFeaturesService);
   });
 
   it('should be created', () => {

@@ -1,16 +1,19 @@
 import { NgModule } from '@angular/core';
-import { MngFeaturesComponent } from './mng-features.component';
-
-
+import { MNGFeaturesComponent } from './mng-features.component';
+import { ColorPickerComponent } from './components/color-picker/color-picker.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
-    MngFeaturesComponent
+    MNGFeaturesComponent,
+    ColorPickerComponent,
   ],
   imports: [
+    CommonModule,
   ],
   exports: [
-    MngFeaturesComponent
+    MNGFeaturesComponent,
+    ColorPickerComponent,
   ]
 })
-export class MngFeaturesModule { }
+export class MNGFeaturesModule { }

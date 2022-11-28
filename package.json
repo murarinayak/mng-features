@@ -3,11 +3,12 @@
   "version": "1.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --port=4300",
     "build": "npm run build:lib",
     "build:lib": "ng build mng-features",
     "build:demo": "ng build demo",
     "publish": "cd dist/mng-features && npm publish",
+    "pack": "cd dist/mng-features && npm pack",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },

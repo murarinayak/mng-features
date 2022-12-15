@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
@@ -10,7 +11,7 @@ import { BasicLayoutComponent } from './basic-layout/basic-layout.component';
 import { FullLayoutComponent } from './full-layout/full-layout.component';
 import { PageLayoutComponent } from './page-layout/page-layout.component';
 import { FooterComponent } from './footer/footer.component';
-import { CommonModule } from '@angular/common';
+import { HeaderModule } from '../../../header/header.module';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { CommonModule } from '@angular/common';
     MatSidenavModule,
     MatListModule,
     MatIconModule,
+    HeaderModule,
   ],
   exports: [
     BasicLayoutComponent,

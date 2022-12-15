@@ -1,0 +1,19 @@
+<mat-toolbar color="primary" class="main-nav">
+  <mat-toolbar-row>
+    <button *ngIf="mobileQuery.matches && !isDashboard; else showMenuIcon" mat-icon-button (click)="onBackClick()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <ng-template #showMenuIcon>
+      <button mat-icon-button color="" aria-hidden="false" aria-label="Toggle sidenav" (click)="onMenuIconClick()">
+        <mat-icon>sort</mat-icon>
+      </button>
+    </ng-template>
+    <a mat-button class="docs-button" routerLink="/dashboard" aria-label="My Finance App">
+      <span>{{ headerTitle }}</span>
+    </a>
+    <div class="flex-spacer"></div>
+    <button mat-icon-button (click)="logout()">
+      <mat-icon>logout</mat-icon>
+    </button>
+  </mat-toolbar-row>
+</mat-toolbar>

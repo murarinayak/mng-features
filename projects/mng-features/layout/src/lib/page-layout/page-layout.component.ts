@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, OnDestroy, ChangeDetectorRef } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+// import { NavigationEnd, Router } from '@angular/router';
 import { BreakpointObserver, Breakpoints, MediaMatcher } from '@angular/cdk/layout';
-import { Location } from '@angular/common';
-import { filter, map, Observable } from 'rxjs';
+// import { Location } from '@angular/common';
+// import { filter, map, Observable } from 'rxjs';
 
 // import { NAV_LINKS } from '../../../helpers/constants';
 // import { environment } from 'src/environments/environment';
@@ -19,19 +19,17 @@ const NAV_LINKS = [
   selector: 'app-page-layout',
   templateUrl: './page-layout.component.html'
 })
-export class PageLayoutComponent implements OnInit, OnDestroy {
+export class PageLayoutComponent {
 
   @Input() title = '';
 
-  headerTitle = 'My Finance v3';
+  // headerTitle = 'My Finance v3';
 
   appVersion = 'environment.version';
   links = NAV_LINKS;
   mobileQuery: MediaQueryList;
-
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(map(result => result.matches));
-  isDashboard = true;
-  
+  // isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(map(result => result.matches));
+  // isDashboard = true;
   private _mobileQueryListener: () => void;
 
   get sections() {
@@ -43,9 +41,9 @@ export class PageLayoutComponent implements OnInit, OnDestroy {
   }
 
   constructor(
-    private router: Router,
-    private location: Location,
-    private breakpointObserver: BreakpointObserver,
+    // private router: Router,
+    // private location: Location,
+    // private breakpointObserver: BreakpointObserver,
     changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher,
     // private appService: AppService
@@ -54,11 +52,11 @@ export class PageLayoutComponent implements OnInit, OnDestroy {
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addEventListener('change', this._mobileQueryListener);
 
-    // this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event: NavigationEnd) => {
-    this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event: any) => {
-      console.log('event', event);
-      this.isDashboard = event.urlAfterRedirects === '/dashboard/list';
-    });
+    // // this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event: NavigationEnd) => {
+    // this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event: any) => {
+    //   console.log('event', event);
+    //   this.isDashboard = event.urlAfterRedirects === '/dashboard/list';
+    // });
   }
 
   ngOnInit() {
@@ -71,14 +69,14 @@ export class PageLayoutComponent implements OnInit, OnDestroy {
     }
   }
 
-  onBackClick() {
-    this.location.back();
-  }
+  // onBackClick() {
+  //   this.location.back();
+  // }
 
-  logout() {
-    localStorage.clear();
-    this.router.navigate(['auth/login']);
-  }
+  // logout() {
+  //   localStorage.clear();
+  //   this.router.navigate(['auth/login']);
+  // }
 
   ngOnDestroy(): void {
     this.mobileQuery.removeEventListener('change', this._mobileQueryListener);

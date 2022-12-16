@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { from, map, of, switchMap, tap } from 'rxjs';
-import { LoggerService } from '../../../../shared/src/lib/services/logger.service';
-
-import { UserService } from '../../../../shared/src/lib/services/user.service';
-import { IAuthUser } from '../../../../shared/src/lib/models/common.model';
+import { LoggerService, UserService, IAuthUser } from 'mng-features/shared';
 
 @Injectable({
   providedIn: 'root'

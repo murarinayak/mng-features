@@ -1,5 +1,5 @@
 // TODO - This needs to be passed via configuration
-import { environment } from '../../../../../../../../src/environments/environment';
+// import { environment } from '../../../../../../../../src/environments/environment';
 
 export const enum LocalStorageCommonKeys {
   USER_INFO = 'USER_INFO'
@@ -20,5 +20,5 @@ export const API_URL = (url: string, params?: { [key: string]: string }) => {
       paramsC += `${key}=${params[key]}&`;
     });
   }
-  return environment.API_URL + urlToApply + paramsC;
+  return 'environment.API_URL' + urlToApply + paramsC;
 };

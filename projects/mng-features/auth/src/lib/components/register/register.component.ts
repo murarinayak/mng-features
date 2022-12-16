@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { ToastService } from '../../../../../shared/src/lib/services/toast.service';
-import { UserService } from '../../../../../shared/src/lib/services/user.service';
-import { User } from '../../../../../shared/src/lib/models/common.model';
+import { ToastService, UserService, User } from 'mng-features/shared';
 
 @Component({
   selector: 'app-register',
@@ -20,24 +18,23 @@ export class RegisterComponent {
     private toastService: ToastService
   ) { }
 
-  register(firstName, lastName, username, password) {
+  register(firstName: string, lastName: string, username: string, password: string) {
     // this.loading = true;
     this.user = new User();
     this.user.firstName = firstName;
     this.user.lastName = lastName;
     this.user.username = username;
     this.user.password = password;
-    this.userService.signUp(this.user)
-      .subscribe(
-        data => {
-          this.toastService.success('Registration successful');
-          this.router.navigate(['/auth/login']);
-        },
-        error => {
-          this.toastService.error(error);
-          this.loading = false;
-        }
-      );
+    this.userService.signUp(this.user).subscribe({
+      next: data => {
+        this.toastService.success('Registration successful');
+        this.router.navigate(['/auth/login']);
+      },
+      error: error => {
+        this.toastService.error(error);
+        this.loading = false;
+      }
+    });
   }
 
 }

@@ -2,12 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import firebase from 'firebase/compat/app';
 
-import { ToastService } from '../../../../../shared/src/lib/services/toast.service';
-import { StorageService } from '../../../../../shared/src/lib/services/storage.service';
-import { UserService } from '../../../../../shared/src/lib/services/user.service';
 import { AuthService } from '../../services/auth.service';
-import { LocalStorageCommonKeys } from '../../../../../shared/src/lib/common/constants'
-import { IResponseModel, User } from '../../../../../shared/src/lib/models/common.model';
+import { ToastService, StorageService, UserService, LocalStorageCommonKeys, IResponseModel, User } from 'mng-features/shared';
 
 @Component({
   selector: 'app-login',

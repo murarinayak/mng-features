@@ -7,11 +7,11 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 
+import { HeaderModule } from 'mng-features/header';
 import { BasicLayoutComponent } from './basic-layout/basic-layout.component';
 import { FullLayoutComponent } from './full-layout/full-layout.component';
 import { PageLayoutComponent } from './page-layout/page-layout.component';
 import { FooterComponent } from './footer/footer.component';
-import { HeaderModule } from '../../../header/header.module';
 
 @NgModule({
   declarations: [

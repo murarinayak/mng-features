@@ -5,13 +5,12 @@
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
-    "strict": true,
+    "strict": false,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
     "paths": {
-      "mng-features": [ "src/public-api" ],
-      "mng-features/*": [ "src/lib/*/public-api" ]
+      "mng-features/*": ["projects/mng-features/*/src/public-api"]
     },
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,

@@ -10,7 +10,7 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AuthRoutingModule } from './auth-routing.module';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
-// import { SharedModule } from 'src/app/shared/shared.module';
+import { SharedModule } from 'mng-features/shared';
 import { GoogleLoginMatIconComponent } from './components/google-login-mat-icon/google-login-mat-icon.component';
 
 
@@ -22,7 +22,7 @@ import { GoogleLoginMatIconComponent } from './components/google-login-mat-icon/
   ],
   imports: [
     CommonModule,
-    // SharedModule,
+    SharedModule,
     RouterModule,
     AuthRoutingModule,
     FormsModule,

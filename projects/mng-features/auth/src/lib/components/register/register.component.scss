@@ -1,0 +1,26 @@
+
+.card {
+    margin: 10% auto;
+    max-width: 500px;
+}
+.card > * {
+    width: 100%;
+}
+input {    
+    font-size: 16px;
+}
+mat-card-header > * {
+    width: 100%;
+}
+mat-card-content > * {
+    width: 100%;
+}
+mat-card-footer {
+    margin: 0;
+}
+mat-card-footer > * {
+    width: 100%;
+}
+.mat-card-title {
+    font-size: 20px;
+}

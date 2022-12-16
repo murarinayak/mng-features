@@ -8,4 +8,3 @@ export * from './lib/mng-features.module';
 
 export * from './lib/components/color-picker/color-picker.component';
 
-export * from './lib/services/request/request.service';

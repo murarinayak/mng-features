@@ -33,10 +33,10 @@ export class UserService {
   list() {}
 
   get(id: string): Observable<IAuthUser | undefined> {
-    // return this.ngFirestore.collection(CollName.USERS).doc(id).get().pipe(
-    //   map((ds: DocumentSnapshot<IAuthUser>) => ds.data())
-    // );
-    return of(undefined);
+    return this.ngFirestore.collection(CollName.USERS).doc(id).get().pipe(
+      map((ds: DocumentSnapshot<IAuthUser>) => ds.data())
+    );
+    // return of(undefined);
   }
 
   post(item: IAuthUser) {

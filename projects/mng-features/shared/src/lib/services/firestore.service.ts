@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, QueryFn } from '@angular/fire/compat/firestore';
+import { AngularFirestore, DocumentSnapshot, QueryFn } from '@angular/fire/compat/firestore';
 import { from, map, Observable } from 'rxjs';
 import { IDocumentModel } from '../models/common.model';
 
@@ -33,26 +33,36 @@ export class FirestoreService<T extends { id?: string }> implements IFirestoreSe
     );
   }
 
-  get(itemID: string) {
-    return this.ngFirestore.collection(this.collName).doc(itemID).valueChanges().pipe(
-      // map((item: T) => {
-      //   item.id = itemID;
-      //   return item;
-      // })
+  get(itemID: string): Observable<T> {
+    return this.ngFirestore.collection(this.collName).doc(itemID).get().pipe(
+      map((item: DocumentSnapshot<T>) => {
+        return { id: item.id, ...item.data() };
+      })
     );
+  }
+
+  /**
+   * This works to update when not sure if the document exists.
+   * @param item T
+   * @returns 
+   */
+  set(item: T): Observable<void> {
+    const docID: string = item.id;
+    delete item.id;
+    return from(this.ngFirestore.collection(this.collName).doc(docID).set(item));
   }
 
   post(item: T) {
     return from(this.ngFirestore.collection(this.collName).add(item));
   }
 
-  put(item: T) {
+  put(item: T): Observable<void> {
     const docID: string = item.id;
     delete item.id;
     return from(this.ngFirestore.collection(this.collName).doc(docID).update(item));
   }
 
-  delete(itemID: string) {
+  delete(itemID: string): Observable<void> {
     return from(this.ngFirestore.collection(this.collName).doc(itemID).delete());
   }
 

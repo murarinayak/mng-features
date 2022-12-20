@@ -6,7 +6,7 @@ export const enum LocalStorageCommonKeys {
 }
 
 export const enum CollName {
-  USERS = 'USERS'
+  USERS = 'users'
 }
 
 export const API_URL = (url: string, params?: { [key: string]: string }) => {

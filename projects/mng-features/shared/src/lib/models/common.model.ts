@@ -43,5 +43,5 @@ export interface IAuthUser {
   phoneNumber: string;
   photoURL: string;
   isAnonymous: boolean;
-  categories?: Array<IOption>;
+  // categories?: Array<IOption>;
 }

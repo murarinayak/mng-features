@@ -1,0 +1,26 @@
+<div class="card post-item mb-2">
+  <img [src]="post.urlToImage" class="card-img-top" alt="..." />
+  <div class="card-body">
+    <div class="row article-info">
+      <!-- <div class="col-auto">
+        <img [src]="post['_embedded']['author'][0]['avatar_urls']['48']" class="rounded-circle" alt="...">
+      </div> -->
+      <div class="col article-details">
+        <span>{{ post.author }} : </span>
+        <span>{{ post.publishedAt }}</span>
+      </div>
+    </div>
+    <h4 class="card-title post-title mt-2" [innerHTML]="post.title"></h4>
+    <div class="post-content">
+      <p>{{ post.description }} <a class="btn btn-link btn-sm" href="{{ post.url }}" target="_blank">More...</a></p>
+    </div>
+    <div class="row post-footer">
+      <!-- <div class="col">
+        <span *ngFor="let tag of post['_embedded']['wp:term'][1]" class="badge bg-warning me-1">{{ tag.name }}</span>
+      </div>
+      <div class="col-auto">
+        <a class="btn btn-link btn-sm" href="{{ post.url }}" target="_blank">More...</a>
+      </div> -->
+    </div>
+  </div>
+</div>

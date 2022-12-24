@@ -1,0 +1,13 @@
+<img [src]="post?.jetpack_featured_media_url" alt="" class="w-100">
+<div class="container my-3">
+  <div class="row">
+    <div class="col-auto my-2">{{ post?.date | date }}</div>
+    <div class="col">
+      <mat-chip-listbox>
+        <mat-chip-option *ngFor="let tag of post?.tags">{{ tag }}</mat-chip-option>
+      </mat-chip-listbox>
+    </div>
+  </div>
+  <h2><span [innerHTML]="post?.title.rendered"></span></h2>
+  <p [innerHtml]="post?.content.rendered"></p>
+</div>

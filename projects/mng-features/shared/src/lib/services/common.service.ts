@@ -1,10 +1,20 @@
-import { AuthService } from 'projects/mng-features/auth/services/auth.service';
+import { Inject, Injectable } from '@angular/core';
+import { AuthService } from 'mng-features/auth';
 import { getServerTimestamp } from '../common/utils';
-import { IDocumentModel } from '../models/common.model';
+import { IDocumentModel, IEnvironment } from '../models/common.model';
 
+@Injectable({
+  providedIn: 'root'
+})
 export class CommonService {
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    @Inject('env') private environment: IEnvironment,
+    private authService: AuthService
+  ) {}
+
+  getApiUrl() { return this.environment.API_URL; }
+  getAppName() { return this.environment.appName; }
 
   getDefaultDoc(): IDocumentModel {
     return {

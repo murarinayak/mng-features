@@ -1,41 +1,13 @@
-<!-- <div class="card post-item">
-  <img [src]="post['_embedded']['wp:featuredmedia'][0]['media_details'].sizes['medium'].source_url" class="card-img-top"
-    alt="..." />
-  <div class="card-body">
-    <div class="row article-info">
-      <div class="col-auto">
-        <img [src]="post['_embedded']['author'][0]['avatar_urls']['48']" class="rounded-circle" alt="...">
-      </div>
-      <div class="col article-details">
-        <span>{{ post['_embedded']['author'][0]['name'] }}</span>
-        <span>{{ post.dateModified }}</span>
-      </div>
-    </div>
-    <h4 class="card-title post-title mt-2" [innerHTML]="post?.title?.rendered"></h4>
-    <div class="row post-footer">
-      <div class="col">
-        <span *ngFor="let tag of post['_embedded']['wp:term'][1]" class="badge bg-warning me-1">{{ tag.name }}</span>
-      </div>
-      <div class="col-auto">
-        <a class="btn btn-link btn-sm" href="{{ post.link }}" target="_blank">More...</a>
-      </div>
-    </div>
-  </div>
-</div> -->
-
-<div class="card post-item">
+<div class="card post-item" (click)="onLinkClick()">
   <img [src]="post.jetpack_featured_media_url" class="card-img-top"
     [alt]="post?.title.rendered" />
   <div class="card-body">
-    <div class="row article-info">
-      <div class="col article-details">
-        <span>{{ post.date | date }}</span>
-      </div>
-    </div>
-    <!-- <a class="link" [routerLink]="" (click)="onLinkClick()"><h5 class="card-title post-title mt-2" [innerHTML]="post?.title?.rendered"></h5></a> -->
-    <a class="link" [href]="post?.link" (click)="onLinkClick()"><h5 class="card-title post-title mt-2" [innerHTML]="post?.title?.rendered"></h5></a>
-    <div class="post-footer">
+    <p class="text-center">
+      <span>{{ post.date | date }}</span>
+    </p>
+    <h3 class="text-center mb-0"><span [innerHTML]="post?.title?.rendered"></span></h3>
+    <!-- <div class="post-footer">
       <p [innerHtml]="post?.excerpt.rendered"></p>
-    </div>
+    </div> -->
   </div>
 </div>

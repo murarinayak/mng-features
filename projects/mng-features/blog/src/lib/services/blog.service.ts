@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-const URL = 'https://murarinayak.com/blog/wp-json/wp/v2/posts?_embed';
+const URL = 'https://murarinayak.com/blog/wp-json/wp/v2/posts';
 
 @Injectable({
   providedIn: 'root'
@@ -22,10 +22,15 @@ export class BlogService {
   getPosts(currentPage: number) {
     this.currentPage = currentPage;
     const fields = ['id', 'title', 'excerpt', 'jetpack_featured_media_url', 'date', 'link'];
-    let url = `${URL}&page=${this.currentPage}&per_page=${this.postsPerPage}`;
+    let url = `${URL}?_embed&page=${this.currentPage}&per_page=${this.postsPerPage}`;
     if (fields.length) {
       url = url.concat('&_fields=', fields.join(','));
     }
+    return this.httpClient.get(url);
+  }
+
+  get(id: string) {
+    const url = `${URL}/${id}`;
     return this.httpClient.get(url);
   }
 }

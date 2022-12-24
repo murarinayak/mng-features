@@ -2,6 +2,11 @@ import firebase from 'firebase/compat/app'
 
 export type IFirestoreTimestamp = firebase.firestore.Timestamp;
 
+export interface IEnvironment {
+  appName: string;
+  API_URL: string;
+}
+
 export interface IDocumentModel {
   id?: string;
   v?: number;

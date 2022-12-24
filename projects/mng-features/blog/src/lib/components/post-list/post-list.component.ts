@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { IWpPost } from 'mng-features/blog';
 import { BlogService } from '../../services/blog.service';
 
 @Component({
-  selector: 'app-blog-list',
-  templateUrl: './blog-list.component.html'
+  selector: 'mng-post-list',
+  templateUrl: './post-list.component.html',
+  styleUrls: ['./post-list.component.css']
 })
-export class BlogListComponent implements OnInit {
+export class PostListComponent {
 
   currentPage = 1;
   posts: Array<IWpPost> = [];
@@ -35,5 +36,4 @@ export class BlogListComponent implements OnInit {
   getCurrentPage() {
     return this.blogService.getCurrentPage();
   }
-
 }

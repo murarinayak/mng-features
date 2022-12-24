@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { IPost } from '../common/common.model';
+import { IPost } from '../../common/common.model';
 
 @Component({
   selector: 'app-post-item-short',

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonService } from 'mng-features/shared';
 // import { environment } from 'src/environments/environment';
 
 @Component({
@@ -7,11 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
+  appName: string;
   appVersion = 'environment.version';
   
-  constructor() { }
+  constructor(
+    private commonService: CommonService,
+  ) { }
 
   ngOnInit(): void {
+    this.appName = this.commonService.getAppName();
   }
 
 }

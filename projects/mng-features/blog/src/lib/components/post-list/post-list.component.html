@@ -2,33 +2,21 @@
   <h1>Recent Posts</h1>
   <p>Fetched from developer's blog</p>
 </div>
-<section class="primary-section container">
+<section class="primary-section container-fluid">
   <div class="row">
     <div *ngFor="let post of posts" class="col-md-4 col-sm-6 mb-3 hover-scale">
       <app-post-item [post]="post"></app-post-item>
     </div>
   </div>
-  <!-- <article *ngFor="let post of posts">
-    <h3>{{ post?.title?.rendered }}</h3>
-    <div [innerHTML]="post?.excerpt?.rendered"></div>
-    <hr>
-  </article> -->
   <div class="text-center my-4">
-    <!-- <button class="btn btn-primary" (click)="getPosts(1)">PREV</button> -->
-    <!-- <span class="badge rounded-pill bg-secondary"><h5>{{ currentPage }}</h5></span> -->
-    <!-- <button mat-mini-fab class="mx-2" aria-label="Example icon button with a home icon">
-      {{ currentPage }}
-    </button> -->
     <button mat-mini-fab color="accent" (click)="getPosts(1)">
       <mat-icon>chevron_left</mat-icon>
     </button>
-    <!-- <h5 class="mx-2">        {{ currentPage }}      </h5> -->
     <button mat-icon-button color="accent" class="mx-2" aria-label="Example icon button with a home icon">
       <h6>{{ currentPage }}</h6>
     </button>
     <button mat-mini-fab color="accent" (click)="getPosts(2)">
       <mat-icon>chevron_right</mat-icon>
     </button>
-    <!-- <button class="btn btn-primary" (click)="getPosts(2)">NEXT</button> -->
   </div>
 </section>

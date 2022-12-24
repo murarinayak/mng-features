@@ -12,13 +12,18 @@ export interface IPost {
 }
 
 export interface IWpPost {
+  id: number;
   jetpack_featured_media_url: string;
+  title: {
+    rendered: string;
+  };
   excerpt: {
     rendered: string;
   };
-  title: {
+  content: {
     rendered: string;
   };
   link: string;
   date: string;
+  tags: Array<number>;
 }

@@ -2,6 +2,7 @@ import { BreakpointObserver, Breakpoints, MediaMatcher } from '@angular/cdk/layo
 import { Location } from '@angular/common';
 import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { CommonService } from 'mng-features/shared';
 import { filter, map, Observable } from 'rxjs';
 
 @Component({
@@ -12,10 +13,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   @Input() drawer: any;
 
-  headerTitle = 'My Finance';
-  mobileQuery: MediaQueryList = this.media.matchMedia(Breakpoints.Handset);
-  mobileQueryListener = () => this.changeDetectorRef.detectChanges();
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(map(result => result.matches));
+  headerTitle = 'My App';
+  mobileQuery: MediaQueryList;
+  mobileQueryListener: () => void;
+  isHandset$: Observable<boolean>;
   isDashboard = true;
   
   constructor(
@@ -24,7 +25,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private changeDetectorRef: ChangeDetectorRef,
     private media: MediaMatcher,
     private location: Location,
-  ) {}
+    private commonService: CommonService,
+  ) {
+    this.headerTitle = this.commonService.getAppName();
+    this.mobileQuery = this.media.matchMedia(Breakpoints.Handset);
+    this.mobileQueryListener = () => this.changeDetectorRef.detectChanges();
+    this.isHandset$ = this.breakpointObserver.observe(Breakpoints.Handset).pipe(map(result => result.matches));
+  }
 
   ngOnInit() {
     this.mobileQuery.addEventListener('change', this.mobileQueryListener);

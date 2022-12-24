@@ -111,4 +111,13 @@ export class AuthService {
   //     })
   //   );
   // }
+
+  getUID() {
+    return this.userService.getLoggedInUserID();
+  }
+
+  logout() {
+    // remove user from local storage to log user out
+    localStorage.removeItem('currentUser');
+  }
 }

@@ -8,7 +8,9 @@ import { LocalStorageCommonKeys, CollName, API_URL } from '../common/constants'
 import { IAuthUser, IResponseModel, User } from '../models/common.model';
 import { AngularFirestore, DocumentSnapshot } from '@angular/fire/compat/firestore';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class UserService {
 
   private loggedInUser: IAuthUser;

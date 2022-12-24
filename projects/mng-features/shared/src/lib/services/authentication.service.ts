@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { UserService } from './user.service';
+// import { UserService } from './user.service';
 
 @Injectable()
 export class AuthenticationService {
 
   constructor(
     private http: HttpClient,
-    private userService: UserService
+    // private userService: UserService
   ) { }
 
   login(username: string, password: string) {
@@ -22,15 +22,6 @@ export class AuthenticationService {
         return user;
       })
     );
-  }
-
-  getUID() {
-    return this.userService.getLoggedInUserID();
-  }
-
-  logout() {
-    // remove user from local storage to log user out
-    localStorage.removeItem('currentUser');
   }
 
 }

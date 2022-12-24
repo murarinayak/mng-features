@@ -1,15 +1,27 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+
+import { BlogRoutingModule } from './blog-routing.module';
+import { BlogListComponent } from './components/blog-list/blog-list.component';
+import { PostItemComponent } from './components/post-item/post-item.component';
 import { PostItemShortComponent } from './post-item-short/post-item-short.component';
 
 @NgModule({
   declarations: [
-    PostItemShortComponent
+    BlogListComponent,
+    PostItemComponent,
+    PostItemShortComponent,
   ],
   imports: [
-    
+    CommonModule,
+    BlogRoutingModule,
+    MatButtonModule,
+    MatIconModule,
   ],
   exports: [
-    PostItemShortComponent
+    PostItemShortComponent,
   ]
 })
-export class BlogModule {}
+export class BlogModule { }

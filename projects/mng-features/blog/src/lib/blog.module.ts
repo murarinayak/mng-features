@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
@@ -16,6 +17,7 @@ import { PostItemShortComponent } from './post-item-short/post-item-short.compon
   ],
   imports: [
     CommonModule,
+    HttpClientModule,
     BlogRoutingModule,
     MatButtonModule,
     MatIconModule,

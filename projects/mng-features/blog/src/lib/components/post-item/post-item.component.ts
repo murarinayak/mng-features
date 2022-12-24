@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { IWpPost } from '../../common/common.model';
 
 
 @Component({
@@ -7,7 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class PostItemComponent implements OnInit {
 
-  @Input() post;
+  @Input() post: IWpPost;
 
   constructor() { }
 

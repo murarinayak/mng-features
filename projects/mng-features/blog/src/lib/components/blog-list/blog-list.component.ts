@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { IWpPost } from 'mng-features/blog';
 import { BlogService } from '../../services/blog.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { BlogService } from '../../services/blog.service';
 export class BlogListComponent implements OnInit {
 
   currentPage = 1;
-  posts: Array<unknown> = [];
+  posts: Array<IWpPost> = [];
 
   constructor(
     private blogService: BlogService

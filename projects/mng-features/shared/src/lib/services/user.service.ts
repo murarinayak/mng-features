@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { AngularFirestore, DocumentSnapshot } from '@angular/fire/compat/firestore';
 import { from, Observable, of } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
+
 import { StorageService } from './storage.service';
 import { LocalStorageCommonKeys, CollName, API_URL } from '../common/constants'
 // import { API_URL } from '../helpers/constants';
 import { IAuthUser, IResponseModel, User } from '../models/common.model';
-import { AngularFirestore, DocumentSnapshot } from '@angular/fire/compat/firestore';
 
 @Injectable({
   providedIn: 'root'

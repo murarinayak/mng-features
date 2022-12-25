@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IWpPost } from 'mng-features/blog';
+import { IWpPost } from '../../common/common.model';
 import { BlogService } from '../../services/blog.service';
 
 @Component({

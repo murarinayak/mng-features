@@ -1,0 +1,220 @@
+/* You can add global styles to this file, and also import other style files */
+/* @import url( 'https://fonts.googleapis.com/css?family=Roboto:400,700|Material+Icons'); */
+
+/* @import "./assets/styles/bootstrap-helper.scss"; */
+
+/* @import "./assets/styles/material-helper.scss"; */
+
+/* Logo Color: #673AB7 */
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+body {
+  background-color: #F5F5F5;
+  margin: 0;
+
+  app-root {
+    app-page-layout {
+      mat-toolbar.mat-toolbar.main-nav {
+        color: white;
+
+        .mat-mdc-button-base {
+          color: inherit;
+        }
+      }
+
+      mat-sidenav-content.custom-sidenav {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+
+        app-footer {
+          margin-top: auto;
+          background: #EEEEEE;
+          text-align: center;
+
+          p {
+            margin: 0.5rem;
+            font-size: 0.75rem;
+            font-weight: 100;
+
+            span {
+              font-size: 0.5rem;
+            }
+          }
+        }
+      }
+
+      .mat-primary.mat-fab {
+        color: white;
+      }
+    }
+  }
+}
+
+a:hover {
+
+  &.mat-button,
+  &.mat-fab,
+  &.mat-icon-button,
+  &.mat-mini-fab,
+  &.mat-raised-button {
+    color: currentColor;
+    text-decoration: none;
+  }
+}
+
+table {
+  width: 100%;
+
+  th {
+    &.mat-header-cell {
+      font-weight: bold;
+      font-size: 16px;
+    }
+  }
+}
+
+button {
+  outline: none !important;
+}
+
+mat-sidenav {
+  box-shadow: 0 5px 10px 0 rgba(5, 16, 44, .15);
+}
+
+.container-fluid {
+  padding-top: 1rem;
+}
+
+.small-table {
+  overflow-x: scroll !important;
+}
+
+.mat-card-header-text {
+  width: 100%;
+}
+
+a,
+button {
+  &.float-bottom-right {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+  }
+}
+
+mat-list.mat-mdc-list-base mat-list-item.compact,
+mat-selection-list.mat-mdc-list-base mat-list-option.compact {
+  mat-icon.mat-mdc-list-item-icon {
+    color: white;
+    // Increasing the width/heiht of icon cotnainer, as icon will stay at 24px
+    // So the 8px increase in each direction, wil result in available padding of 4px each side
+    width: 32px;
+    height: 32px;
+    padding: 4px;
+    border-radius: 50%;
+  }
+
+  .mat-mdc-list-item-line {
+    padding: 0px;
+
+    &.mini {
+      font-size: 0.75rem;
+    }
+  }
+}
+
+mat-toolbar mat-toolbar-row.mat-toolbar-row {
+  padding: 0px;
+}
+
+// .my-card {
+// 	p {
+// 		margin-bottom: 0;
+// 	}
+
+// 	.header-icons button {
+// 		margin-top: -10px;
+// 		margin-right: -10px;
+// 	}
+// }
+
+.docs-navbar-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 8px 16px;
+
+  >.mat-button {
+    &:last-child {
+      margin-left: auto;
+    }
+  }
+}
+
+.flex-spacer {
+  flex-grow: 1;
+}
+
+.docs-angular-logo {
+  height: 26px;
+  margin: 0 4px 3px 0;
+  vertical-align: middle;
+}
+
+.docs-github-logo {
+  height: 21px;
+  margin: 0 7px 2px 0;
+  vertical-align: middle;
+}
+
+.docs-navbar-link {
+  text-decoration: inherit;
+  flex: 1;
+}
+
+.docs-navbar {
+  display: none;
+}
+
+.docs-navbar-show-small {
+  display: none;
+}
+
+/**
+	* Rules for when the device is detected to be a small screen.
+	* Moves content two rows instead of one.
+	*/
+@media (max-width: 720px) {
+  .docs-navbar-hide-small {
+    display: none;
+  }
+
+  .docs-navbar-show-small {
+    display: block;
+  }
+
+  .docs-navbar {
+    display: flex;
+  }
+
+  .docs-navbar--github-logo {
+    margin: 0;
+  }
+}
+
+mat-nav-list {
+  width: 200px;
+}
+
+mat-sidenav-container {
+  height: calc(100vh - 64px);
+}

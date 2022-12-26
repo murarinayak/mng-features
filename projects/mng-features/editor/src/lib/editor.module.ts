@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-// import { QuillModule } from 'ngx-quill';
+import { QuillModule } from 'ngx-quill';
 
 import { EditorComponent } from './editor/editor.component';
 
@@ -8,7 +8,7 @@ import { EditorComponent } from './editor/editor.component';
     EditorComponent
   ],
   imports: [
-    // QuillModule.forRoot(),?
+    QuillModule.forRoot(),
   ],
   exports: [
     EditorComponent

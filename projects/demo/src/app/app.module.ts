@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { EditorModule } from 'mng-features/editor';
 import { MNGFeaturesModule } from 'projects/mng-features/src/public-api';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -12,7 +13,8 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     MNGFeaturesModule,
-    AppRoutingModule
+    AppRoutingModule,
+    EditorModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

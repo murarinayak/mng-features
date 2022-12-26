@@ -33,8 +33,8 @@ export class LoginComponent implements OnInit {
 
   login(email: string, password: string) {
     console.log(email, password)
-    if (email === 'm') {
-      email = 'contact@murarinayak.com';
+    if (email === 'q') {
+      email = 'demouser1@murarinayak.com';
       password = 'pass@123';
     }
     if (!email || !password) {

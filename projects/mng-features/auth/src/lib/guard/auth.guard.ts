@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { StorageService } from '../services/storage.service';
-import { LocalStorageCommonKeys } from '../common/constants';
+
+import { StorageService, LocalStorageCommonKeys } from 'mng-features/shared';
 
 @Injectable()
 export class AuthGuard implements CanActivate {

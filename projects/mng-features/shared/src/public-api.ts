@@ -2,7 +2,6 @@ export * from './lib/shared.module';
 
 // export * from './lib/page-layout/page-layout.component';
 
-export * from './lib/guards/auth.guard';
 export * from './lib/guards/environment.guard';
 
 export * from './lib/services/authentication.service';

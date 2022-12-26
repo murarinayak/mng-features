@@ -1,18 +1,30 @@
 <mat-toolbar color="primary" class="main-nav">
   <mat-toolbar-row>
-    <button *ngIf="mobileQuery.matches && !isDashboard; else showMenuIcon" mat-icon-button (click)="onBackClick()">
+    <!-- <button *ngIf="mobileQuery.matches && !isDashboard; else showMenuIcon" mat-icon-button (click)="onBackClick()">
       <mat-icon>arrow_back</mat-icon>
     </button>
-    <ng-template #showMenuIcon>
-      <button mat-icon-button color="" aria-hidden="false" aria-label="Toggle sidenav" (click)="onMenuIconClick()">
-        <mat-icon>sort</mat-icon>
-      </button>
-    </ng-template>
-    <a mat-button class="docs-button" routerLink="/" aria-label="My Finance App">
+    <ng-template #showMenuIcon> -->
+    <button *ngIf="showLeftNav" mat-icon-button color="" aria-hidden="false" aria-label="Toggle sidenav"
+      (click)="onMenuIconClick()">
+      <mat-icon>sort</mat-icon>
+    </button>
+    <!-- </ng-template> -->
+    <a mat-button class="docs-button ms-2" routerLink="/" aria-label="My App">
       <span>{{ headerTitle }}</span>
     </a>
-    <button *ngIf="isLoggedIn" mat-icon-button class="ms-auto" (click)="logout()">
-      <mat-icon>logout</mat-icon>
+    <button mat-icon-button class="ms-auto" [matMenuTriggerFor]="menu">
+      <mat-icon>account_circle</mat-icon>
     </button>
   </mat-toolbar-row>
 </mat-toolbar>
+
+<mat-menu #menu="matMenu">
+  <button *ngIf="!isLoggedIn; else showLoggedInMenu" mat-menu-item (click)="onLoginClick()">Login</button>
+  <ng-template #showLoggedInMenu>
+    <button *ngFor="let item of menuItems" mat-menu-item (click)="onMenuItemClick(item)">{{ item.label }}</button>
+    <button *ngIf="isLoggedIn" mat-menu-item (click)="logout()">
+      <mat-icon>logout</mat-icon>
+      Logout
+    </button>
+  </ng-template>
+</mat-menu>

@@ -17,6 +17,7 @@ export class CommonService {
   getAppVersion() { return this.config.environment.appVersion; }
   getApiUrl() { return this.config.environment.apiUrl; }
   getMenuItems() { return this.config.menu; }
+  getShowLeftNav() { return this.config.showLeftNav; }
 
   getDefaultDoc(): IDocumentModel {
     return {

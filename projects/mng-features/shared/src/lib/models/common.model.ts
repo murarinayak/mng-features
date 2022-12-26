@@ -11,6 +11,7 @@ export interface IEnvironment {
 export interface ILibraryConfig {
   environment: IEnvironment;
   menu: Array<IMenuItem>;
+  showLeftNav: boolean;
 }
 
 export interface IDocumentModel {

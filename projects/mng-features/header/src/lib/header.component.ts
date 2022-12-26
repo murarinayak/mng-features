@@ -3,7 +3,7 @@ import { Location } from '@angular/common';
 import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { AuthService } from 'mng-features/auth';
-import { CommonService } from 'mng-features/shared';
+import { CommonService, IMenuItem } from 'mng-features/shared';
 import { filter, map, Observable } from 'rxjs';
 
 @Component({
@@ -15,7 +15,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
   @Input() drawer: any;
 
   headerTitle = 'App';
+  showLeftNav = false;
   isLoggedIn = false;
+  menuItems: Array<IMenuItem>;
   mobileQuery: MediaQueryList;
   mobileQueryListener: () => void;
   isHandset$: Observable<boolean>;
@@ -31,13 +33,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private commonService: CommonService,
   ) {
     this.headerTitle = this.commonService.getAppName();
+    this.showLeftNav = this.commonService.getShowLeftNav();
     this.isLoggedIn = this.authService.isLoggedIn();
     this.mobileQuery = this.media.matchMedia(Breakpoints.Handset);
     this.mobileQueryListener = () => this.changeDetectorRef.detectChanges();
     this.isHandset$ = this.breakpointObserver.observe(Breakpoints.Handset).pipe(map(result => result.matches));
   }
-
+  
   ngOnInit() {
+    this.menuItems = this.commonService.getMenuItems();
     this.mobileQuery.addEventListener('change', this.mobileQueryListener);
     // this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event: NavigationEnd) => {
     this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event: any) => {
@@ -52,8 +56,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
   }
 
+  onMenuItemClick(item: IMenuItem) {
+    if (item.path) {
+      void this.router.navigate([item.path]);
+    }
+  }
+
   onBackClick() {
     this.location.back();
+  }
+
+  onLoginClick() {
+    void this.router.navigate(['auth']);
   }
 
   logout() {

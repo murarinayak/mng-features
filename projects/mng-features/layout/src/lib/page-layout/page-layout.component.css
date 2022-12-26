@@ -1,71 +1,96 @@
 .docs-navbar-header {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    padding: 8px 16px;
-  
-    > .mat-button {
-      &:last-child {
-        margin-left: auto;
-      }
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 8px 16px;
+
+  > .mat-button {
+    &:last-child {
+      margin-left: auto;
     }
   }
-  
-  .flex-spacer {
-    flex-grow: 1;
-  }
-  
-  .docs-angular-logo {
-    height: 26px;
-    margin: 0 4px 3px 0;
-    vertical-align: middle;
-  }
-  
-  .docs-github-logo {
-    height: 21px;
-    margin: 0 7px 2px 0;
-    vertical-align: middle;
-  }
-  
-  .docs-navbar-link {
-    text-decoration: inherit;
-    flex: 1;
-  }
-  
-  .docs-navbar {
+}
+
+.flex-spacer {
+  flex-grow: 1;
+}
+
+.docs-angular-logo {
+  height: 26px;
+  margin: 0 4px 3px 0;
+  vertical-align: middle;
+}
+
+.docs-github-logo {
+  height: 21px;
+  margin: 0 7px 2px 0;
+  vertical-align: middle;
+}
+
+.docs-navbar-link {
+  text-decoration: inherit;
+  flex: 1;
+}
+
+.docs-navbar {
+  display: none;
+}
+
+.docs-navbar-show-small {
+  display: none;
+}
+
+/**
+  * Rules for when the device is detected to be a small screen.
+  * Moves content two rows instead of one.
+  */
+@media (max-width: 720px) {
+  .docs-navbar-hide-small {
     display: none;
   }
-  
+
   .docs-navbar-show-small {
-    display: none;
-  }
-  
-  /**
-    * Rules for when the device is detected to be a small screen.
-    * Moves content two rows instead of one.
-    */
-  @media (max-width: 720px) {
-    .docs-navbar-hide-small {
-      display: none;
-    }
-  
-    .docs-navbar-show-small {
-      display: block;
-    }
-  
-    .docs-navbar {
-      display: flex;
-    }
-  
-    .docs-navbar--github-logo {
-      margin: 0;
-    }
+    display: block;
   }
 
-  mat-nav-list {
-    width: 200px;
+  .docs-navbar {
+    display: flex;
   }
 
-  mat-sidenav-container {
-    height: calc(100vh - 64px);
+  .docs-navbar--github-logo {
+    margin: 0;
   }
+}
+
+mat-nav-list {
+  width: 200px;
+}
+
+mat-sidenav-container {
+  height: calc(100vh - 64px);
+}
+
+mat-toolbar.mat-toolbar.main-nav {
+  color: white;
+  .mat-mdc-button-base {
+    color: inherit;
+  }	
+}
+mat-sidenav-content.custom-sidenav {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+app-footer {
+  margin-top: auto;
+  background: #EEEEEE;
+  text-align: center;
+}
+app-footer p {
+  margin: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 100;
+}
+app-footer p span { font-size: 0.5rem; }
+.mat-primary.mat-fab { color: white; }

@@ -1,14 +1,17 @@
-export interface IPost {
-  id: string;
-  name: string;
-  title: string;
-  excerpt: string;
+import { IDocumentModel } from 'mng-features/shared';
 
-  url: string;
-  urlToImage: string;
-  author: string;
-  publishedAt: string;
-  description: string;
+export interface IStory extends IDocumentModel {
+  featuredImageUrl?: string;
+  title?: string;
+  excerpt?: string;
+  content?: string;
+  tags?: Array<string>;
+
+  url?: string;
+  urlToImage?: string;
+  author?: string;
+  publishedAt?: string;
+  description?: string;
 }
 
 export interface IWpPost {

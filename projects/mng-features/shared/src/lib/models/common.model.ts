@@ -4,7 +4,13 @@ export type IFirestoreTimestamp = firebase.firestore.Timestamp;
 
 export interface IEnvironment {
   appName: string;
-  API_URL: string;
+  appVersion: string;
+  apiUrl: string;
+}
+
+export interface ILibraryConfig {
+  environment: IEnvironment;
+  menu: Array<IMenuItem>;
 }
 
 export interface IDocumentModel {
@@ -14,6 +20,12 @@ export interface IDocumentModel {
   uidUpdatedBy?: string;
   tsCreatedAt?: IFirestoreTimestamp;
   tsUpdatedAt?: IFirestoreTimestamp;
+}
+
+export interface IMenuItem {
+  id: number;
+  label: string;
+  path: string;
 }
 
 export interface IOption {

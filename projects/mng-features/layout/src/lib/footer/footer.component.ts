@@ -1,22 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonService } from 'mng-features/shared';
-// import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html'
 })
-export class FooterComponent implements OnInit {
+export class FooterComponent {
 
   appName: string;
-  appVersion = 'environment.version';
+  appVersion: string;
   
   constructor(
     private commonService: CommonService,
-  ) { }
-
-  ngOnInit(): void {
+  ) {
     this.appName = this.commonService.getAppName();
+    this.appVersion = this.commonService.getAppVersion();
   }
 
 }

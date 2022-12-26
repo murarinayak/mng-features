@@ -3,7 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import firebase from 'firebase/compat/app';
 
 import { AuthService } from '../../services/auth.service';
-import { ToastService, StorageService, UserService, LocalStorageCommonKeys, IResponseModel, User } from 'mng-features/shared';
+import { StorageService, UserService, LocalStorageCommonKeys, IResponseModel, User } from 'mng-features/shared';
+import { ToastService } from 'mng-features/toast';
 
 @Component({
   selector: 'app-login',

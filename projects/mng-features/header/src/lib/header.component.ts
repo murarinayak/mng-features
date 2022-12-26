@@ -2,6 +2,7 @@ import { BreakpointObserver, Breakpoints, MediaMatcher } from '@angular/cdk/layo
 import { Location } from '@angular/common';
 import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { AuthService } from 'mng-features/auth';
 import { CommonService } from 'mng-features/shared';
 import { filter, map, Observable } from 'rxjs';
 
@@ -13,7 +14,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   @Input() drawer: any;
 
-  headerTitle = 'My App';
+  headerTitle = 'App';
+  isLoggedIn = false;
   mobileQuery: MediaQueryList;
   mobileQueryListener: () => void;
   isHandset$: Observable<boolean>;
@@ -25,9 +27,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private changeDetectorRef: ChangeDetectorRef,
     private media: MediaMatcher,
     private location: Location,
+    private authService: AuthService,
     private commonService: CommonService,
   ) {
     this.headerTitle = this.commonService.getAppName();
+    this.isLoggedIn = this.authService.isLoggedIn();
     this.mobileQuery = this.media.matchMedia(Breakpoints.Handset);
     this.mobileQueryListener = () => this.changeDetectorRef.detectChanges();
     this.isHandset$ = this.breakpointObserver.observe(Breakpoints.Handset).pipe(map(result => result.matches));
@@ -37,7 +41,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.mobileQuery.addEventListener('change', this.mobileQueryListener);
     // this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event: NavigationEnd) => {
     this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event: any) => {
-      console.log('event', event);
+      // console.log('event', event);
       this.isDashboard = event.urlAfterRedirects === '/dashboard/list';
     });
   }

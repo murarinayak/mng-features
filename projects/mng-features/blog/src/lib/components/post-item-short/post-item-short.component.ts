@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { IPost } from '../../common/common.model';
+import { IStory } from '../../common/common.model';
 
 @Component({
   selector: 'app-post-item-short',
@@ -9,7 +9,7 @@ import { IPost } from '../../common/common.model';
 })
 export class PostItemShortComponent implements OnInit {
 
-  @Input() post: IPost;
+  @Input() post: IStory;
 
   constructor() { }
 

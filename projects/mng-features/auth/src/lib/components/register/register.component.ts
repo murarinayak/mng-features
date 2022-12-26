@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { ToastService, UserService, User } from 'mng-features/shared';
+import { UserService, User } from 'mng-features/shared';
+import { ToastService } from 'mng-features/toast';
 
 @Component({
   selector: 'app-register',
@@ -15,7 +16,7 @@ export class RegisterComponent {
   constructor(
     private router: Router,
     private userService: UserService,
-    private toastService: ToastService
+    private toastService: ToastService,
   ) { }
 
   register(firstName: string, lastName: string, username: string, password: string) {

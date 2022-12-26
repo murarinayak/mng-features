@@ -1,19 +1,9 @@
 import { Component, OnInit, Input, OnDestroy, ChangeDetectorRef } from '@angular/core';
 // import { NavigationEnd, Router } from '@angular/router';
 import { BreakpointObserver, Breakpoints, MediaMatcher } from '@angular/cdk/layout';
+import { CommonService, IMenuItem } from 'mng-features/shared';
 // import { Location } from '@angular/common';
 // import { filter, map, Observable } from 'rxjs';
-
-// import { NAV_LINKS } from '../../../helpers/constants';
-// import { environment } from 'src/environments/environment';
-
-const NAV_LINKS = [
-  { id: 1, path: '/dashboard', label: 'Dashboard' },
-  { id: 6, path: '/transactions', label: 'Transactions' },
-  { id: 2, path: '/accounts', label: 'Accounts' },
-  { id: 3, path: '/groups', label: 'Groups' },
-  { id: 14, path: '/test', label: 'Test Zone' },
-];
 
 @Component({
   selector: 'app-page-layout',
@@ -23,10 +13,8 @@ export class PageLayoutComponent {
 
   @Input() title = '';
 
-  // headerTitle = 'My Finance v3';
-
-  appVersion = 'environment.version';
-  links = NAV_LINKS;
+  appVersion: string;
+  links: Array<IMenuItem>;
   mobileQuery: MediaQueryList;
   // isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(map(result => result.matches));
   // isDashboard = true;
@@ -47,11 +35,13 @@ export class PageLayoutComponent {
     changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher,
     // private appService: AppService
+    private commonService: CommonService,
   ) {
     this.mobileQuery = media.matchMedia(Breakpoints.Handset);
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addEventListener('change', this._mobileQueryListener);
-
+    this.appVersion = this.commonService.getAppVersion();
+    this.links = this.commonService.getMenuItems();
     // // this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event: NavigationEnd) => {
     // this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event: any) => {
     //   console.log('event', event);

@@ -116,6 +116,10 @@ export class AuthService {
     return this.userService.getLoggedInUserID();
   }
 
+  isLoggedIn() {
+    return this.userService.getLoggedInUserID() !== '';
+  }
+
   logout() {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');

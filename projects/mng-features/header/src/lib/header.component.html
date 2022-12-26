@@ -8,10 +8,10 @@
         <mat-icon>sort</mat-icon>
       </button>
     </ng-template>
-    <a mat-button class="docs-button" routerLink="/dashboard" aria-label="My Finance App">
+    <a mat-button class="docs-button" routerLink="/" aria-label="My Finance App">
       <span>{{ headerTitle }}</span>
     </a>
-    <button mat-icon-button class="ms-auto" (click)="logout()">
+    <button *ngIf="isLoggedIn" mat-icon-button class="ms-auto" (click)="logout()">
       <mat-icon>logout</mat-icon>
     </button>
   </mat-toolbar-row>

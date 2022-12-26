@@ -1,6 +1,7 @@
 // TODO - This needs to be passed via configuration
 // import { environment } from '../../../../../../../../src/environments/environment';
 
+export const ROUTE_NEW: string = 'new';
 export const enum LocalStorageCommonKeys {
   USER_INFO = 'USER_INFO'
 }

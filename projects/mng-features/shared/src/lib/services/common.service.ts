@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
 import { getServerTimestamp } from '../common/utils';
-import { IDocumentModel, IEnvironment } from '../models/common.model';
+import { IDocumentModel, ILibraryConfig } from '../models/common.model';
 import { UserService } from './user.service';
 
 @Injectable({
@@ -9,13 +9,14 @@ import { UserService } from './user.service';
 export class CommonService {
 
   constructor(
-    @Inject('env') private environment: IEnvironment,
+    @Inject('config') private config: ILibraryConfig,
     private userService: UserService,
-    // private authService: AuthService
   ) {}
 
-  getApiUrl() { return this.environment.API_URL; }
-  getAppName() { return this.environment.appName; }
+  getAppName() { return this.config.environment.appName; }
+  getAppVersion() { return this.config.environment.appVersion; }
+  getApiUrl() { return this.config.environment.apiUrl; }
+  getMenuItems() { return this.config.menu; }
 
   getDefaultDoc(): IDocumentModel {
     return {

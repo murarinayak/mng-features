@@ -26,7 +26,9 @@
     <p class="ms-3 mt-3">v{{ appVersion }}</p>
   </mat-sidenav>
   <mat-sidenav-content class="custom-sidenav">
-    <ng-content></ng-content>
+    <div class="container-fluid">
+      <ng-content></ng-content>
+    </div>
     <app-footer></app-footer>
   </mat-sidenav-content>
 </mat-sidenav-container>

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, DocumentSnapshot, QueryFn } from '@angular/fire/compat/firestore';
+import { AngularFirestore, CollectionReference, DocumentSnapshot, QueryFn } from '@angular/fire/compat/firestore';
 import { from, map, Observable } from 'rxjs';
 import { IDocumentModel } from '../models/common.model';
 
@@ -19,9 +19,9 @@ export class FirestoreService<T extends { id?: string }> implements IFirestoreSe
   constructor(private ngFirestore: AngularFirestore) { }
 
   list(callback: QueryFn = null): Observable<Array<T>> {
-    // if (!callback) {
-    //   callback = (ref: CollectionReference) => ref.where('uidCreatedBy', '==', '5adb44ec2b576510688ed88c');
-    // }
+    if (!callback) {
+      callback = (ref: CollectionReference) => ref; //  .where('uidCreatedBy', '==', '5adb44ec2b576510688ed88c');
+    }
     return this.ngFirestore.collection(this.collName, callback).snapshotChanges().pipe(
       map((actions: Array<any>) => {
         return actions.map(item => {

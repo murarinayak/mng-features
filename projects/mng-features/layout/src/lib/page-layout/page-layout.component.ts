@@ -16,6 +16,7 @@ export class PageLayoutComponent {
   appVersion: string;
   links: Array<IMenuItem>;
   mobileQuery: MediaQueryList;
+  showLeftNav = false;
   // isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(map(result => result.matches));
   // isDashboard = true;
   private _mobileQueryListener: () => void;
@@ -42,6 +43,7 @@ export class PageLayoutComponent {
     this.mobileQuery.addEventListener('change', this._mobileQueryListener);
     this.appVersion = this.commonService.getAppVersion();
     this.links = this.commonService.getMenuItems();
+    this.showLeftNav = this.commonService.getShowLeftNav();
     // // this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event: NavigationEnd) => {
     // this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event: any) => {
     //   console.log('event', event);

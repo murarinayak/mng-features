@@ -1,6 +1,0 @@
-.hover-scale {
-  transition: transform .3s;
-}
-.hover-scale:hover {
-  transform: scale(1.05);
-}

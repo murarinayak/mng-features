@@ -1,34 +1,13 @@
 <mng-header [drawer]="drawer"></mng-header>
-<!-- <mat-toolbar color="primary" class="main-nav">
-  <mat-toolbar-row>
-    <button *ngIf="mobileQuery.matches && !isDashboard; else showMenuIcon" mat-icon-button (click)="onBackClick()">
-      <mat-icon>arrow_back</mat-icon>
-    </button>
-    <ng-template #showMenuIcon>
-      <button mat-icon-button color="" aria-hidden="false" aria-label="Toggle sidenav" (click)="drawer.toggle()">
-        <mat-icon>sort</mat-icon>
-      </button>
-    </ng-template>
-    <a mat-button class="docs-button" routerLink="/" aria-label="My Finance App">
-      <span>{{ headerTitle }}</span>
-    </a>
-    <div class="flex-spacer"></div>
-    <button mat-icon-button (click)="logout()">
-      <mat-icon>logout</mat-icon>
-    </button>
-  </mat-toolbar-row>
-</mat-toolbar> -->
 <mat-sidenav-container class="example-container">
-  <mat-sidenav #drawer role="navigation" [mode]="mobileQuery.matches ? 'over' : 'side'" [opened]="!mobileQuery.matches">
+  <mat-sidenav #drawer role="navigation" [mode]="mobileQuery.matches ? 'over' : 'side'" [opened]="showLeftNav && !mobileQuery.matches">
     <mat-nav-list (click)="onNavListClick(drawer)">
       <a *ngFor="let link of links" mat-list-item [routerLink]="link.path">{{ link.label }}</a>
     </mat-nav-list>
     <p class="ms-3 mt-3">v{{ appVersion }}</p>
   </mat-sidenav>
   <mat-sidenav-content class="custom-sidenav">
-    <div class="container-fluid">
-      <ng-content></ng-content>
-    </div>
+    <ng-content></ng-content>
     <app-footer></app-footer>
   </mat-sidenav-content>
 </mat-sidenav-container>

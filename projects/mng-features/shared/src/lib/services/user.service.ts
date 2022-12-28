@@ -4,10 +4,11 @@ import { AngularFirestore, DocumentSnapshot } from '@angular/fire/compat/firesto
 import { from, Observable, of } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
-import { StorageService } from './storage.service';
-import { LocalStorageCommonKeys, CollName, API_URL } from '../common/constants'
+import { MNGBrowserStorageService } from './browser-storage.service';
+import { CollName, API_URL } from '../common/constants'
 // import { API_URL } from '../helpers/constants';
 import { IAuthUser, IResponseModel, User } from '../models/common.model';
+import { LocalStorageCommonKeys } from '../common/browser-storage.keys';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,7 @@ export class UserService {
   constructor(
     private http: HttpClient,
     private ngFirestore: AngularFirestore,
-    private storageService: StorageService
+    private storageService: MNGBrowserStorageService
   ) { }
 
   getLoggedInUser(): IAuthUser {

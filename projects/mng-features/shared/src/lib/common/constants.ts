@@ -2,9 +2,6 @@
 // import { environment } from '../../../../../../../../src/environments/environment';
 
 export const ROUTE_NEW: string = 'new';
-export const enum LocalStorageCommonKeys {
-  USER_INFO = 'USER_INFO'
-}
 
 export const enum CollName {
   USERS = 'users'

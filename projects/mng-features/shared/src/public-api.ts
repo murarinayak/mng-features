@@ -5,6 +5,7 @@ export * from './lib/shared.module';
 export * from './lib/guards/environment.guard';
 
 export * from './lib/services/authentication.service';
+export * from './lib/services/browser-storage.service';
 export * from './lib/services/common.service';
 export * from './lib/services/firestore.service';
 export * from './lib/services/logger.service';
@@ -18,6 +19,7 @@ export * from './lib/pipes/firestore-date.pipe';
 export * from './lib/models/response-model.class';
 export * from './lib/models/common.model';
 
+export * from './lib/common/browser-storage.keys';
 export * from './lib/common/constants';
 export * from './lib/common/csv-export-items';
 export * from './lib/common/m2n-csv';

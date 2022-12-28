@@ -1,17 +1,23 @@
 <mat-toolbar color="primary" class="main-nav">
   <mat-toolbar-row>
-    <!-- <button *ngIf="mobileQuery.matches && !isDashboard; else showMenuIcon" mat-icon-button (click)="onBackClick()">
+    <button *ngIf="!isDashboard; else showMenuIcon" mat-icon-button (click)="onBackClick()">
       <mat-icon>arrow_back</mat-icon>
     </button>
-    <ng-template #showMenuIcon> -->
-    <button *ngIf="showLeftNav" mat-icon-button color="" aria-hidden="false" aria-label="Toggle sidenav"
-      (click)="onMenuIconClick()">
-      <mat-icon>sort</mat-icon>
-    </button>
-    <!-- </ng-template> -->
-    <a mat-button class="docs-button ms-2" routerLink="/" aria-label="My App">
+    <ng-template #showMenuIcon>
+      <button *ngIf="showLeftNav; else showHomeIcon" mat-icon-button color="" aria-hidden="false" aria-label="Toggle sidenav"
+        (click)="onMenuIconClick()">
+        <mat-icon>sort</mat-icon>
+      </button>
+    </ng-template>
+    <ng-template #showHomeIcon>
+      <!-- <a mat-icon-button color="" aria-hidden="false" aria-label="home" routerLink="/">
+        <mat-icon>home</mat-icon>
+      </a> -->
+    </ng-template>
+    <a mat-button class="docs-button" routerLink="/" aria-label="My App">
       <span>{{ headerTitle }}</span>
     </a>
+    <!-- <h2 class="ms-2 mb-0 fw-normal">{{ headerTitle }}</h2> -->
     <button mat-icon-button class="ms-auto" [matMenuTriggerFor]="menu">
       <mat-icon>account_circle</mat-icon>
     </button>
@@ -19,9 +25,17 @@
 </mat-toolbar>
 
 <mat-menu #menu="matMenu">
-  <button *ngIf="!isLoggedIn; else showLoggedInMenu" mat-menu-item (click)="onLoginClick()">Login</button>
+  <button mat-menu-item (click)="logout()">
+    <mat-icon>share</mat-icon>Share
+  </button>
+  <button *ngIf="!isLoggedIn; else showLoggedInMenu" mat-menu-item (click)="onLoginClick()">
+    <mat-icon>login</mat-icon>Login
+  </button>
   <ng-template #showLoggedInMenu>
-    <button *ngFor="let item of menuItems" mat-menu-item (click)="onMenuItemClick(item)">{{ item.label }}</button>
+    <button *ngFor="let item of menuItems" mat-menu-item (click)="onMenuItemClick(item)">
+      <mat-icon>{{ item.icon }}</mat-icon>
+      {{ item.label }}
+    </button>
     <button *ngIf="isLoggedIn" mat-menu-item (click)="logout()">
       <mat-icon>logout</mat-icon>
       Logout

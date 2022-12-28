@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import firebase from 'firebase/compat/app';
 
 import { AuthService } from '../../services/auth.service';
-import { StorageService, UserService, LocalStorageCommonKeys, IResponseModel, User } from 'mng-features/shared';
+import { MNGBrowserStorageService, UserService, LocalStorageCommonKeys, IResponseModel, User } from 'mng-features/shared';
 import { ToastService } from 'mng-features/toast';
 
 @Component({
@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private userService: UserService,
     private toastService: ToastService,
-    private storageService: StorageService
+    private storageService: MNGBrowserStorageService
   ) { }
 
   ngOnInit() {
@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
   }
 
   login(email: string, password: string) {
-    console.log(email, password)
+    // console.log(email, password);
     if (email === 'q') {
       email = 'demouser1@murarinayak.com';
       password = 'pass@123';
@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
     }
     this.authService.signInWithEmailAndPassword(email, password).subscribe({
       next: (response) => {
-        console.log('r', response);
+        // console.log('r', response);
         this.onLoginSuccess();
       },
       error: this.onError
@@ -62,7 +62,7 @@ export class LoginComponent implements OnInit {
   }
 
   onLoginSuccess() {
-    console.log('Login success');
+    // console.log('Login success');
     // this.loggerService.log('Login success');
     // this.stateManagerService.setActive();
     // if (!this.authService.isVerified()) {

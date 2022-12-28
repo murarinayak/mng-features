@@ -3,7 +3,7 @@ import { Location } from '@angular/common';
 import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { AuthService } from 'mng-features/auth';
-import { CommonService, IMenuItem } from 'mng-features/shared';
+import { MNGBrowserStorageService, CommonService, IMenuItem, LocalStorageCommonKeys } from 'mng-features/shared';
 import { filter, map, Observable } from 'rxjs';
 
 @Component({
@@ -31,6 +31,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private location: Location,
     private authService: AuthService,
     private commonService: CommonService,
+    private browserStorageService: MNGBrowserStorageService,
   ) {
     this.headerTitle = this.commonService.getAppName();
     this.showLeftNav = this.commonService.getShowLeftNav();
@@ -45,8 +46,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.mobileQuery.addEventListener('change', this.mobileQueryListener);
     // this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event: NavigationEnd) => {
     this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event: any) => {
-      // console.log('event', event);
-      this.isDashboard = event.urlAfterRedirects === '/dashboard/list';
+      // console.log('event', event.urlAfterRedirects);
+      this.isDashboard = event.urlAfterRedirects === this.browserStorageService.getItem(LocalStorageCommonKeys.APP_DEFAULT_URL);
     });
   }
 
@@ -71,8 +72,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   logout() {
-    localStorage.clear();
-    this.router.navigate(['auth/login']);
+    this.isLoggedIn = false;
+    this.browserStorageService.clear();
+    this.router.navigate(['/']);
   }
 
   ngOnDestroy(): void {

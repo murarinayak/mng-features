@@ -57,7 +57,7 @@ export class AuthService {
         // } else {
         return this.userService.get(response.uid).pipe(
           switchMap((responseAuthUser: IAuthUser) => {
-            console.log('rr', response);
+            // console.log('rr', response);
             if (responseAuthUser) {
               return of(responseAuthUser);
             }

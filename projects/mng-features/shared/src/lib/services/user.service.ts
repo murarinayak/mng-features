@@ -5,9 +5,8 @@ import { from, Observable, of } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
 import { MNGBrowserStorageService } from './browser-storage.service';
-import { CollName, API_URL } from '../common/constants'
-// import { API_URL } from '../helpers/constants';
-import { IAuthUser, IResponseModel, User } from '../models/common.model';
+import { CollName } from '../common/constants'
+import { IAuthUser } from '../models/common.model';
 import { LocalStorageCommonKeys } from '../common/browser-storage.keys';
 
 @Injectable({
@@ -65,38 +64,38 @@ export class UserService {
   
   // ----------
 
-  signUp(user: User) {
-    return this.http.post(API_URL('signup'), user);
-  }
+  // signUp(user: User) {
+  //   return this.http.post(API_URL('signup'), user);
+  // }
 
-  signIn1(user: User) {
-    return this.http.post(API_URL('signin'), user).pipe(
-      tap((response: IResponseModel) => this.loggedInUser = response.data)
-    );
-  }
+  // signIn1(user: User) {
+  //   return this.http.post(API_URL('signin'), user).pipe(
+  //     tap((response: IResponseModel) => this.loggedInUser = response.data)
+  //   );
+  // }
 
-  signOut1(user: User) {
-    return this.http.post(API_URL('signout'), user);
-  }
+  // signOut1(user: User) {
+  //   return this.http.post(API_URL('signout'), user);
+  // }
 
-  getAll1() {
-    return this.http.get<User[]>(API_URL('users'));
-  }
+  // getAll1() {
+  //   return this.http.get<User[]>(API_URL('users'));
+  // }
 
-  getById(id: number) {
-    return this.http.get(API_URL('users/') + id);
-  }
+  // getById(id: number) {
+  //   return this.http.get(API_URL('users/') + id);
+  // }
 
-  create(user: User) {
-    return this.http.post(API_URL('users'), user);
-  }
+  // create(user: User) {
+  //   return this.http.post(API_URL('users'), user);
+  // }
 
-  update1(user: User) {
-    return this.http.put(API_URL('users/') + user.id, user);
-  }
+  // update1(user: User) {
+  //   return this.http.put(API_URL('users/') + user.id, user);
+  // }
 
-  delete1(id: number) {
-    return this.http.delete(API_URL('users/') + id);
-  }
+  // delete1(id: number) {
+  //   return this.http.delete(API_URL('users/') + id);
+  // }
 
 }

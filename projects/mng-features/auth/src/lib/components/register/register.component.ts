@@ -26,16 +26,17 @@ export class RegisterComponent {
     this.user.lastName = lastName;
     this.user.username = username;
     this.user.password = password;
-    this.userService.signUp(this.user).subscribe({
-      next: data => {
-        this.toastService.success('Registration successful');
-        this.router.navigate(['/auth/login']);
-      },
-      error: error => {
-        this.toastService.error(error);
-        this.loading = false;
-      }
-    });
+    console.log('create sign up flow');
+    // this.userService.signUp(this.user).subscribe({
+    //   next: data => {
+    //     this.toastService.success('Registration successful');
+    //     this.router.navigate(['/auth/login']);
+    //   },
+    //   error: error => {
+    //     this.toastService.error(error);
+    //     this.loading = false;
+    //   }
+    // });
   }
 
 }

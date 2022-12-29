@@ -86,13 +86,14 @@ export class LoginComponent implements OnInit {
     this.user = new User();
     this.user.username = username;
     this.user.password = password;
-    this.userService.signIn1(this.user).subscribe({
-      next: (response: IResponseModel) => {
-        this.storageService.setItem(LocalStorageCommonKeys.USER_INFO, response?.data ?? '');
-        this.router.navigate([this.returnUrl]);
-      },
-      error: this.onError
-    });
+    console.log('create sign in flow');
+    // this.userService.signIn1(this.user).subscribe({
+    //   next: (response: IResponseModel) => {
+    //     this.storageService.setItem(LocalStorageCommonKeys.USER_INFO, response?.data ?? '');
+    //     this.router.navigate([this.returnUrl]);
+    //   },
+    //   error: this.onError
+    // });
   }
 
 }

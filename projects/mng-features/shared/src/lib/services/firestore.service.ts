@@ -15,22 +15,31 @@ export class FirestoreService<T extends { id?: string }> implements IFirestoreSe
 
   collName = 'NA';
   returnType: IDocumentModel;
+  lastItem;
 
   constructor(private ngFirestore: AngularFirestore) { }
 
   list(callback: QueryFn = null): Observable<Array<T>> {
     if (!callback) {
-      callback = (ref: CollectionReference) => ref; //  .where('uidCreatedBy', '==', '5adb44ec2b576510688ed88c');
+      callback = (ref: CollectionReference) => ref.orderBy('tsCreatedAt').limit(2)
     }
-    return this.ngFirestore.collection(this.collName, callback).snapshotChanges().pipe(
-      map((actions: Array<any>) => {
-        return actions.map(item => {
-          const data = item.payload.doc.data() as T;
-          const id = item.payload.doc.id;
+    if (this.lastItem) {
+      callback = (ref: CollectionReference) => ref.orderBy('tsCreatedAt').startAfter(this.lastItem).limit(2)
+    }
+    return this.ngFirestore.collection(this.collName, callback).get().pipe(
+      map((response) => response.docs), // firebase.firestore.QuerySnapshot<unknown>
+      map((response) => { // firebase.firestore.QueryDocumentSnapshot<unknown>[]
+        if (response.length) {
+          this.lastItem = response[response.length - 1]; // .payload.doc.data();
+        }
+        console.log('lastitem', this.lastItem);
+        return response.map(item => {
+          const data = item.data() as T;
+          const id = item.id;
           return { id, ...data } as T;
         });
       })
-    );
+    )
   }
 
   get(itemID: string): Observable<T> {

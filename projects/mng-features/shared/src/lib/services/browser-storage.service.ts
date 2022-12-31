@@ -21,8 +21,28 @@ export class MNGBrowserStorageService {
     return null;
   }
 
-  clear() {
+  reset(keysToKeep?: Map<string, string>) {
+    this.getKeysMap(keysToKeep);
     localStorage.clear();
+    // Put the keys back
+    this.setKeysMap(keysToKeep);
     sessionStorage.clear();
+  }
+
+  getKeysMap(keysToKeep: Map<string, string>) {
+    if (keysToKeep) {
+      for(let key of keysToKeep.keys()) {
+        keysToKeep.set(key, this.getItem(key));
+        console.log('key', key, keysToKeep.get(key));
+      }
+    }
+  }
+
+  setKeysMap(keysToKeep: Map<string, string>) {
+    if (keysToKeep) {
+      for(let key of keysToKeep.keys()) {
+        this.setItem(key, keysToKeep.get(key));
+      }
+    }
   }
 }

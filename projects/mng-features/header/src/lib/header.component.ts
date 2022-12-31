@@ -73,7 +73,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   logout() {
     this.isLoggedIn = false;
-    this.browserStorageService.clear();
+    const keysToKeep: Map<string, string> = new Map();
+    keysToKeep.set(LocalStorageCommonKeys.APP_DEFAULT_URL, '');
+    this.browserStorageService.reset(keysToKeep);
     this.router.navigate(['/']);
   }
 

@@ -40,10 +40,13 @@ export class FirestoreService<T extends { id?: string }> { // implements IFirest
     )
   }
 
-  get(itemID: string): Observable<T> {
-    return this.ngFirestore.collection(this.collName).doc(itemID).get().pipe(
+  get(id: string): Observable<T> {
+    return this.ngFirestore.collection(this.collName).doc(id).get().pipe(
       map((item: DocumentSnapshot<T>) => {
-        return { id: item.id, ...item.data() };
+        if (item.exists) {
+          return { id: item.id, ...item.data() };
+        }
+        return item.data(); // this will be undefined
       })
     );
   }

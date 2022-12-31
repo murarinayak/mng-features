@@ -27,7 +27,7 @@ export interface IMenuItem {
   id: number;
   label: string;
   path: string;
-  icon: string;
+  icon?: string;
 }
 
 export interface IOption {

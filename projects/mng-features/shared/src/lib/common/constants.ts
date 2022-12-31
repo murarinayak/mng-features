@@ -3,7 +3,7 @@
 
 export const ROUTE_NEW: string = 'new';
 export const ITEMS_PER_PAGE_GLOBAL = 10;
-export const enum CollName {
+export const enum CollNameGlobal {
   UPLOADS = 'uploads',
   USERS = 'users',
 }

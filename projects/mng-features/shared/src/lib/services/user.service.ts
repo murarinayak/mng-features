@@ -5,7 +5,7 @@ import { from, Observable, of } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
 import { MNGBrowserStorageService } from './browser-storage.service';
-import { CollName } from '../common/constants'
+import { CollNameGlobal } from '../common/constants'
 import { IAuthUser } from '../models/common.model';
 import { LocalStorageCommonKeys } from '../common/browser-storage.keys';
 
@@ -36,20 +36,20 @@ export class UserService {
   list() {}
 
   get(id: string): Observable<IAuthUser | undefined> {
-    return this.ngFirestore.collection(CollName.USERS).doc(id).get().pipe(
+    return this.ngFirestore.collection(CollNameGlobal.USERS).doc(id).get().pipe(
       map((ds: DocumentSnapshot<IAuthUser>) => ds.data())
     );
     // return of(undefined);
   }
 
   post(item: IAuthUser) {
-    return from(this.ngFirestore.collection(CollName.USERS).doc(item.uid).set(item)).pipe(
+    return from(this.ngFirestore.collection(CollNameGlobal.USERS).doc(item.uid).set(item)).pipe(
       tap(() => this.updateInMemory(item))
     );
   }
 
   put(item: IAuthUser) {
-    return from(this.ngFirestore.collection(CollName.USERS).doc(item.uid).update(item)).pipe(
+    return from(this.ngFirestore.collection(CollNameGlobal.USERS).doc(item.uid).update(item)).pipe(
       tap((response) => {
         console.log('r', response);
         this.updateInMemory(item);

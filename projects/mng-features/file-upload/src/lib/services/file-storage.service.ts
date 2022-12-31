@@ -5,7 +5,7 @@ import { UploadTaskSnapshot } from '@angular/fire/compat/storage/interfaces';
 import { from, Observable, of, throwError } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
 
-import { CollName, CommonService } from 'mng-features/shared';
+import { CollNameGlobal, CommonService } from 'mng-features/shared';
 import { IUploadedFile } from '../common/common.model';
 
 export interface IFileMetadata {
@@ -57,7 +57,7 @@ export class FileStorageService {
       contentType: fileMetadata.contentType ?? '',
       // dateCreated: firebase.firestore.FieldValue.serverTimestamp(),
     }
-    return of(this.ngFirestore.collection(CollName.UPLOADS).add(document)).pipe(
+    return of(this.ngFirestore.collection(CollNameGlobal.UPLOADS).add(document)).pipe(
       // switchMap(() => of(fileMetadata))
     );
   }
@@ -79,7 +79,7 @@ export class FileStorageService {
   }
 
   deleteUploadedFileRef(id: string) {
-    return this.ngFirestore.collection(CollName.UPLOADS).doc(id).delete();
+    return this.ngFirestore.collection(CollNameGlobal.UPLOADS).doc(id).delete();
   }
 
   getDownloadURL(filePath: string) {

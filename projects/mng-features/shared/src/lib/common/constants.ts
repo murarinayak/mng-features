@@ -4,7 +4,8 @@
 export const ROUTE_NEW: string = 'new';
 export const ITEMS_PER_PAGE_GLOBAL = 10;
 export const enum CollName {
-  USERS = 'users'
+  UPLOADS = 'uploads',
+  USERS = 'users',
 }
 
 // export const API_URL = (url: string, params?: { [key: string]: string }) => {

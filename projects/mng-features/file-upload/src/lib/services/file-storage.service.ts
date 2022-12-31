@@ -5,9 +5,8 @@ import { UploadTaskSnapshot } from '@angular/fire/compat/storage/interfaces';
 import { from, Observable, of, throwError } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
 
-import { CommonService } from 'mng-features/shared';
-import { CollName } from 'src/app/helpers/constants';
-import { IUploadedFile } from '../../../shared/models/common.model';
+import { CollName, CommonService } from 'mng-features/shared';
+import { IUploadedFile } from '../common/common.model';
 
 export interface IFileMetadata {
   filePath: string;

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { from, map, Observable, of } from 'rxjs';
 import { AngularFirestore, CollectionReference, DocumentSnapshot, QueryFn } from '@angular/fire/compat/firestore';
 
-import { ITEMS_PER_PAGE_GLOBAL } from 'mng-features/shared';
+import { ITEMS_PER_PAGE_GLOBAL } from '../common/constants';
 
 // interface IFirestoreService {
 //   collName: string;

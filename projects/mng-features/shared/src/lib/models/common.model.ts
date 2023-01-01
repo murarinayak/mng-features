@@ -24,7 +24,7 @@ export interface IDocumentModel {
 }
 
 export interface IMenuItem {
-  id: number;
+  id?: number;
   label: string;
   path: string;
   icon?: string;

@@ -1,0 +1,25 @@
+<div class="container-fluid mt-4">
+  <div [formGroup]="formGroup">
+    <div class="row">
+      <mat-form-field class="col-12">
+        <input matInput type="text" formControlName="displayName" placeholder="Display Name">
+      </mat-form-field>
+      <mat-form-field class="col-md-6">
+        <input matInput type="text" formControlName="firstName" placeholder="First Name">
+      </mat-form-field>
+      <mat-form-field class="col-md-6">
+        <input matInput type="text" formControlName="lastName" placeholder="Last Name">
+      </mat-form-field>
+      <mat-form-field class="col-md-6">
+        <input matInput type="text" formControlName="email" placeholder="E Mail">
+      </mat-form-field>
+      <mat-form-field class="col-md-6">
+        <input matInput type="text" formControlName="phoneNumber" placeholder="Phone Number">
+      </mat-form-field>
+    </div>
+    <div class="d-flex flex-md-row flex-column justify-content-end">
+      <!-- <button mat-stroked-button color="accent" class="me-2" (click)="getUserDetails()">GET</button> -->
+      <button mat-raised-button color="primary" (click)="onSaveClick()">Save</button>
+    </div>
+  </div>
+</div>

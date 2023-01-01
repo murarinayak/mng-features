@@ -3,7 +3,9 @@ import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from
 
 import { LocalStorageCommonKeys, MNGBrowserStorageService } from 'mng-features/shared';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthGuard implements CanActivate {
 
   constructor(

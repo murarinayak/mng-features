@@ -14,12 +14,14 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { SharedModule } from 'mng-features/shared';
 import { GoogleLoginMatIconComponent } from './components/google-login-mat-icon/google-login-mat-icon.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 
 @NgModule({
   declarations: [
     LoginComponent,
     RegisterComponent,
+    ProfileComponent,
     GoogleLoginMatIconComponent
   ],
   imports: [

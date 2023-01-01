@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, CanActivateChild } from '@angular/router';
 
 import { LocalStorageCommonKeys, MNGBrowserStorageService } from 'mng-features/shared';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
+export class AuthGuard implements CanActivate, CanActivateChild {
 
   constructor(
     private router: Router,
@@ -14,6 +14,14 @@ export class AuthGuard implements CanActivate {
   ) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    return this.canAccess(route, state);
+  }
+
+  canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    return this.canAccess(route, state);
+  }
+
+  canAccess(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     if (this.storageService.getItem(LocalStorageCommonKeys.USER_INFO)) {
       // logged in so return true
       return true;

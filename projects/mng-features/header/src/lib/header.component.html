@@ -25,6 +25,9 @@
 </mat-toolbar>
 
 <mat-menu #menu="matMenu">
+  <a mat-menu-item routerLink="us/profile">
+    <mat-icon>manage_accounts</mat-icon>Profile
+  </a>
   <button mat-menu-item (click)="logout()">
     <mat-icon>share</mat-icon>Share
   </button>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from 'mng-features/auth';
 import { IAuthUser, UserService } from 'mng-features/shared';
 import { ToastService } from 'mng-features/toast';
 

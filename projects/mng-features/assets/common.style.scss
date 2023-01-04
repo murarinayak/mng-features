@@ -121,15 +121,21 @@ mat-selection-list.mat-mdc-list-base mat-list-option.compact {
     height: 32px;
     padding: 4px;
     border-radius: 50%;
+    margin-right: 1rem;
   }
 
   .mat-mdc-list-item-line {
     padding: 0px;
-
+    margin-bottom: 0px;
     &.mini {
       font-size: 0.75rem;
     }
   }
+}
+button.mdc-icon-button.mat-mdc-icon-button.mat-mdc-button-base.icon-small {
+  width: 2rem;
+  height: 2rem;
+  padding: 0.25rem;
 }
 
 mat-toolbar mat-toolbar-row.mat-toolbar-row {

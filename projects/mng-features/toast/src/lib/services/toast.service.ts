@@ -20,7 +20,7 @@ export class ToastService {
 
   setMessage(toastMessage: ToastMessage) {
     this.toastMessage.next(toastMessage);
-    this.matSnackBar.open(toastMessage.detail);
+    this.matSnackBar.open(toastMessage.detail, 'ok') ; // , { duration: 2 * 1000 });
   }
 
   success(message: string) {

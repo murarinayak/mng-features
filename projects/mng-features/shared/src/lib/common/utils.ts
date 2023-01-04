@@ -1,7 +1,8 @@
 // import * as moment from 'moment';
 import firebase from 'firebase/compat/app'
 
-import { IDocumentModel, IFirestoreTimestamp } from '../models/common.model';
+import { IFirestoreTimestamp, IOption } from '../models/common.model';
+import { RouteParts } from './constants';
 
 export const formatDate = (date) => {
   // return moment(date).format('DD/MM/YYYY'); // 'L'
@@ -26,3 +27,20 @@ export const convertDateToFirestoreTimestamp = (date) => {
   // console.log('d2', firebase.firestore.Timestamp.fromDate(new Date(date)));
   return firebase.firestore.Timestamp.fromDate(date);
 }
+
+export const isRouteNew = (value: string) => value === RouteParts.NEW;
+export const getUniqueValueFromLabel = (label: string, allItems: Array<IOption>) => {
+  const arrValue: Array<string> = allItems.map(item => item.value);
+  const labelToValue: string = label.toLowerCase().replace(/ /g, '-');
+  let counter = 0;
+  let isDuplicate = true;
+  let value: string = labelToValue;
+  while (isDuplicate) {
+    if (counter > 0) {
+      value = `${labelToValue}-${counter}`;
+    }
+    counter++;
+    isDuplicate = arrValue.indexOf(value) !== -1;
+  }
+  return value;
+};

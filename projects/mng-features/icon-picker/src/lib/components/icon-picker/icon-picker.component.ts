@@ -1,6 +1,8 @@
+import { Dialog } from '@angular/cdk/dialog';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IOption } from 'mng-features/shared';
-import { MNGIconPickerService } from '../icon-picker.service';
+import { MNGIconPickerService } from '../../icon-picker.service';
+import { IconPaletteComponent } from '../icon-palette/icon-palette.component';
 
 @Component({
   selector: 'mng-icon-picker',
@@ -9,7 +11,7 @@ import { MNGIconPickerService } from '../icon-picker.service';
 })
 export class MNGIconPickerComponent {
 
-  @Input() header = 'Icon';
+  @Input() label = 'Icon';
   @Input() selection = 'home';
   @Input() icons: Array<IOption> = [];
 
@@ -18,6 +20,7 @@ export class MNGIconPickerComponent {
   show = false;
   
   constructor(
+    private dialog: Dialog,
     private iconService: MNGIconPickerService,
   ) {}
 
@@ -36,5 +39,22 @@ export class MNGIconPickerComponent {
     this.selection = icon.value;
     this.show = false;
     this.onSelection.emit(this.selection);
+  }
+
+  onToggleClick() {
+    this.show = !this.show;
+    if (this.show) {
+      const dialogRef = this.dialog.open<string>(IconPaletteComponent, {
+        // width: '300px',
+        data: { name: 'this.name', animal: 'this.animal' },
+      });
+
+      dialogRef.closed.subscribe(result => {
+        console.log('The dialog was closed', result);
+        this.selection = result;
+        this.show = false;
+        this.onSelection.emit(this.selection);
+      });
+    }
   }
 }

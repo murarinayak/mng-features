@@ -1,0 +1,5 @@
+<div class="colors">
+  <div *ngFor="let item of items" class="circle" [ngStyle]="{'background-color': item}" (click)="onClick(item)">
+    <mat-icon>{{ item.value }}</mat-icon>
+  </div>
+</div>

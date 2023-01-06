@@ -1,9 +1,9 @@
-<mat-card>
+<!-- <mat-card>
   <mat-card-content (click)="onClick()">
     <div class="row">
 
       <div class="col">
-        <p class="mb-0">{{ header }}</p>
+        <p class="mb-0">{{ label }}</p>
         <p class="mb-0">{{ selection }}</p>
       </div>
       <div class="col-auto">
@@ -23,4 +23,12 @@
       </mat-grid-tile>
     </mat-grid-list>
   </mat-card-content>
-</mat-card>
+</mat-card> -->
+
+<mat-form-field class="example-form-field w-100">
+  <mat-label>{{ label }}</mat-label>
+  <input matInput type="text" [(ngModel)]="selection">
+  <button matSuffix mat-icon-button aria-label="open" (click)="onToggleClick()">
+    <mat-icon>{{ selection }}</mat-icon>
+  </button>
+</mat-form-field>

@@ -1,14 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Dialog } from '@angular/cdk/dialog';
 import { ColorPaletteComponent } from '../color-palette/color-palette.component';
 
 @Component({
-  selector: 'mng-color-picker-2',
+  selector: 'mng-color-picker',
   templateUrl: './color-picker.component.html',
   styleUrls: ['./color-picker.component.css']
 })
 export class MNGColorPickerComponent {
-  value: string;
+
+  @Input() label: string = 'Select Color';
+  @Input() selection: string;
+  @Output() onSelection = new EventEmitter<string>();
+
   showModal = false;
 
   constructor(private dialog: Dialog) { }
@@ -23,14 +27,16 @@ export class MNGColorPickerComponent {
 
       dialogRef.closed.subscribe(result => {
         console.log('The dialog was closed', result);
-        this.value = result;
+        this.selection = result;
         this.showModal = false;
+        this.onSelection.emit(this.selection);
       });
     }
   }
 
-  onSelection(event: string) {
-    this.value = event;
+  // Not req
+  onSelectionChange(event: string) {
+    this.selection = event;
     this.showModal = false;
   }
 }

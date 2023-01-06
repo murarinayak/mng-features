@@ -1,11 +1,11 @@
-<mat-form-field class="example-form-field">
-  <mat-label>Clearable input</mat-label>
-  <input matInput type="text" [(ngModel)]="value">
+<mat-form-field class="example-form-field w-100">
+  <mat-label>{{ label }}</mat-label>
+  <input matInput type="text" [(ngModel)]="selection">
   <!-- <button matSuffix mat-icon-button aria-label="open" (click)="onToggleClick()">
     <mat-icon [ngStyle]="{ color: value }">palette</mat-icon>
   </button> -->
   <button matSuffix mat-icon-button aria-label="open" (click)="onToggleClick()" cdkOverlayOrigin #trigger="cdkOverlayOrigin">
-    <mat-icon [ngStyle]="{ color: value }">palette</mat-icon>
+    <mat-icon [ngStyle]="{ color: selection }">palette</mat-icon>
   </button>
 </mat-form-field>
 

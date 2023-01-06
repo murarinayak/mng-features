@@ -95,6 +95,24 @@ export class FirestoreService<T extends { id?: string }> { // implements IFirest
     return this.list(callback);
   }
 
+  // getFilteredList(options: Array<IOption>) {
+  //   const indexStart: number = (pageNum - 1) * this.itemsPerPage;
+  //   const indexEnd: number = indexStart + this.itemsPerPage;
+  //   // console.log('ip', this.collData.length, indexStart, indexEnd);
+  //   if (this.collData.length >= indexEnd) {
+  //     return of(this.formatResponseToType(this.collData.slice(indexStart, indexEnd)));
+  //   }
+  //   const callback: QueryFn = (ref: CollectionReference) => {
+  //     let collRef = ref.orderBy('tsCreatedAt');
+  //     if (pageNum > 1 && isNext && this.itemLast) {
+  //       collRef = collRef.startAfter(this.itemLast);
+  //     }
+  //     collRef = collRef.limit(this.itemsPerPage);
+  //     return collRef;
+  //   };
+  //   return this.list(callback);
+  // }
+
   formatResponseToType(response): Array<T> {
     this.isLastPage = response.length < this.itemsPerPage;
     return response.map(item => {

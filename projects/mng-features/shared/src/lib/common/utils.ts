@@ -31,7 +31,7 @@ export const convertDateToFirestoreTimestamp = (date) => {
 export const isRouteNew = (value: string) => value === RouteParts.NEW;
 export const getUniqueValueFromLabel = (label: string, allItems: Array<IOption>) => {
   const arrValue: Array<string> = allItems.map(item => item.value);
-  const labelToValue: string = label.toLowerCase().replace(/ /g, '-');
+  const labelToValue: string = label.toLowerCase().trim().replace(/ /g, '-');
   let counter = 0;
   let isDuplicate = true;
   let value: string = labelToValue;

@@ -1,8 +1,12 @@
-import { Inject } from "@angular/core";
+import { HttpClient } from '@angular/common/http';
+import { Inject, Injectable } from '@angular/core';
+import { map } from 'rxjs';
 
+@Injectable({ providedIn: 'root' })
 export class UtilService {
   constructor(
-    @Inject('env') private environment
+    // @Inject('environment') private environment,
+    private httpClient: HttpClient,
   ) { }
 
   getApiUrl(url: string, params?: { [key: string]: string }) {
@@ -16,6 +20,16 @@ export class UtilService {
         paramsC += `${key}=${params[key]}&`;
       });
     }
-    return this.environment.API_URL + urlToApply + paramsC;
+    // return this.environment.API_URL + urlToApply + paramsC;
+  }
+
+  getAllIcons() {
+    return this.httpClient.get('https://fonts.google.com/metadata/icons?key=material_symbols&incomplete=true').pipe(
+      map((response: { icons: Array<unknown> }) => {
+        return response.icons.map((item: { name: string }) => {
+          return { name: item.name }
+        })
+      })
+    );
   }
 }

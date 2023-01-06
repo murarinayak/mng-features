@@ -34,6 +34,7 @@ export interface IOption {
   label: string;
   value: string;
   total?: number;
+  icon?: string;
 }
 
 export interface IResponseModel {

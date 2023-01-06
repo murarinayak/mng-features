@@ -2,9 +2,9 @@
   <div class="summary-info" (click)="toggleColors()">
     <div class="info">
       <p class="style">{{ heading }}</p>
-      <p class="style-value">{{ selectedColor }}</p>
+      <p class="style-value">{{ selection }}</p>
     </div>
-    <div class="circle" [ngStyle]="{'background': selectedColor}"></div>
+    <div class="circle" [ngStyle]="{'background': selection}"></div>
   </div>
   <div class="opened" *ngIf="show">
     <div class="colors">
@@ -14,7 +14,7 @@
     <div class="hex-code">
       <p>Hex Code</p>
       <div class="g-input">
-        <input type="text" maxlength="7" [value]="selectedColor" #paintInput
+        <input type="text" maxlength="7" [value]="selection" #paintInput
           (keyup)="changeColorManual(paintInput.value)"
           (keydown.enter)="toggleColors()"/>
       </div>

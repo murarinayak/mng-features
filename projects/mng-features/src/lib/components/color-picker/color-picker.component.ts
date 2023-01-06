@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { COLORS_DEFAULT } from '../../common/color-picker.constants';
 
 @Component({
   selector: 'mng-color-picker',
@@ -8,16 +9,11 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class ColorPickerComponent {
 
   @Input() heading: string = 'Primary Color';
-  @Input() selectedColor: string = '#FFFFFF';
-  @Output() event = new EventEmitter();
+  @Input() selection: string = '#FFFFFF';
 
-  @Input() colorList: string[] = [
-    '#ffffff', '#000105', '#3e6158', '#3f7a89', '#96c582',
-    '#b7d5c4', '#bcd6e7', '#7c90c1', '#9d8594', '#dad0d8',
-    '#4b4fce', '#4e0a77', '#a367b5', '#ee3e6d', '#d63d62',
-    '#c6a670', '#f46600', '#cf0500', '#efabbd', '#8e0622',
-    '#f0b89a', '#f0ca68', '#62382f', '#c97545', '#c1800b'
-  ];
+  @Output() onSelection = new EventEmitter();
+
+  @Input() colorList: string[] = COLORS_DEFAULT;
 
   public show = false;
 
@@ -31,8 +27,8 @@ export class ColorPickerComponent {
   }
 
   public changeColor(color: string) {
-    this.selectedColor = color;
-    this.event.emit(this.selectedColor); // Return color
+    this.selection = color;
+    this.onSelection.emit(this.selection); // Return color
     this.show = false;
   }
 
@@ -40,8 +36,8 @@ export class ColorPickerComponent {
     const isValid = /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(color);
 
     if (isValid) {
-      this.selectedColor = color;
-      this.event.emit(this.selectedColor); // Return color
+      this.selection = color;
+      this.onSelection.emit(this.selection); // Return color
     }
   }
 }

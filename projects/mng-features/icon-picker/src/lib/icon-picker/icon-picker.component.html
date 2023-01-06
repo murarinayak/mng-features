@@ -1,0 +1,26 @@
+<mat-card>
+  <mat-card-content (click)="onClick()">
+    <div class="row">
+
+      <div class="col">
+        <p class="mb-0">{{ header }}</p>
+        <p class="mb-0">{{ selection }}</p>
+      </div>
+      <div class="col-auto">
+        <button *ngIf="selection" mat-fab class="icon-wrapper icon-small">
+          <mat-icon class="icon-small">{{ selection }}</mat-icon>
+        </button>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<mat-card *ngIf="show">
+  <mat-card-content>
+    <mat-grid-list cols="10" rowHeight="1:1">
+      <mat-grid-tile *ngFor="let item of icons" (click)="onIconClick(item)">
+        <mat-icon>{{ item.value }}</mat-icon>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,6 @@
+button.icon-wrapper {
+  background-color: purple;
+}
+button.icon-wrapper mat-icon {
+  color: white;
+}

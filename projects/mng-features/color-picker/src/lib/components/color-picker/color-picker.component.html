@@ -1,1 +1,22 @@
-<p>color-picker works!</p>
+<mat-form-field class="example-form-field">
+  <mat-label>Clearable input</mat-label>
+  <input matInput type="text" [(ngModel)]="value">
+  <!-- <button matSuffix mat-icon-button aria-label="open" (click)="onToggleClick()">
+    <mat-icon [ngStyle]="{ color: value }">palette</mat-icon>
+  </button> -->
+  <button matSuffix mat-icon-button aria-label="open" (click)="onToggleClick()" cdkOverlayOrigin #trigger="cdkOverlayOrigin">
+    <mat-icon [ngStyle]="{ color: value }">palette</mat-icon>
+  </button>
+</mat-form-field>
+
+<!-- This button triggers the overlay and is it's origin -->
+<!-- <button (click)="showModal = !showModal" type="button" cdkOverlayOrigin #trigger="cdkOverlayOrigin">
+  {{showModal ? "Close" : "Open"}}
+</button> -->
+
+<!-- This template displays the overlay content and is connected to the button -->
+<!-- <ng-template cdkConnectedOverlay [cdkConnectedOverlayOrigin]="trigger" [cdkConnectedOverlayOpen]="showModal">
+  <div class="example-list">
+    <mng-color-palette (selection)="onSelection($event)"></mng-color-palette>
+  </div>
+</ng-template> -->

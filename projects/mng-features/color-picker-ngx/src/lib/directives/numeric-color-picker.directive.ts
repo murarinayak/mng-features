@@ -5,7 +5,7 @@ import { NUMERIC_REGEX } from '../common/color-picker.helper';
 @Directive({
   selector: '[mngNumericColorPicker]'
 })
-export class MNGNumericColorPickerDirective {
+export class NumericColorInputDirective {
 
   constructor() { }
 

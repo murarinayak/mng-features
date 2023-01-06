@@ -8,7 +8,7 @@ import { MAT_INPUT_VALUE_ACCESSOR } from '@angular/material/input';
 import { Subscription } from 'rxjs';
 import { createMissingDateImplError } from '../../common/color-picker.helper';
 import { Color } from '../../common/color.model';
-import { ColorAdapterService } from '../../services/color-adapter.service';
+import { ColorAdapter } from '../../services/color-adapter.service';
 import { MatColorFormats, MAT_COLOR_FORMATS } from '../../services/color-formats';
 import { NgxMatColorPickerComponent } from './ngx-color-picker.component';
 
@@ -148,7 +148,7 @@ export class NgxMatColorPickerInput implements ControlValueAccessor, OnInit, OnD
   constructor(private _elementRef: ElementRef<HTMLInputElement>,
     @Optional() private _formField: MatFormField,
     @Optional() @Inject(MAT_COLOR_FORMATS) private _colorFormats: MatColorFormats,
-    private _adapter: ColorAdapterService) {
+    private _adapter: ColorAdapter) {
     if (!this._colorFormats) {
       throw createMissingDateImplError('MAT_COLOR_FORMATS');
     }

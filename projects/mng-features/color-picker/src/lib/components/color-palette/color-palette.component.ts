@@ -1,29 +1,29 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
-import { Color } from '../../common/color.model';
+import { Component, EventEmitter, Inject, Input, Output } from '@angular/core';
+import { DialogRef, DIALOG_DATA } from '@angular/cdk/dialog';
+import { COLORS_DEFAULT } from '../../common/color-picker.constants';
+
+// export interface DialogData {
+//   animal: string;
+//   name: string;
+// }
 
 @Component({
-  selector: 'ngx-mat-color-palette',
+  selector: 'mng-color-palette',
   templateUrl: './color-palette.component.html',
-  styleUrls: ['./color-palette.component.scss'],
-  encapsulation: ViewEncapsulation.None,
-  host: {
-    'class': 'ngx-mat-color-palette'
-  }
+  styleUrls: ['./color-palette.component.css']
 })
-export class NgxMatColorPaletteComponent implements OnInit {
+export class ColorPaletteComponent {
 
-  @Output() colorChanged: EventEmitter<Color> = new EventEmitter<Color>();
+  @Input() colorList: string[] = COLORS_DEFAULT;
 
-  @Input() color: Color;
+  // @Output() selection = new EventEmitter<string>();
 
-  constructor() { }
+  constructor(public dialogRef: DialogRef<string>, @Inject(DIALOG_DATA) public data: string) { } // DialogData
+  // constructor() {}
 
-  ngOnInit() {
+  changeColor(color: string) {
+    this.data = color;
+    this.dialogRef.close(color ?? this.data);
+    // this.selection.next(color);
   }
-
-  public handleColorChanged(color: Color) {
-    this.colorChanged.emit(color);
-  }
-
 }
-

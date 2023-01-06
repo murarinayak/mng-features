@@ -2,11 +2,11 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { COLORS_DEFAULT } from '../../common/color-picker.constants';
 
 @Component({
-  selector: 'mng-color-picker',
+  selector: 'mng-color-picker-1',
   templateUrl: './color-picker.component.html',
   styleUrls: ['./color-picker.component.css']
 })
-export class ColorPickerComponent {
+export class MNGColorPickerComponent1 {
 
   @Input() heading: string = 'Primary Color';
   @Input() selection: string = '#FFFFFF';

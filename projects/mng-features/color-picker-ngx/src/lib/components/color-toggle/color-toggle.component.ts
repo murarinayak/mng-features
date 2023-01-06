@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, Input, SimpleChanges, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { merge, of, Subscription } from 'rxjs';
-import { NgxMatColorPickerComponent } from '../ngx-color-picker/ngx-color-picker.component';
+import { NgxMatColorPickerComponent } from '../color-picker/ngx-color-picker.component';
 
 @Component({
   selector: 'ngx-mat-color-toggle',

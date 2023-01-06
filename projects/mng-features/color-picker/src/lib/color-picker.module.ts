@@ -4,39 +4,43 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
-
-import { MNGColorPickerComponent } from './components/color-picker/color-picker.component';
-import { NgxMatColorToggleComponent } from './components/color-toggle/color-toggle.component';
-import { NgxMatColorPickerComponent, NgxMatColorPickerContentComponent } from './components/ngx-color-picker/ngx-color-picker.component';
-import { NgxMatColorCanvasComponent } from './components/color-canvas/color-canvas.component';
-import { NgxMatColorSliderComponent } from './components/color-slider/color-slider.component';
 import { MatInputModule } from '@angular/material/input';
-import { ReactiveFormsModule } from '@angular/forms';
-import { NgxMatColorCollectionComponent } from './components/color-collection/color-collection.component';
-import { NgxMatColorPaletteComponent } from './components/color-palette/color-palette.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { MNGColorPickerComponent } from './components/color-picker/color-picker.component';
+import { ColorPickerDirective } from './color-picker.directive';
+import { ColorPaletteComponent } from './components/color-palette/color-palette.component';
+import { MNGColorPickerComponent1 } from './components/color-picker-1/color-picker.component';
 
 @NgModule({
   declarations: [
     MNGColorPickerComponent,
-    NgxMatColorToggleComponent,
-    NgxMatColorPickerComponent,
-    NgxMatColorPaletteComponent,
-    NgxMatColorCanvasComponent,
-    NgxMatColorCollectionComponent,
-    NgxMatColorSliderComponent,
-    NgxMatColorPickerContentComponent,
+    MNGColorPickerComponent1,
+    ColorPickerDirective,
+    ColorPaletteComponent,
   ],
   imports: [
     CommonModule,
+    FormsModule,
     ReactiveFormsModule,
     // MatCardModule,
-    // MatButtonModule,
+    MatButtonModule,
     // MatGridListModule,
     MatIconModule,
     MatInputModule,
+    MatDialogModule,
+    OverlayModule,
   ],
   exports: [
     MNGColorPickerComponent,
+  ],
+  entryComponents: [
+    // NgxMatColorPickerContentComponent
+  ],
+  providers: [
+    // ColorAdapter,
+    // NGX_MAT_COLOR_PICKER_SCROLL_STRATEGY_FACTORY_PROVIDER
   ]
 })
 export class MNGColorPickerModule { }

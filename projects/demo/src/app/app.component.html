@@ -1,6 +1,23 @@
 <h1>Library Demo</h1>
+<button mat-raised-button>Show</button>
 <div class="container">
-  <mng-color-picker></mng-color-picker>
+  <!-- <mng-color-picker></mng-color-picker> -->
 
-  <mng-editor></mng-editor>
+  <!-- <mng-editor></mng-editor> -->
+
+  <!-- <mat-form-field> -->
+    <input matInput [ngxMatColorPicker]="picker" [formControl]="colorCtr" [disabled]="disabled">
+    <ngx-mat-color-toggle matSuffix [for]="picker"></ngx-mat-color-toggle>
+    <ngx-mat-color-picker #picker [touchUi]="touchUi" [color]="color"></ngx-mat-color-picker>
+  <!-- </mat-form-field> -->
+
+  <!-- <input matInput [mngColorPicker]="picker"> -->
+  <div>
+    <hr>
+    <!-- <mat-form-field>
+      <input matInput mngColorPicker>
+    </mat-form-field> -->
+    <hr>
+    <mng-color-picker-2></mng-color-picker-2>
+  </div>
 </div>

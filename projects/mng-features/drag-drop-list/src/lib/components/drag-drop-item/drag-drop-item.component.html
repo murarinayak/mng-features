@@ -1,0 +1,12 @@
+<div class="w-100">
+  <div class="d-flex w-100 align-items-center justify-content-between">
+    <span class="cursor-pointer d-inline-block px-1" (click)="toggleBlock(!expanded)">
+      <span [hidden]="expanded"><mat-icon>chevron_right</mat-icon></span>
+      <span [hidden]="!expanded"><mat-icon>expand_more</mat-icon></span>
+    </span>
+    <span>{{ rowLabel }}</span>
+  </div>
+  <div *ngIf="expanded" class="ms-3">
+    <ng-content></ng-content>
+  </div>
+</div>

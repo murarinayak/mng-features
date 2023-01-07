@@ -1,0 +1,26 @@
+<div *ngIf="showExpansionControls">
+  <button mat-button (click)="expandAll()">Expand All</button>
+  <button mat-button (click)="collapseAll()">Collapse All</button>
+</div>
+<div cdkDropList class="example-list {{ className }}" [id]="dropListID" [cdkDropListData]="items"
+  [cdkDropListConnectedTo]="connectedTo" [cdkDropListSortingDisabled]="sortingDisabled"
+  (cdkDropListDropped)="onDrop($event)">
+  <ng-container *ngIf="items?.length; else templateNoItems">
+    <ng-container *ngFor="let item of items">
+      <ng-container *ngIf="templateCustom; else templateDefault">
+        <div cdkDrag>
+          <ng-container *ngTemplateOutlet="templateCustom; context: { $implicit: item }"></ng-container>
+        </div>
+      </ng-container>
+      <ng-template #templateDefault>
+        <mng-drag-drop-item cdkDrag [rowLabel]="item.label" [rowData]="item">
+          <mng-drag-drop-list [items]="item.expandedList"></mng-drag-drop-list>
+        </mng-drag-drop-item>
+      </ng-template>
+    </ng-container>
+  </ng-container>
+</div>
+
+<ng-template #templateNoItems>
+  <p>Nothing to display</p>
+</ng-template>

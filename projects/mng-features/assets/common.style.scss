@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 /* @import url( 'https://fonts.googleapis.com/css?family=Roboto:400,700|Material+Icons'); */
 
-/* @import "./assets/styles/bootstrap-helper.scss"; */
+// @import "./assets/styles/bootstrap-helper.scss";
 
 /* @import "./assets/styles/material-helper.scss"; */
 
@@ -236,5 +236,19 @@ mng-editor {
 
   &:hover {
     transform: scale(1.02);
+  }
+}
+
+mng-drag-drop-list {
+  color: red;
+  .example-list {
+    min-height: 1.25rem;
+    background: white;
+    border-radius: 0.25rem;
+    overflow: auto;
+    display: block;
+  }
+  & mng-drag-drop-item {
+    color: blue;
   }
 }

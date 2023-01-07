@@ -12,6 +12,7 @@ import { MNGColorPickerModule } from 'mng-features/color-picker';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { NgxMatColorPickerModule, MAT_COLOR_FORMATS, NGX_MAT_COLOR_FORMATS } from 'mng-features/color-picker-ngx';
+import { MNGDragDropListModule } from 'mng-features/drag-drop-list';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { NgxMatColorPickerModule, MAT_COLOR_FORMATS, NGX_MAT_COLOR_FORMATS } fro
     MatInputModule,
     NgxMatColorPickerModule,
     MNGColorPickerModule,
+    MNGDragDropListModule,
   ],
   providers: [
     { provide: MAT_COLOR_FORMATS, useValue: NGX_MAT_COLOR_FORMATS }

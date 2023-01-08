@@ -5,6 +5,7 @@ export type IFirestoreTimestamp = firebase.firestore.Timestamp;
 export interface IEnvironment {
   appName: string;
   appVersion: string;
+  appNamespace: string;
   apiUrl: string;
 }
 

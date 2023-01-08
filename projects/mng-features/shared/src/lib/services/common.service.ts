@@ -15,6 +15,7 @@ export class CommonService {
 
   getAppName() { return this.config.environment.appName; }
   getAppVersion() { return this.config.environment.appVersion; }
+  getAppNamespace() { return this.config.environment.appNamespace; }
   getApiUrl() { return this.config.environment.apiUrl; }
   getMenuItems() { return this.config.menu; }
   getShowLeftNav() { return this.config.showLeftNav; }
@@ -27,5 +28,13 @@ export class CommonService {
       tsCreatedAt: getServerTimestamp(),
       tsUpdatedAt: getServerTimestamp()
     };
+  }
+
+  share(summary = '', title = '') { // 
+    if (!title) { title = `Share ${this.getAppName()} App`; }
+    if (!summary) { summary = `I found an awesome ${this.getAppName()} App!`; }
+    const text: string = summary + `\nJoin ${this.getAppName()} by downloading from https://play.google.com/store/apps/details?id=${this.getAppNamespace()}\n\n`;
+    const shareData: ShareData = { title, text };
+    navigator.share(shareData);
   }
 }

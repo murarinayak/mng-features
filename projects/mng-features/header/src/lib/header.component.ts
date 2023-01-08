@@ -71,6 +71,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
     void this.router.navigate(['auth']);
   }
 
+  onShareClick() {
+    this.commonService.share();
+  }
+
   logout() {
     this.isLoggedIn = false;
     const keysToKeep: Map<string, string> = new Map();

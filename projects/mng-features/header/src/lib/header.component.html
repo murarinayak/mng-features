@@ -28,9 +28,6 @@
   <a mat-menu-item routerLink="us/profile">
     <mat-icon>manage_accounts</mat-icon>Profile
   </a>
-  <button mat-menu-item (click)="logout()">
-    <mat-icon>share</mat-icon>Share
-  </button>
   <button *ngIf="!isLoggedIn; else showLoggedInMenu" mat-menu-item (click)="onLoginClick()">
     <mat-icon>login</mat-icon>Login
   </button>
@@ -39,9 +36,12 @@
       <mat-icon>{{ item.icon }}</mat-icon>
       {{ item.label }}
     </button>
-    <button *ngIf="isLoggedIn" mat-menu-item (click)="logout()">
-      <mat-icon>logout</mat-icon>
-      Logout
-    </button>
   </ng-template>
+  <button mat-menu-item (click)="onShareClick()">
+    <mat-icon>share</mat-icon>Share
+  </button>
+  <button *ngIf="isLoggedIn" mat-menu-item (click)="logout()">
+    <mat-icon>logout</mat-icon>
+    Logout
+  </button>
 </mat-menu>

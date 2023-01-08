@@ -6,6 +6,8 @@ import { MatIconModule } from '@angular/material/icon';
 
 import { DragDropListComponent } from './components/drag-drop-list/drag-drop-list.component';
 import { DragDropItemComponent } from './components/drag-drop-item/drag-drop-item.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -15,8 +17,10 @@ import { DragDropItemComponent } from './components/drag-drop-item/drag-drop-ite
   imports: [
     CommonModule,
     DragDropModule,
+    MatCardModule,
     MatButtonModule,
     MatIconModule,
+    MatMenuModule,
   ],
   exports: [
     DragDropListComponent,

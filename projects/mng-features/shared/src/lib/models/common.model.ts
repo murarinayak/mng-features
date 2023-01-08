@@ -26,13 +26,14 @@ export interface IDocumentModel {
 export interface IMenuItem {
   id?: number;
   label: string;
-  path: string;
+  path?: string;
   icon?: string;
+  onClick?: () => void;
 }
 
 export interface IOption {
   label: string;
-  value: string;
+  value?: string;
   total?: number;
   icon?: string;
 }

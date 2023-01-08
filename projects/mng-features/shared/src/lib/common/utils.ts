@@ -44,3 +44,13 @@ export const getUniqueValueFromLabel = (label: string, allItems: Array<IOption>)
   }
   return value;
 };
+
+export const flattenArray = (data: Array<any>) => {
+  let children = [];
+  return data.map(m => {
+    if (m.children && m.children.length) {
+      children = [...children, ...m.children];
+    }
+    return m;
+  }).concat(children.length ? flattenArray(children) : children);
+}

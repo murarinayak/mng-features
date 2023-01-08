@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { IMenuItem } from 'mng-features/shared';
 import { IDragDropItem } from '../../common/drag-drop-item.model';
 
 @Component({
@@ -8,8 +9,9 @@ import { IDragDropItem } from '../../common/drag-drop-item.model';
 })
 export class DragDropItemComponent {
 
+  @Input() item: IDragDropItem;
   @Input() rowLabel = 'Row Label';
-  @Input() rowData: IDragDropItem;
+  // @Input() rowData: IDragDropItem;
   @Input() expanded = false;
   @Input() showToggle = false;
   // @Input() showFlyoutMenu = false;
@@ -22,9 +24,16 @@ export class DragDropItemComponent {
   collapse() { this.toggleBlock(false); }
 
   toggleBlock(expanded: boolean) {
-    if (this.rowData.canToggle) {
-      this.expanded = expanded;
-      this.toggle.emit(this.expanded);
+    // if (this.item.canToggle) {
+    this.expanded = expanded;
+    this.toggle.emit(this.expanded);
+    // }
+  }
+
+  onActionItemClick(item: IMenuItem) {
+    console.log('iii', item);
+    if (item.onClick) {
+      item.onClick();
     }
   }
 }

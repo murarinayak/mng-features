@@ -10,7 +10,7 @@ export class DragDropListComponent {
 
   @Input() items: Array<IDragDropItem> = [
     {
-      label: 'Item 1', canToggle: true, expandedList: [
+      label: 'Item 1', canToggle: true, children: [
         { label: 'Item 1-1' },
         { label: 'Item 1-2' },
       ]
@@ -24,6 +24,7 @@ export class DragDropListComponent {
   @Input() showExpansionControls = false;
   @Input() templateCustom: TemplateRef<unknown>;
   @Input() templateExpansion: TemplateRef<unknown>;
+  @Input() isDragDisabled = false;
 
   @Output() dragStart = new EventEmitter();
   @Output() itemDrop = new EventEmitter();
@@ -38,6 +39,7 @@ export class DragDropListComponent {
   }
 
   onDrop(event) {
+    // console.log('drp', event);
     this.itemDrop.emit(event);
   }
 }

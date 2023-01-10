@@ -1,0 +1,12 @@
+<mat-card class="text-center">
+  <mat-card-title class="my-2">{{ data.title }}</mat-card-title>
+  <mat-divider></mat-divider>
+  <mat-card-content class="my-3">
+    <p>{{ data.content }}</p>
+  </mat-card-content>
+  <mat-divider></mat-divider>
+  <mat-card-actions align="end">
+    <button mat-raised-button class="ms-auto me-2" (click)="onNoClick()">Cancel</button>
+    <button mat-raised-button color="primary" class="me-auto" (click)="onYesClick()" cdkFocusInitial>Ok</button>
+  </mat-card-actions>
+</mat-card>

@@ -45,7 +45,7 @@ export const getUniqueValueFromLabel = (label: string, allItems: Array<IOption>)
   return value;
 };
 
-export const flattenArray = (data: Array<any>) => {
+export const flattenArray = (data: Array<any>): Array<any> => {
   let children = [];
   return data.map(m => {
     if (m.children && m.children.length) {

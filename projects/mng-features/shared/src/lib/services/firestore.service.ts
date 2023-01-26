@@ -75,7 +75,7 @@ export class FirestoreService<T extends { id?: string }> { // implements IFirest
 
   list(callback: QueryFn = null): Observable<Array<T>> {
     if (!callback) {
-      callback = (ref: CollectionReference) => ref.orderBy('tsCreatedAt').limit(3)
+      callback = (ref: CollectionReference) => ref.orderBy('tsCreatedAt'); // .limit(3)
     }
     return this.ngFirestore.collection(this.collName, callback).get().pipe(
       map((response) => response.docs), // firebase.firestore.QuerySnapshot<unknown>
@@ -138,7 +138,7 @@ export class FirestoreService<T extends { id?: string }> { // implements IFirest
       console.log('ref', ref);
       ref = this.sortQuery(ref, params.arrSortQuery);
       ref = this.filterQuery(ref, params.arrFilterQuery);
-      ref = this.limitQuery(ref, this.limitPerPage);
+      ref = this.limitQuery(ref, params.limit); // ?? this.limitPerPage);
       ref = this.lastItemQuery(ref, params);
       return ref;
     }

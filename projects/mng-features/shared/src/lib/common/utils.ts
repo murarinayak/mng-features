@@ -14,7 +14,7 @@ export const formatPrice = (price: number, places = 4) => {
   return Math.round(price * power) / power;
 };
 
-export const getDateFromFirestoreDate = (date: { seconds: number, milliseconds: number }): Date | null => {
+export const getDateFromFirestoreTimestamp = (date: { seconds: number, milliseconds: number }): Date | null => {
   return date?.seconds ? new Date(date.seconds * 1000) : null;
 };
 
@@ -22,7 +22,7 @@ export const getServerTimestamp = (): IFirestoreTimestamp => {
   return firebase.firestore.FieldValue.serverTimestamp() as IFirestoreTimestamp;
 }
 
-export const convertDateToFirestoreTimestamp = (date) => {
+export const getFirestoreTimestampFromDate = (date: Date): IFirestoreTimestamp => {
   // console.log('d1', date);
   // console.log('d2', firebase.firestore.Timestamp.fromDate(new Date(date)));
   return firebase.firestore.Timestamp.fromDate(date);
@@ -54,3 +54,21 @@ export const flattenArray = (data: Array<any>): Array<any> => {
     return m;
   }).concat(children.length ? flattenArray(children) : children);
 }
+
+export const getISO8601Week = (date: Date) => {
+  // Create a copy of the current date, we don't want to mutate the original
+  // const date = new Date(this.getTime());
+
+  // Find Thursday of this week starting on Monday
+  date.setDate(date.getDate() + 4 - (date.getDay() || 7));
+  const thursday = date.getTime();
+
+  // Find January 1st
+  date.setMonth(0); // January
+  date.setDate(1);  // 1st
+  const jan1st = date.getTime();
+
+  // Round the amount of days to compensate for daylight saving time
+  const days = Math.round((thursday - jan1st) / 86400000); // 1 day = 86400000 ms
+  return Math.floor(days / 7) + 1;
+};

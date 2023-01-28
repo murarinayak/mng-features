@@ -53,7 +53,7 @@ export class FirestoreService<T extends { id?: string }> { // implements IFirest
     const indexEnd: number = indexStart + this.limitPerPage;
     // console.log('ip', this.collData.length, indexStart, indexEnd);
     if (this.collData.length >= indexEnd) {
-      return of(this.formatResponseToType(this.collData.slice(indexStart, indexEnd)));
+      // return of(this.formatResponseToType(this.collData.slice(indexStart, indexEnd)));
     }
     const callback: QueryFn = (ref: CollectionReference) => {
       let collRef = ref.orderBy('date');
@@ -135,7 +135,7 @@ export class FirestoreService<T extends { id?: string }> { // implements IFirest
       return of(this.formatResponseToType(this.collData.slice(indexStart, indexEnd)));
     }
     const callback: QueryFn<unknown> = (ref: CollectionReference) => {
-      console.log('ref', ref);
+      // console.log('ref', ref);
       ref = this.sortQuery(ref, params.arrSortQuery);
       ref = this.filterQuery(ref, params.arrFilterQuery);
       ref = this.limitQuery(ref, params.limit); // ?? this.limitPerPage);

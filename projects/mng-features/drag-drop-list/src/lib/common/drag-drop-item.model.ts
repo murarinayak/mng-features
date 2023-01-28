@@ -2,7 +2,7 @@ import { IMenuItem } from 'mng-features/shared';
 
 export interface IDragDropItem {
   label: string;
-  value?: string;
+  value?: number | string;
   data?: unknown;
   // IDs if this becomes a DropList
   dropListID?: string;

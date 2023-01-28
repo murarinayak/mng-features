@@ -36,7 +36,7 @@ export class MNGIconPickerComponent {
   }
 
   onIconClick(icon: IOption) {
-    this.selection = icon.value;
+    this.selection = icon.value.toString();
     this.show = false;
     this.onSelection.emit(this.selection);
   }

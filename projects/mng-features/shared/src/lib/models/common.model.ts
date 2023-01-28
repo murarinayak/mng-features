@@ -34,7 +34,7 @@ export interface IMenuItem {
 
 export interface IOption {
   label: string;
-  value?: string;
+  value?: number | string;
   total?: number;
   icon?: string;
 }

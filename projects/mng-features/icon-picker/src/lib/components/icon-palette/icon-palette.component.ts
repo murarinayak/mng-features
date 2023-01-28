@@ -27,7 +27,7 @@ export class IconPaletteComponent {
   }
 
   onClick(item: IOption) {
-    this.data = item.value;
+    this.data = item.value.toString();
     this.dialogRef.close(this.data);
   }
 }

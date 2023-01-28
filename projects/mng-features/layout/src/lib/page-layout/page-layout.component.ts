@@ -13,7 +13,6 @@ export class PageLayoutComponent {
 
   @Input() title = '';
 
-  appVersion: string;
   links: Array<IMenuItem>;
   mobileQuery: MediaQueryList;
   showLeftNav = false;
@@ -41,7 +40,6 @@ export class PageLayoutComponent {
     this.mobileQuery = media.matchMedia(Breakpoints.Handset);
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addEventListener('change', this._mobileQueryListener);
-    this.appVersion = this.commonService.getAppVersion();
     this.links = this.commonService.getMenuItems();
     this.showLeftNav = this.commonService.getShowLeftNav();
     // // this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event: NavigationEnd) => {

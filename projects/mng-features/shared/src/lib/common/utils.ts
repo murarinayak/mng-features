@@ -30,7 +30,7 @@ export const getFirestoreTimestampFromDate = (date: Date): IFirestoreTimestamp =
 
 export const isRouteNew = (value: string) => value === RouteParts.NEW;
 export const getUniqueValueFromLabel = (label: string, allItems: Array<IOption>) => {
-  const arrValue: Array<string> = allItems.map(item => item.value);
+  const arrValue: Array<number | string> = allItems.map(item => item.value);
   const labelToValue: string = label.toLowerCase().trim().replace(/ /g, '-');
   let counter = 0;
   let isDuplicate = true;
@@ -72,3 +72,22 @@ export const getISO8601Week = (date: Date) => {
   const days = Math.round((thursday - jan1st) / 86400000); // 1 day = 86400000 ms
   return Math.floor(days / 7) + 1;
 };
+
+export const getDaysInMonth = (year: number, month: number): number => {
+  let days = 31; // For all others not defined in case
+  switch (month) {
+    case 1: { // Feb
+      const isLeapYear = year % 4 === 0;
+      days = isLeapYear ? 29 : 28;
+      break;
+    }
+    case 3: // Apr
+    case 5: // Jun
+    case 8: // Sept
+    case 10: { // Nov
+      days = 30;
+      break;
+    }
+  }
+  return days;
+}

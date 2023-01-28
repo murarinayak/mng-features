@@ -51,10 +51,10 @@ export class LoginComponent implements OnInit {
   }
 
   onLoginWithGoogleClick() {
-    console.log('open google signin');
+    // console.log('open google signin');
     this.authService.signInWithPopup(new firebase.auth.GoogleAuthProvider).subscribe({
       next: (response) => {
-        console.log('res', response);
+        // console.log('res', response);
         this.onLoginSuccess();
       },
       error: this.onError

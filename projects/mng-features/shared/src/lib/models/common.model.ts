@@ -67,3 +67,12 @@ export interface IAuthUser {
   isAnonymous: boolean;
   // categories?: Array<IOption>;
 }
+
+export interface IEChartClickEventData {
+  name: string,
+  value: string,
+  ref: string;
+}
+export interface IEChartClickEvent {
+  data: IEChartClickEventData;
+}

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { from, map, Observable, of } from 'rxjs';
 import { AngularFirestore, CollectionReference, DocumentSnapshot, QueryFn } from '@angular/fire/compat/firestore';
 import { WhereFilterOp } from '@firebase/firestore-types';
+import firebase from 'firebase/compat/app'
 
 import { ITEMS_PER_PAGE_GLOBAL } from '../common/constants';
 
@@ -25,7 +26,7 @@ export interface IFirestoreQueryParams {
 export interface IFilterQuery {
   fieldRef: string;
   opStr: WhereFilterOp;
-  value: string | number | boolean | Date;
+  value: string | number | boolean | Date | firebase.firestore.Timestamp;
 }
 export interface ISortQuery {
   fieldRef: string;

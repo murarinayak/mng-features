@@ -108,7 +108,7 @@ export class FirestoreService<T extends { id?: string }> { // implements IFirest
    * @returns 
    */
   set(item: T): Observable<void> {
-    const docID: string = item.id;
+    const docID: string = item.id ?? this.ngFirestore.createId();
     delete item.id;
     return from(this.ngFirestore.collection(this.collName).doc(docID).set(item));
   }

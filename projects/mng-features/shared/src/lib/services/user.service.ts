@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { AngularFirestore, DocumentSnapshot } from '@angular/fire/compat/firestore';
 import { from, Observable, of } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
@@ -17,7 +16,6 @@ export class UserService {
   private loggedInUser: IAuthUser;
 
   constructor(
-    private http: HttpClient,
     private ngFirestore: AngularFirestore,
     private storageService: MNGBrowserStorageService
   ) { }

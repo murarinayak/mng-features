@@ -91,3 +91,10 @@ export const getDaysInMonth = (year: number, month: number): number => {
   }
   return days;
 }
+
+export const getYearMonth = (date: Date) => {
+  return '' + date.getFullYear() + ('0' + date.getMonth()).slice(-2);
+}
+export const getYearMonthDay = (date: Date) => {
+  return '' + date.getFullYear() + ('0' + date.getMonth()).slice(-2) + ('0' + date.getDay()).slice(-2);
+}

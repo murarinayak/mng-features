@@ -46,13 +46,13 @@ export const getUniqueValueFromLabel = (label: string, allItems: Array<IOption>)
 };
 
 export const flattenArray = (data: Array<any>): Array<any> => {
-  let children = [];
-  return data.map(m => {
-    if (m.children && m.children.length) {
-      children = [...children, ...m.children];
+  return data.reduce((acc: Array<any>, item) => {
+    acc.push(item);
+    if (item.children?.length) {
+      acc = acc.concat(flattenArray(item.children));
     }
-    return m;
-  }).concat(children.length ? flattenArray(children) : children);
+    return acc;
+  }, []);
 }
 
 export const getISO8601Week = (date: Date) => {

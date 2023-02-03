@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { IDialogData } from 'mng-features/modals';
+import { IDialogData } from '../../common/dialog-data.model';
 
 @Component({
   selector: 'mng-alert-modal',

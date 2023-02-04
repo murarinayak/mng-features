@@ -35,8 +35,8 @@ export interface IMenuItem {
 export interface IOption {
   label: string;
   value?: number | string;
-  total?: number;
-  icon?: string;
+  readonly?: boolean;
+  hidden?: boolean;
 }
 
 export interface IResponseModel {

@@ -92,9 +92,8 @@ export const getDaysInMonth = (year: number, month: number): number => {
   return days;
 }
 
-export const getYearMonth = (date: Date) => {
-  return '' + date.getFullYear() + ('0' + date.getMonth()).slice(-2);
-}
-export const getYearMonthDay = (date: Date) => {
-  return '' + date.getFullYear() + ('0' + date.getMonth()).slice(-2) + ('0' + date.getDay()).slice(-2);
-}
+export const getYear = (date: Date) => '' + date.getFullYear();
+export const getMonth = (date: Date) => ('0' + (date.getMonth() + 1)).slice(-2);
+export const getDay = (date: Date) => ('0' + date.getDay()).slice(-2);
+export const getYearMonth = (date: Date) => getYear(date) + getMonth(date);
+export const getYearMonthDay = (date: Date) => getYear(date) + getMonth(date) + getDay(date);

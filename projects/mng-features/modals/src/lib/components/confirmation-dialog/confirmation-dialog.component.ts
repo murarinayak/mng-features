@@ -10,6 +10,11 @@ import { IDialogData } from '../../common/dialog-data.model';
 })
 export class ConfirmationDialogComponent {
 
+  strDefTitle: string = 'Confirm';
+  strDefContent: string = 'Are you sure?';
+  strDefYesBtn: string = 'Ok';
+  strDefNoBtn: string = 'Cancel';
+
   constructor(
     public dialogRef: MatDialogRef<ConfirmationDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: IDialogData,

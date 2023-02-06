@@ -37,7 +37,9 @@ export class CommonService {
     if (!summary) { summary = `I found an awesome ${this.getAppName()} App!`; }
     const text: string = summary + `\nJoin ${this.getAppName()} by downloading from https://play.google.com/store/apps/details?id=${this.getAppNamespace()}`;
     const shareData: ShareData = { title, text };
-    if (navigator.canShare && navigator.canShare()) {
+    console.log('share', typeof navigator.share, typeof navigator.canShare)
+    // if (navigator.canShare && navigator.canShare()) {
+    if (typeof navigator.share === 'function') {
       navigator.share(shareData);
     } else {
       // alert('Sharing not supported on device. Copy the following instead. \n\n' + text);

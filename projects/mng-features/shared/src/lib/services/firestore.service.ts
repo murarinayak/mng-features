@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { from, map, Observable, of } from 'rxjs';
-import { AngularFirestore, CollectionReference, DocumentSnapshot, QueryFn } from '@angular/fire/compat/firestore';
+import { AngularFirestore, CollectionReference, DocumentReference, DocumentSnapshot, QueryFn } from '@angular/fire/compat/firestore';
 import { WhereFilterOp } from '@firebase/firestore-types';
 import firebase from 'firebase/compat/app'
 
@@ -23,10 +23,11 @@ export interface IFirestoreQueryParams {
   arrSortQuery?: Array<ISortQuery>;
 }
 
+type IFirestoreValueType = string | number | boolean | Date | firebase.firestore.Timestamp;
 export interface IFilterQuery {
   fieldRef: string;
   opStr: WhereFilterOp;
-  value: string | number | boolean | Date | firebase.firestore.Timestamp;
+  value: IFirestoreValueType | Array<IFirestoreValueType>;
 }
 export interface ISortQuery {
   fieldRef: string;
@@ -114,13 +115,16 @@ export class FirestoreService<T extends { id?: string }> { // implements IFirest
   }
 
   post(item: T) {
-    return from(this.ngFirestore.collection(this.collName).add(item));
+    return from(this.ngFirestore.collection(this.collName).add(item)).pipe(
+      map((response: DocumentReference<T>) => response.id)
+    );
   }
 
   put(item: T): Observable<void> {
     const docID: string = item.id;
-    delete item.id;
-    return from(this.ngFirestore.collection(this.collName).doc(docID).update(item));
+    const itemSpread: T = { ...item };
+    delete itemSpread.id;
+    return from(this.ngFirestore.collection(this.collName).doc(docID).update(itemSpread));
   }
 
   delete(itemID: string): Observable<void> {

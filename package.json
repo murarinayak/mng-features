@@ -8,6 +8,7 @@
     "build:lib": "ng build mng-features",
     "build:demo": "ng build demo",
     "publish": "cd dist/mng-features && npm publish",
+    "bp": "npm run build && npm run publish",
     "pack": "cd dist/mng-features && npm pack",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"

@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
-import { AlertModalComponent, ConfirmationDialogComponent, ModalService } from 'mng-features/modals';
-import { AuthUserType } from 'mng-features/shared';
+import { ConfirmationDialogComponent, ModalService } from 'mng-features/modals';
+import { AuthUserType } from '../common/constants';
 import { getServerTimestamp } from '../common/utils';
 import { IAuthUser, IDocumentModel, ILibraryConfig, IMenuItem } from '../models/common.model';
 import { UserService } from './user.service';

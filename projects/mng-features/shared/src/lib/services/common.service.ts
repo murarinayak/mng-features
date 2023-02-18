@@ -1,26 +1,37 @@
 import { Inject, Injectable } from '@angular/core';
 import { AlertModalComponent, ConfirmationDialogComponent, ModalService } from 'mng-features/modals';
+import { AuthUserType } from 'mng-features/shared';
 import { getServerTimestamp } from '../common/utils';
-import { IDocumentModel, ILibraryConfig } from '../models/common.model';
+import { IAuthUser, IDocumentModel, ILibraryConfig, IMenuItem } from '../models/common.model';
 import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CommonService {
+  
+  user: IAuthUser;
 
   constructor(
     @Inject('config') private config: ILibraryConfig,
     private userService: UserService,
     private modalService: ModalService,
-  ) {}
+  ) {
+    this.user = this.userService.getLoggedInUser();
+  }
 
   getAppName() { return this.config.environment.appName; }
   getAppVersion() { return this.config.environment.appVersion; }
   getAppNamespace() { return this.config.environment.appNamespace; }
   getApiUrl() { return this.config.environment.apiUrl; }
-  getMenuItems() { return this.config.menu; }
   getShowLeftNav() { return this.config.showLeftNav; }
+  getMenuItems() {
+    let menuItems: Array<IMenuItem> = [];
+    if (this.user) { menuItems = this.config.menu.filter(item => item.roles.includes(this.user.userType)); }
+    return menuItems;
+  }
+  isSuperAdmin() { return this.user.userType === AuthUserType.SUPER_ADMIN; }
+  isAdmin() { return this.user.userType === AuthUserType.ADMIN || this.user.userType === AuthUserType.SUPER_ADMIN; }
 
   getDefaultDoc(): IDocumentModel {
     return {

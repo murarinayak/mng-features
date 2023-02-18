@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { from, map, of, switchMap, tap } from 'rxjs';
-import { LoggerService, UserService, IAuthUser } from 'mng-features/shared';
+import { LoggerService, UserService, IAuthUser, AuthUserType } from 'mng-features/shared';
 
 @Injectable({
   providedIn: 'root'
@@ -91,7 +91,8 @@ export class AuthService {
       locale: data?.additionalUserInfo?.profile['locale'] ?? 'en-GB', // might use this for translation
       phoneNumber: data?.user?.phoneNumber ?? '',
       photoURL: data?.user?.photoURL ?? '',
-      isAnonymous: data?.user?.isAnonymous ?? false
+      isAnonymous: data?.user?.isAnonymous ?? false,
+      userType: AuthUserType.USER,
     };
   }
 

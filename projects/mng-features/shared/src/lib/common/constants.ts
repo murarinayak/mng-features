@@ -10,6 +10,11 @@ export const enum CollNameGlobal {
   UPLOADS = 'uploads',
   USERS = 'users',
 }
+export const enum AuthUserType {
+  USER = 1,
+  ADMIN = 2,
+  SUPER_ADMIN = 3
+}
 
 // export const API_URL = (url: string, params?: { [key: string]: string }) => {
 //   let urlToApply = url;

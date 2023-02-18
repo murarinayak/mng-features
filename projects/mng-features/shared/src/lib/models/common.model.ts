@@ -29,6 +29,7 @@ export interface IMenuItem {
   label: string;
   path?: string;
   icon?: string;
+  roles?: Array<number>;
   onClick?: () => void;
 }
 
@@ -66,6 +67,7 @@ export interface IAuthUser {
   photoURL: string;
   isAnonymous: boolean;
   // categories?: Array<IOption>;
+  userType: number;
 }
 
 export interface IEChartClickEventData {

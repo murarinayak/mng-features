@@ -5,6 +5,7 @@ export interface IStory extends IDocumentModel {
   title?: string;
   excerpt?: string;
   content?: string;
+  audioURL?: string;
   tags?: Array<string>;
 
   url?: string;

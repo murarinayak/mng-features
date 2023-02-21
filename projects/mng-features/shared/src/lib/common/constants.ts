@@ -11,9 +11,9 @@ export const enum CollNameGlobal {
   USERS = 'users',
 }
 export const enum AuthUserType {
-  USER = 1,
+  SUPER_ADMIN = 1,
   ADMIN = 2,
-  SUPER_ADMIN = 3
+  USER = 3,
 }
 
 // export const API_URL = (url: string, params?: { [key: string]: string }) => {

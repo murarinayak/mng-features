@@ -27,7 +27,7 @@ export class CommonService {
   getShowLeftNav() { return this.config.showLeftNav; }
   getMenuItems() {
     let menuItems: Array<IMenuItem> = [];
-    if (this.user) { menuItems = this.config.menu.filter(item => item.roles.includes(this.user.userType)); }
+    if (this.user) { menuItems = this.config.menu.filter(item => item.roles?.length ? item.roles.includes(this.user.userType) : true); }
     return menuItems;
   }
   isSuperAdmin() { return this.user.userType === AuthUserType.SUPER_ADMIN; }

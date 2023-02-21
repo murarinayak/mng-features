@@ -113,6 +113,8 @@ button {
 
 mat-list.mat-mdc-list-base mat-list-item.compact,
 mat-selection-list.mat-mdc-list-base mat-list-option.compact {
+  padding-left: 0rem;
+  padding-right: 0rem;
   mat-icon.mat-mdc-list-item-icon {
     color: white;
     // Increasing the width/heiht of icon cotnainer, as icon will stay at 24px
@@ -121,6 +123,7 @@ mat-selection-list.mat-mdc-list-base mat-list-option.compact {
     height: 32px;
     padding: 4px;
     border-radius: 50%;
+    margin-left: 0rem;
     margin-right: 1rem;
   }
 

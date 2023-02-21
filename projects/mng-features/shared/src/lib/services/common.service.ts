@@ -30,8 +30,8 @@ export class CommonService {
     if (this.user) { menuItems = this.config.menu.filter(item => item.roles?.length ? item.roles.includes(this.user.userType) : true); }
     return menuItems;
   }
-  isSuperAdmin() { return this.user.userType === AuthUserType.SUPER_ADMIN; }
-  isAdmin() { return this.user.userType === AuthUserType.ADMIN || this.user.userType === AuthUserType.SUPER_ADMIN; }
+  isSuperAdmin() { return this.user?.userType === AuthUserType.SUPER_ADMIN; }
+  isAdmin() { return this.user?.userType === AuthUserType.ADMIN || this.user?.userType === AuthUserType.SUPER_ADMIN; }
 
   getDefaultDoc(): IDocumentModel {
     return {

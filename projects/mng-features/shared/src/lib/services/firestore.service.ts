@@ -110,8 +110,9 @@ export class FirestoreService<T extends { id?: string }> { // implements IFirest
    */
   set(item: T): Observable<void> {
     const docID: string = item.id ?? this.ngFirestore.createId();
-    delete item.id;
-    return from(this.ngFirestore.collection(this.collName).doc(docID).set(item));
+    const itemSpread: T = { ...item };
+    delete itemSpread.id;
+    return from(this.ngFirestore.collection(this.collName).doc(docID).set(itemSpread));
   }
 
   post(item: T) {

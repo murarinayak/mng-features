@@ -13,6 +13,7 @@ export * from './lib/services/request.service';
 export * from './lib/services/storage.service';
 export * from './lib/services/user.service';
 export * from './lib/services/window.service';
+export * from './lib/services/text-to-speech.service';
 
 export * from './lib/pipes/firestore-date.pipe';
 

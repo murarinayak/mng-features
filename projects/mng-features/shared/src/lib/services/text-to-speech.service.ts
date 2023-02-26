@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireFunctions } from '@angular/fire/compat/functions';
 import { map } from 'rxjs';
-import { IAudioRequest } from '../models/common.model';
+import { IAudioRequest } from '../models/global.model';
 
 @Injectable()
 export class M2NTextToSpeechService {

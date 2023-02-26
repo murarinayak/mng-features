@@ -78,10 +78,3 @@ export interface IEChartClickEventData {
 export interface IEChartClickEvent {
   data: IEChartClickEventData;
 }
-
-export interface IAudioRequest {
-  docID: string;
-  text: string;
-  languageCode?: string;
-  voiceName?: string;
-}

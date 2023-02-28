@@ -7,12 +7,17 @@ export interface IEnvironment {
   appVersion: string;
   appNamespace: string;
   apiUrl: string;
+  firebase: IFirebaseConfig;
 }
 
 export interface ILibraryConfig {
   environment: IEnvironment;
   menu: Array<IMenuItem>;
   showLeftNav: boolean;
+}
+
+export interface IFirebaseConfig {
+  storageBucket: string;
 }
 
 export interface IDocumentModel {

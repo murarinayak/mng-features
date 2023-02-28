@@ -24,6 +24,7 @@ export class CommonService {
   getAppVersion() { return this.config.environment.appVersion; }
   getAppNamespace() { return this.config.environment.appNamespace; }
   getApiUrl() { return this.config.environment.apiUrl; }
+  getFirebaseConfig() { return this.config.environment.firebase; }
   getShowLeftNav() { return this.config.showLeftNav; }
   getMenuItems() {
     let menuItems: Array<IMenuItem> = [];

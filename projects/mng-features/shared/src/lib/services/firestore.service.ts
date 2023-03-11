@@ -12,6 +12,7 @@ import { ITEMS_PER_PAGE_GLOBAL } from '../common/constants';
 // }
 
 export interface IFirestoreQueryParams {
+  fromCache?: boolean;
   limit?: number;
   pageNum?: number;
   isNext?: boolean;
@@ -108,11 +109,13 @@ export class FirestoreService<T extends { id?: string }> { // implements IFirest
    * @param item T
    * @returns 
    */
-  set(item: T): Observable<void> {
+  set(item: T): Observable<string> {
     const docID: string = item.id ?? this.ngFirestore.createId();
     const itemSpread: T = { ...item };
     delete itemSpread.id;
-    return from(this.ngFirestore.collection(this.collName).doc(docID).set(itemSpread));
+    return from(this.ngFirestore.collection(this.collName).doc(docID).set(itemSpread)).pipe(
+      map(() => docID)
+    );
   }
 
   post(item: T) {
@@ -137,7 +140,7 @@ export class FirestoreService<T extends { id?: string }> { // implements IFirest
     const indexStart: number = (params.pageNum - 1) * this.limitPerPage;
     const indexEnd: number = indexStart + this.limitPerPage;
     // console.log('ip', this.collData.length, indexStart, indexEnd);
-    if (this.collData.length > indexStart) {
+    if (params?.fromCache && this.collData.length > indexStart) {
       return of(this.formatResponseToType(this.collData.slice(indexStart, indexEnd)));
     }
     const callback: QueryFn<unknown> = (ref: CollectionReference) => {

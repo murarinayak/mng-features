@@ -14,6 +14,7 @@ export const enum AuthUserType {
   SUPER_ADMIN = 1,
   ADMIN = 2,
   USER = 3,
+  NOT_LOGGEDIN = 4,
 }
 
 // export const API_URL = (url: string, params?: { [key: string]: string }) => {

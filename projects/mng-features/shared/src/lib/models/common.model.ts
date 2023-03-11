@@ -41,6 +41,7 @@ export interface IMenuItem {
 export interface IOption {
   label: string;
   value?: number | string;
+  imageUrl?: string;
   readonly?: boolean;
   hidden?: boolean;
 }

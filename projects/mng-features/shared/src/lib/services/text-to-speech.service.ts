@@ -10,9 +10,9 @@ export class M2NTextToSpeechService {
     private fns: AngularFireFunctions,
   ) {}
 
-  getAudio(docID: string, text: string) {
+  getAudio(docID: string, text: string, voiceName: string) {
     // text = 'This is a test story designed to test the audio output of the story.';
-    const request: IAudioRequest = { docID, text };
+    const request: IAudioRequest = { docID, text, voiceName };
     // return httpsCallableData<IAudioRequest, string>(this.functions, 'textToSpeech')(request).pipe(
     return this.fns.httpsCallable('textToSpeech')(request).pipe(
       map((response: string) => {

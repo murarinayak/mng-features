@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
   user: User;
   loading = false;
   returnUrl: string;
+  loginMandatory = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -29,6 +30,9 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    if (window.location.href.indexOf('stories') !== -1) {
+      this.loginMandatory = false;
+    }
   }
 
   login(email: string, password: string) {

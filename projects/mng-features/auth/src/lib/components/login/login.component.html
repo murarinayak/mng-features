@@ -19,6 +19,10 @@
         <app-google-login-mat-icon></app-google-login-mat-icon>
         <span class="ms-2">Continue with Google</span>
       </button>
+      <ng-container *ngIf="loginMandatory">
+        <hr>
+        <a mat-stroked-button color="primary" routerLink="/">Continue without Logging In</a>
+      </ng-container>
     </mat-card-content>
     <mat-card-footer>
       <!-- <img *ngIf="loading"

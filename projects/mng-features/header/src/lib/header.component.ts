@@ -77,10 +77,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   logout() {
     this.isLoggedIn = false;
-    const keysToKeep: Map<string, string> = new Map();
-    keysToKeep.set(LocalStorageCommonKeys.APP_DEFAULT_URL, '');
-    this.browserStorageService.reset(keysToKeep);
-    this.router.navigate(['/']);
+    this.authService.logout();
   }
 
   ngOnDestroy(): void {

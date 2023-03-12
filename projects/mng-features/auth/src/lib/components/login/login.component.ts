@@ -70,6 +70,7 @@ export class LoginComponent implements OnInit {
     //   return;
     // }
     this.router.navigate([this.returnUrl]);
+    setTimeout(() => window.location.reload(), 0);
   }
 
   onError = (error) => {

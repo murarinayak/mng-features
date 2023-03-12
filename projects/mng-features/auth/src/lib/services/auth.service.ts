@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { from, map, of, switchMap, tap } from 'rxjs';
 import { LoggerService, UserService, IAuthUser, AuthUserType, MNGBrowserStorageService, LocalStorageCommonKeys } from 'mng-features/shared';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,7 @@ import { LoggerService, UserService, IAuthUser, AuthUserType, MNGBrowserStorageS
 export class AuthService {
 
   constructor(
+    private router: Router,
     private loggerService: LoggerService,
     private afAuth: AngularFireAuth, // Inject Firebase auth service
     private userService: UserService,
@@ -126,9 +128,9 @@ export class AuthService {
     const keysToKeep: Map<string, string> = new Map();
     keysToKeep.set(LocalStorageCommonKeys.APP_DEFAULT_URL, '');
     this.browserStorageService.reset(keysToKeep);
-    // this.router.navigate(['/']);
     // remove user from local storage to log user out
     // localStorage.removeItem('currentUser');
-    window.location.reload();
+    this.router.navigate(['/']);
+    setTimeout(() => window.location.reload(), 0);
   }
 }

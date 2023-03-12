@@ -21,6 +21,10 @@ export class MNGBrowserStorageService {
     return null;
   }
 
+  removeItem(key: string) {
+    localStorage.removeItem(key);
+  }
+
   reset(keysToKeep?: Map<string, string>) {
     this.getKeysMap(keysToKeep);
     localStorage.clear();

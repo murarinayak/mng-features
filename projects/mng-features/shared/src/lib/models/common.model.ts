@@ -44,6 +44,7 @@ export interface IOption {
   imageUrl?: string;
   readonly?: boolean;
   hidden?: boolean;
+  children?: Array<IOption>;
 }
 
 export interface IResponseModel {

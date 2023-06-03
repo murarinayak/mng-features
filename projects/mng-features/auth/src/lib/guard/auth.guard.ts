@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, CanActivateChild } from '@angular/router';
+import { Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
 import { LocalStorageCommonKeys, MNGBrowserStorageService } from 'mng-features/shared';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate, CanActivateChild {
+export class AuthGuard  {
 
   constructor(
     private router: Router,

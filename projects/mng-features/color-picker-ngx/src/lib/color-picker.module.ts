@@ -42,9 +42,9 @@ import { MatDialogModule } from '@angular/material/dialog';
     NgxMatColorPickerInput,
     NgxMatColorPickerComponent
   ],
-  entryComponents: [
-    NgxMatColorPickerContentComponent
-  ],
+  // entryComponents: [
+  //   NgxMatColorPickerContentComponent
+  // ],
   providers: [
     ColorAdapter,
     NGX_MAT_COLOR_PICKER_SCROLL_STRATEGY_FACTORY_PROVIDER

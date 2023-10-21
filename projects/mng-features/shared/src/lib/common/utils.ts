@@ -55,6 +55,21 @@ export const flattenArray = (data: Array<any>): Array<any> => {
   }, []);
 }
 
+export const buildArrayTree = (data: Array<any>): Array<any> => {
+  return data.reduce((acc: Array<any>, item) => {
+    if (item.parentID) {
+      const itemAcc = acc.find(accItem => accItem.value === item.parentID);
+      if (itemAcc) {
+        if (!itemAcc.children) { itemAcc.children = []; }
+        itemAcc.children.push(item);
+      }
+    } else {
+      acc.push(item);
+    }
+    return acc;
+  }, []);
+}
+
 export const getISO8601Week = (date: Date) => {
   // Create a copy of the current date, we don't want to mutate the original
   // const date = new Date(this.getTime());

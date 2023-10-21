@@ -11,9 +11,7 @@ export class DragDropItemComponent {
 
   @Input() item: IDragDropItem;
   @Input() rowLabel = 'Row Label';
-  // @Input() rowData: IDragDropItem;
   @Input() expanded = false;
-  @Input() showToggle = false;
   // @Input() showFlyoutMenu = false;
   // @Input() flyoutMenu;
   @Input() rowExpansionCondition: (rowData: unknown) => boolean;
@@ -24,14 +22,11 @@ export class DragDropItemComponent {
   collapse() { this.toggleBlock(false); }
 
   toggleBlock(expanded: boolean) {
-    // if (this.item.canToggle) {
     this.expanded = expanded;
     this.toggle.emit(this.expanded);
-    // }
   }
 
   onActionItemClick(item: IMenuItem) {
-    console.log('iii', item);
     if (item.onClick) {
       item.onClick();
     }

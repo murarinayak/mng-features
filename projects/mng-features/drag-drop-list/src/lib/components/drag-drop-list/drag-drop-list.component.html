@@ -5,34 +5,23 @@
 <div cdkDropList class="example-list {{ className }}" [id]="dropListID" [cdkDropListData]="items"
   [cdkDropListConnectedTo]="connectedTo" [cdkDropListSortingDisabled]="sortingDisabled"
   (cdkDropListDropped)="onDrop($event)">
-  <!-- <ng-container *ngIf="items?.length; else templateNoItems"> -->
-    <ng-container *ngFor="let item of items">
-      <ng-container *ngIf="templateCustom; else templateDefault">
-        <div cdkDrag>
-          <ng-container *ngTemplateOutlet="templateCustom; context: { $implicit: item }"></ng-container>
-        </div>
-      </ng-container>
-      <ng-template #templateDefault>
-        <div cdkDrag class="example-box" [cdkDragDisabled]="isDragDisabled">
-          <mng-drag-drop-item [item]="item">
-            <!-- <div class="drag-handle mt-3" cdkDragHandle><mat-icon>drag_indicator</mat-icon></div> -->
-            <mng-drag-drop-list [dropListID]="item.dropListID" [items]="item.children" [connectedTo]="connectedTo"
-              (itemDrop)="onDrop($event)"></mng-drag-drop-list>
-          </mng-drag-drop-item>
-        </div>
-      </ng-template>
+  <ng-container *ngFor="let item of items">
+    <ng-container *ngIf="templateCustom; else templateDefault">
+      <div cdkDrag>
+        <ng-container *ngTemplateOutlet="templateCustom; context: { $implicit: item }"></ng-container>
+      </div>
     </ng-container>
-  <!-- </ng-container> -->
+    <ng-template #templateDefault>
+      <div cdkDrag class="example-box" [cdkDragDisabled]="isDragDisabled">
+        <mng-drag-drop-item [item]="item">
+          <mng-drag-drop-list [dropListID]="item.dropListID" [items]="item.children" [connectedTo]="connectedTo"
+            [isDragDisabled]="item.isDragDisabled" (itemDrop)="onDrop($event)"></mng-drag-drop-list>
+        </mng-drag-drop-item>
+      </div>
+    </ng-template>
+  </ng-container>
 </div>
 
 <ng-template #templateNoItems>
   <p class="ms-4">No items</p>
 </ng-template>
-
-<!-- <div cdkDropList class="example-list">
-  <ng-container *ngFor="let item of items">
-    <div cdkDrag>
-      <mng-drag-drop-item [rowLabel]="item.label" [item]="item"></mng-drag-drop-item>
-    </div>
-  </ng-container>
-</div> -->

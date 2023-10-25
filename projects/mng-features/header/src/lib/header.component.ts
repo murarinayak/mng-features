@@ -45,9 +45,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.menuItems = this.commonService.getMenuItems();
     this.mobileQuery.addEventListener('change', this.mobileQueryListener);
     // this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event: NavigationEnd) => {
-    this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event: any) => {
+    this.router.events.pipe().subscribe((event: any) => {
       // console.log('event', event.urlAfterRedirects);
       this.isDashboard = event.urlAfterRedirects === this.browserStorageService.getItem(LocalStorageCommonKeys.APP_DEFAULT_URL);
+      // this.commonService.setTitle(even)
+      // console.log('e', event);
     });
   }
 

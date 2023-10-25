@@ -10,6 +10,7 @@ import { UserService } from './user.service';
 })
 export class CommonService {
   
+  title: string;
   user: IAuthUser;
 
   constructor(
@@ -20,7 +21,8 @@ export class CommonService {
     this.user = this.userService.getLoggedInUser();
   }
 
-  getAppName() { return this.config.environment.appName; }
+  // getAppName() { return this.config.environment.appName; }
+  getAppName() { return this.title; }
   getAppVersion() { return this.config.environment.appVersion; }
   getAppNamespace() { return this.config.environment.appNamespace; }
   getApiUrl() { return this.config.environment.apiUrl; }
@@ -43,6 +45,10 @@ export class CommonService {
       tsCreatedAt: getServerTimestamp(),
       tsUpdatedAt: getServerTimestamp()
     };
+  }
+
+  setTitle(value: string) {
+    this.title = value ?? this.config.environment.appName;;
   }
 
   share(summary = '', title = '') { // 

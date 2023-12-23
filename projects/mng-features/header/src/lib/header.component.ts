@@ -5,6 +5,8 @@ import { NavigationEnd, Router } from '@angular/router';
 import { AuthService } from 'mng-features/auth';
 import { MNGBrowserStorageService, CommonService, IMenuItem, LocalStorageCommonKeys } from 'mng-features/shared';
 import { filter, map, Observable } from 'rxjs';
+import { MNGThemePickerService } from './theme-picker/theme-picker.service';
+import { IThemeOption } from './theme-picker/option.model';
 
 @Component({
   selector: 'mng-header',
@@ -22,6 +24,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   mobileQueryListener: () => void;
   isHandset$: Observable<boolean>;
   isDashboard = true;
+  themeOptions: Array<IThemeOption> = [];
   
   constructor(
     private router: Router,
@@ -32,6 +35,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private commonService: CommonService,
     private browserStorageService: MNGBrowserStorageService,
+    private readonly themeService: MNGThemePickerService,
   ) {
     this.headerTitle = this.commonService.getAppName();
     this.showLeftNav = this.commonService.getShowLeftNav();
@@ -49,6 +53,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
       // console.log('event', event.urlAfterRedirects);
       this.isDashboard = event.urlAfterRedirects === this.browserStorageService.getItem(LocalStorageCommonKeys.APP_DEFAULT_URL);
     });
+
+    
+    this.themeService.getThemeOptions().subscribe({
+      next: (response: Array<IThemeOption>) => {
+        console.log('t', response);
+        this.themeOptions = response ?? [];
+      }
+    });
+    this.themeService.setTheme('deeppurple-amber');
   }
 
   onMenuIconClick() {
@@ -73,6 +86,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   onShareClick() {
     this.commonService.share();
+  }
+
+  themeChangeHandler(themeToSet) {
+    this.themeService.setTheme(themeToSet);
   }
 
   logout() {

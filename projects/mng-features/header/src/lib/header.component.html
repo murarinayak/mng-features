@@ -18,11 +18,25 @@
       <span>{{ headerTitle }}</span>
     </a>
     <!-- <h2 class="ms-2 mb-0 fw-normal">{{ headerTitle }}</h2> -->
-    <button mat-icon-button class="ms-auto" [matMenuTriggerFor]="menu">
-      <mat-icon>account_circle</mat-icon>
-    </button>
+    <span class="ms-auto">
+      <button mat-icon-button class="ms-autoas" [matMenuTriggerFor]="menuThemes">
+        <mat-icon>format_color_fill</mat-icon>
+      </button>
+      <button mat-icon-button class="ms-autoas" [matMenuTriggerFor]="menu">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+    </span>
   </mat-toolbar-row>
 </mat-toolbar>
+
+<mat-menu #menuThemes="matMenu">
+  <ng-container *ngFor="let themeOption of themeOptions">
+    <button mat-menu-item (click)="themeChangeHandler(themeOption.value)">
+      <!-- <mat-icon>share</mat-icon> -->
+      {{ themeOption.label }}
+    </button>
+  </ng-container>
+</mat-menu>
 
 <mat-menu #menu="matMenu">
   <!-- <a mat-menu-item routerLink="us/profile">

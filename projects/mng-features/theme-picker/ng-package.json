@@ -1,7 +1,6 @@
 {
   "$schema": "../../../../node_modules/ng-packagr/ng-package.schema.json",
   "lib": {
-    "assets": ["./src/lib/theme-picker/assets"],
     "entryFile": "src/public-api.ts"
   }
 }

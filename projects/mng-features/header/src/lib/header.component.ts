@@ -57,7 +57,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     
     this.themeService.getThemeOptions().subscribe({
       next: (response: Array<IThemeOption>) => {
-        console.log('t', response);
+        // console.log('t', response);
         this.themeOptions = response ?? [];
       }
     });

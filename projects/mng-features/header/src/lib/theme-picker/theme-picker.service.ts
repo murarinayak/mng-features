@@ -18,7 +18,7 @@ export class MNGThemePickerService {
   }
  
   setTheme(themeToSet) {
-    console.log('settheme', themeToSet);
+    // console.log('settheme', themeToSet);
     this.styleManager.setStyle(
       'theme',
       `assets/themes/${themeToSet}.css`

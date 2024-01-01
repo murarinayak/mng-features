@@ -1,7 +1,8 @@
 {
   "$schema": "../../../../node_modules/ng-packagr/ng-package.schema.json",
+  "assets": ["./assets"],
   "lib": {
-    "assets": ["./src/lib/theme-picker/assets"],
-    "entryFile": "src/public-api.ts"
+    "entryFile": "src/public-api.ts",
+    "styleIncludePaths": ["../assets/prebuilt-themes"]
   }
 }

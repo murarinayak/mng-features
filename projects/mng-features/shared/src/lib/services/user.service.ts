@@ -1,24 +1,32 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, DocumentSnapshot } from '@angular/fire/compat/firestore';
-import { from, Observable, of } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+// import { AngularFirestore, DocumentSnapshot } from '@angular/fire/compat/firestore';
+// import { from, Observable, of } from 'rxjs';
+// import { map, tap } from 'rxjs/operators';
+import { Firestore } from '@angular/fire/firestore';
 
 import { MNGBrowserStorageService } from './browser-storage.service';
 import { CollNameGlobal } from '../common/constants'
 import { IAuthUser } from '../models/common.model';
 import { LocalStorageCommonKeys } from '../common/browser-storage.keys';
+import { FirestoreService } from './firestore.service';
+import { tap } from 'rxjs';
+// import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class UserService extends FirestoreService<unknown>  {
 
   private loggedInUser: IAuthUser;
 
   constructor(
-    private ngFirestore: AngularFirestore,
+    // private ngFirestore: AngularFirestore,
+    ngFirestore: Firestore,
     private storageService: MNGBrowserStorageService
-  ) { }
+  ) {
+    super(ngFirestore);
+    this.collName = CollNameGlobal.USERS;
+  }
 
   getLoggedInUser(): IAuthUser {
     if (!this.loggedInUser) {
@@ -31,29 +39,36 @@ export class UserService {
     return this.getLoggedInUser()?.uid ?? '';
   }
 
-  list() {}
+  // list() {}
 
-  get(id: string): Observable<IAuthUser | undefined> {
-    return this.ngFirestore.collection(CollNameGlobal.USERS).doc(id).get().pipe(
-      map((ds: DocumentSnapshot<IAuthUser>) => ds.data())
-    );
-    // return of(undefined);
-  }
+  // get(id: string): Observable<IAuthUser | undefined> {
+  //   return this.ngFirestore.collection(CollNameGlobal.USERS).doc(id).get().pipe(
+  //     map((ds: DocumentSnapshot<IAuthUser>) => ds.data())
+  //   );
+  //   // return of(undefined);
+  // }
+  
+  // post(item: IAuthUser) {
+  //   return from(this.ngFirestore.collection(CollNameGlobal.USERS).doc(item.uid).set(item)).pipe(
+  //     tap(() => this.updateInMemory(item))
+  //   );
+  // }
 
-  post(item: IAuthUser) {
-    return from(this.ngFirestore.collection(CollNameGlobal.USERS).doc(item.uid).set(item)).pipe(
+  override set(item: IAuthUser) {
+    item.id = item.uid;
+    return super.set(item).pipe(
       tap(() => this.updateInMemory(item))
     );
   }
 
-  put(item: IAuthUser) {
-    return from(this.ngFirestore.collection(CollNameGlobal.USERS).doc(item.uid).update(item)).pipe(
-      tap((response) => {
-        console.log('r', response);
-        this.updateInMemory(item);
-      })
-    );
-  }
+  // put(item: IAuthUser) {
+  //   return from(this.ngFirestore.collection(CollNameGlobal.USERS).doc(item.uid).update(item)).pipe(
+  //     tap((response) => {
+  //       console.log('r', response);
+  //       this.updateInMemory(item);
+  //     })
+  //   );
+  // }
 
   updateInMemory(item: IAuthUser) {
     this.loggedInUser = item;

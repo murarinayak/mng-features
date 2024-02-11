@@ -1,6 +1,5 @@
-import firebase from 'firebase/compat/app'
-
-export type IFirestoreTimestamp = firebase.firestore.Timestamp;
+import { Timestamp } from 'firebase/firestore';
+export type IFirestoreTimestamp = Timestamp;
 
 export interface IEnvironment {
   appName: string;
@@ -63,7 +62,8 @@ export class User {
 }
 
 export interface IAuthUser {
-  token?: string, // TODO Remove this
+  token?: string; // TODO Remove this
+  id?: string;
   uid: string;
   email: string;
   firstName: string;

@@ -1,5 +1,4 @@
-// import * as moment from 'moment';
-import firebase from 'firebase/compat/app'
+import { Timestamp, serverTimestamp } from '@angular/fire/firestore';
 
 import { IFirestoreTimestamp, IOption } from '../models/common.model';
 import { RouteParts } from './constants';
@@ -19,13 +18,13 @@ export const getDateFromFirestoreTimestamp = (date: { seconds: number, milliseco
 };
 
 export const getServerTimestamp = (): IFirestoreTimestamp => {
-  return firebase.firestore.FieldValue.serverTimestamp() as IFirestoreTimestamp;
+  return serverTimestamp() as IFirestoreTimestamp;
 }
 
 export const getFirestoreTimestampFromDate = (date: Date): IFirestoreTimestamp => {
   // console.log('d1', date);
   // console.log('d2', firebase.firestore.Timestamp.fromDate(new Date(date)));
-  return firebase.firestore.Timestamp.fromDate(date);
+  return Timestamp.fromDate(date);
 }
 
 export const isRouteNew = (value: string) => value === RouteParts.NEW;

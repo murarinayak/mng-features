@@ -19,6 +19,7 @@ export class ToastService {
   }
 
   setMessage(toastMessage: ToastMessage) {
+    // console.log(toastMessage.detail);
     this.toastMessage.next(toastMessage);
     this.matSnackBar.open(toastMessage.detail, 'ok', { duration: 2 * 1000 });
   }

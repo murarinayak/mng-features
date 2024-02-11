@@ -21,6 +21,7 @@ export * from './lib/pipes/firestore-date.pipe';
 export * from './lib/models/response-model.class';
 export * from './lib/models/common.model';
 export * from './lib/models/global.model';
+export * from './lib/models/firestore-query-params.model';
 
 export * from './lib/common/browser-storage.keys';
 export * from './lib/common/constants';

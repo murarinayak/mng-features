@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { from, map, of, switchMap, tap } from 'rxjs';
+import {
+  AdditionalUserInfo, Auth, UserCredential, getAdditionalUserInfo,
+  signInWithEmailAndPassword, signInWithPopup
+} from '@angular/fire/auth';
+import { Observable, from, map, of, switchMap, tap } from 'rxjs';
 import { LoggerService, UserService, IAuthUser, AuthUserType, MNGBrowserStorageService, LocalStorageCommonKeys } from 'mng-features/shared';
 import { Router } from '@angular/router';
 
@@ -12,41 +15,46 @@ export class AuthService {
   constructor(
     private router: Router,
     private loggerService: LoggerService,
-    private afAuth: AngularFireAuth, // Inject Firebase auth service
+    private afAuth: Auth,
     private userService: UserService,
     private browserStorageService: MNGBrowserStorageService,
   ) { }
 
   signInWithPopup(authProvider) {
     let isNewUser = false;
-    
-    return from(this.afAuth.signInWithPopup(authProvider)).pipe(
-      map((response: firebase.default.auth.UserCredential) => {
-        const authUser: IAuthUser = this.processAuthUser(response);
+    return from(signInWithPopup(this.afAuth, authProvider)).pipe(
+      map((response: UserCredential) => {
+        const additionalUserInfo: AdditionalUserInfo = getAdditionalUserInfo(response);
+        const authUser: IAuthUser = this.processAuthUser(response, additionalUserInfo);
         this.loggerService.log('on login', response);
-        isNewUser = response.additionalUserInfo.isNewUser;
+        isNewUser = additionalUserInfo.isNewUser;
         return authUser;
       }),
       switchMap((response: IAuthUser) => {
         // this.loggerService.log('then', response);
-        if (isNewUser) {
-          return this.userService.post(response);
+        return this.addUpdateInUserColl(response);
+      }),
+    );
+  }
+
+  addUpdateInUserColl(authUser: IAuthUser): Observable<IAuthUser> {
+    return this.userService.get(authUser.uid).pipe(
+      switchMap((response: IAuthUser) => {
+        if (response) {
+          this.userService.updateInMemory(response);
+          return of(authUser);
         } else {
-          return this.userService.get(response.uid).pipe(
-            tap((response: IAuthUser) => this.userService.updateInMemory(response))
+          return this.userService.post(authUser).pipe(
+            switchMap(() => this.addUpdateInUserColl(authUser)),
           );
         }
-      }),
-      // catchError(error => {
-      //   console.log('error', error);
-      //   return throwError(() => error);
-      // })
+      })
     );
   }
 
   signInWithEmailAndPassword(email: string, password: string) {
     // let isNewUser = false;
-    return from(this.afAuth.signInWithEmailAndPassword(email, password)).pipe(
+    return from(signInWithEmailAndPassword(this.afAuth, email, password)).pipe(
       map((response) => {
         const authUser: IAuthUser = this.processAuthUser(response);
         this.loggerService.log('on login', response);
@@ -54,17 +62,13 @@ export class AuthService {
         return authUser;
       }),
       switchMap((response: IAuthUser) => {
-        // this.loggerService.log('then', response);
-        // if (isNewUser) {
-        //   return this.userService.post(response);
-        // } else {
         return this.userService.get(response.uid).pipe(
           switchMap((responseAuthUser: IAuthUser) => {
             // console.log('rr', response);
             if (responseAuthUser) {
               return of(responseAuthUser);
             }
-            return this.userService.post(response).pipe(
+            return this.userService.set(response).pipe(
               switchMap(() => this.userService.get(response.uid))
             );
           }),
@@ -72,49 +76,25 @@ export class AuthService {
             this.userService.updateInMemory(rAuthUser);
           })
         );
-        // }
       }),
     )
   }
 
-  // processSignInResponse(response: firebase.default.auth.UserCredential) {
-  //   const authUser: IAuthUser = this.processAuthUser(response);
-  //   this.loggerService.log('on login', response);
-  //   isNewUser = response.additionalUserInfo.isNewUser;
-  //   return authUser;
-  // }
 
-  processAuthUser(data: firebase.default.auth.UserCredential): IAuthUser {
+  processAuthUser(data: UserCredential, additionalUserInfo?: AdditionalUserInfo): IAuthUser {
     return {
       uid: data?.user?.uid ?? '',
       email: data?.user?.email ?? '',
-      firstName: data?.additionalUserInfo?.profile['given_name'] ?? '',
-      lastName: data?.additionalUserInfo?.profile['family_name'] ?? '',
+      firstName: additionalUserInfo?.profile['given_name'].toString() ?? '',
+      lastName: additionalUserInfo?.profile['family_name'].toString() ?? '',
       displayName: data?.user?.displayName ?? '',
-      locale: data?.additionalUserInfo?.profile['locale'] ?? 'en-GB', // might use this for translation
+      locale: additionalUserInfo?.profile['locale'].toString() ?? 'en-GB', // might use this for translation
       phoneNumber: data?.user?.phoneNumber ?? '',
       photoURL: data?.user?.photoURL ?? '',
       isAnonymous: data?.user?.isAnonymous ?? false,
       userType: AuthUserType.USER,
     };
   }
-
-  // saveAuthUser(response, authMethod: AuthMethods = AuthMethods.EMAIL): Observable<void | IUser> {
-  //   if (authMethod === AuthMethods.OAUTH_ANDROID) {
-  //     // This is a fix as the Mobile OAuth isn't providing a full object as compared to the Web OAuth
-  //     this.userCredential = {
-  //       user: response,
-  //       credential: response.authentication
-  //     };
-  //   } else {
-  //     this.userCredential = response;
-  //   }
-  //   return this.userService.addUpdateUserInfo(this.userCredential).pipe(
-  //     tap(() => {
-  //       this.storageService.setItem(StorageConstants.AUTH, this.userCredential);
-  //     })
-  //   );
-  // }
 
   getUID() {
     return this.userService.getLoggedInUserID();

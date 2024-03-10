@@ -24,6 +24,7 @@ export class FirestoreService<T extends { id?: string }> { // implements IFirest
 
   list(qry?: FirestoreQuery<T>) {
     // console.log('fire2list called');
+    qry = qry ?? {};
     const {where: ws, orderBy: os} = qry;
     const orderBys = os?.map((condition) => {
       return orderBy(condition.field as string, condition.order);

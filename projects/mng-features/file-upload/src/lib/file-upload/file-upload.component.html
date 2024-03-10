@@ -1,7 +1,4 @@
 <h5 class="mt-2">File Upload</h5>
-<!-- <div class="col-md-6"> -->
-<input type="file" (change)="uploadFile($event)">
-<!-- <div>{{ uploadProgress$ | async }}</div> -->
-<mat-progress-bar *ngIf="uploadInProgress" class="mt-2" [value]="uploadProgress$ | async" mode="determinate">
+<input type="file" (change)="uploadFile($event)" #inputFile>
+<mat-progress-bar *ngIf="uploadInProgress" class="mt-2" [value]="progress" mode="determinate">
 </mat-progress-bar>
-<!-- </div> -->

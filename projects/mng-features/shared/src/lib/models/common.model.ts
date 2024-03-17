@@ -13,6 +13,7 @@ export interface ILibraryConfig {
   environment: IEnvironment;
   menu: Array<IMenuItem>;
   showLeftNav: boolean;
+  themed?: boolean;
 }
 
 export interface IFirebaseConfig {

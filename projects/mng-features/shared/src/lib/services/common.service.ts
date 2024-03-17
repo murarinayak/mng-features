@@ -35,6 +35,10 @@ export class CommonService {
   isSuperAdmin() { return this.user?.userType === AuthUserType.SUPER_ADMIN; }
   isAdmin() { return this.user?.userType === AuthUserType.ADMIN || this.user?.userType === AuthUserType.SUPER_ADMIN; }
 
+  getConfigByKey(key: string) {
+    return this.config[key];
+  }
+
   getDefaultDoc(): IDocumentModel {
     return {
       v: 1,

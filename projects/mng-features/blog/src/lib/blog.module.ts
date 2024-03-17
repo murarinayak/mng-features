@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { NgOptimizedImage } from '@angular/common'
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
@@ -23,6 +24,7 @@ import { PostViewComponent } from './components/post-view/post-view.component';
   imports: [
     CommonModule,
     HttpClientModule,
+    NgOptimizedImage,
     BlogRoutingModule,
     MatButtonModule,
     MatIconModule,

@@ -14,7 +14,7 @@ export class ThemeService {
     private styleManager: StyleManagerService,
   ) {}
  
-  getThemeOptions(): Observable<Array<IThemeOption>> {
+  getThemeOptions1(): Observable<Array<IThemeOption>> {
     return this.http.get<Array<IThemeOption>>('assets/theme-options.json');
   }
  

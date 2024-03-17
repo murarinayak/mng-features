@@ -54,14 +54,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.isDashboard = event.urlAfterRedirects === this.browserStorageService.getItem(LocalStorageCommonKeys.APP_DEFAULT_URL);
     });
 
-    
-    this.themeService.getThemeOptions().subscribe({
-      next: (response: Array<IThemeOption>) => {
-        // console.log('t', response);
-        this.themeOptions = response ?? [];
-      }
-    });
-    this.themeService.setTheme('deeppurple-amber');
+    if (this.commonService.getConfigByKey('themed')) {
+      this.themeService.getThemeOptions().subscribe({
+        next: (response: Array<IThemeOption>) => {
+          // console.log('t', response);
+          this.themeOptions = response ?? [];
+        }
+      });
+      this.themeService.setTheme('deeppurple-amber');
+    }
   }
 
   onMenuIconClick() {

@@ -8,6 +8,7 @@ export * from './lib/services/authentication.service';
 export * from './lib/services/browser-storage.service';
 export * from './lib/services/common.service';
 export * from './lib/services/firestore.service';
+export * from './lib/services/rtdb.service';
 export * from './lib/services/logger.service';
 export * from './lib/services/request.service';
 export * from './lib/services/storage.service';

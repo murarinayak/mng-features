@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, from, map, of, tap } from 'rxjs';
 import {
+  AggregateField, AggregateQuerySnapshot,
   DocumentReference, Firestore, Query, QueryConstraint, addDoc,
   collection, deleteDoc, doc, getCountFromServer, getDoc, getDocs,
   limit, orderBy, query, setDoc, startAfter, where
@@ -200,11 +201,11 @@ export class FirestoreService<T extends IDocumentModel> { // implements IFiresto
     return doc(collection(this.ngFirestore, '_')).id;
   }
 
-  getCount(collName: string) {
-    const coll = collection(this.ngFirestore, collName);
+  getCount(collName?: string): Observable<number> {
+    const coll = collection(this.ngFirestore, collName ?? this.collName);
     const q = query(coll); //, where("state", "==", "CA"));
     return from(getCountFromServer(q)).pipe(
-      map((snapshot) => {
+      map((snapshot: AggregateQuerySnapshot<{ count: AggregateField<number> }>) => {
         return snapshot.data().count;
       })
     );

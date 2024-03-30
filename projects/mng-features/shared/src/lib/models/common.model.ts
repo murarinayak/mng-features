@@ -23,7 +23,7 @@ export interface IFirebaseConfig {
 export interface IDocumentModel {
   id?: string;
   v?: number;
-  uidCreatedBy: string;
+  uidCreatedBy?: string;
   uidUpdatedBy?: string;
   tsCreatedAt?: IFirestoreTimestamp;
   tsUpdatedAt?: IFirestoreTimestamp;

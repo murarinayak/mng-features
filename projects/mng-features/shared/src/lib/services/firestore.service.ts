@@ -1,17 +1,19 @@
 import { Injectable } from '@angular/core';
+import { Observable, from, map, of, tap } from 'rxjs';
 import {
   DocumentReference, Firestore, Query, QueryConstraint, addDoc,
   collection, deleteDoc, doc, getCountFromServer, getDoc, getDocs,
   limit, orderBy, query, setDoc, startAfter, where
 } from '@angular/fire/firestore';
-import { Observable, from, map, of, tap } from 'rxjs';
+
 import { FirestoreQuery } from '../models/firestore-query-params.model';
 import { ITEMS_PER_PAGE_GLOBAL } from '../common/constants';
+import { IDocumentModel } from '../models/common.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class FirestoreService<T extends { id?: string }> { // implements IFirestoreService {
+export class FirestoreService<T extends IDocumentModel> { // implements IFirestoreService {
 
   collName = 'NA';
   limitPerPage = ITEMS_PER_PAGE_GLOBAL;
@@ -64,13 +66,22 @@ export class FirestoreService<T extends { id?: string }> { // implements IFirest
     // console.log('fire2listBatch called');
     // Check if data set already available
     const limitRecords: number = qry.limit ?? this.limitPerPage;
-    const pagesAvailable: number = this.collData.length / limitRecords;
-    // The qry.page > 1 is used to make sure that the first call of anu query returns fresh result
-    if (qry.page > 1 && pagesAvailable >= qry.page) {
+    const pagesAvailable: number = Math.ceil(this.collData.length / limitRecords);
+    // The qry.cached is used to make sure that the first call of anu query returns fresh result
+    if (!qry.cached) {
+      // Reset everything
+      this.collData = [];
+      this.itemFirst = null;
+      this.itemLast = null;
+    }
+    if (qry.cached && pagesAvailable >= qry.page) {
       const startPoint: number = (qry.page - 1) * limitRecords;
       return of(this.collData.slice(startPoint, startPoint + limitRecords))
     }
-    const {where: ws, orderBy: os} = qry;
+    let {where: ws, orderBy: os} = qry;
+    if (!os?.length) {
+      os = [{ field: 'tsCreatedAt', order: 'desc' }];
+    }
     const orderBys = os?.map((condition) => {
       return orderBy(condition.field as string, condition.order);
     }) ?? [];
@@ -78,9 +89,9 @@ export class FirestoreService<T extends { id?: string }> { // implements IFirest
       return where(condition.field as string, condition.operator, condition.value);
     }) ?? [];
     // add logic for other query conditions
-    if (!orderBys.length) {
-      orderBys.push(orderBy('tsCreatedAt', 'desc'));
-    }
+    // if (!orderBys) {
+    //   orderBys.push(orderBy('tsCreatedAt', 'desc'));
+    // }
     if (!wheres.length) {
       // wheres.push(where('uidCreatedBy', '==', this.userService.getLoggedInUserID()));
     }
@@ -90,10 +101,13 @@ export class FirestoreService<T extends { id?: string }> { // implements IFirest
       ...orderBys,
       limit(limitRecords),
     ];
+    if (!qry.startAfter && qry.page > 1) {
+      qry.startAfter = this.itemLast;
+    }
     if (qry.startAfter) {
       // queryConstraints.push(startAfter(qry.startAfter));
       // queryConstraints.push(startAfter(qry.startAfter['tsCreatedAt']));
-      const sortField: string = qry.orderBy[0].field as string;
+      const sortField: string = os[0].field as string;
       const sortValue = qry.startAfter[sortField];
       queryConstraints.push(startAfter(sortValue));
     }
@@ -106,7 +120,11 @@ export class FirestoreService<T extends { id?: string }> { // implements IFirest
       //   // this.itemLast = response.docs[response.docs.length - 1];
       // }),
       map(results => results.docs.map((doc) => ({ id: doc.id,  ...doc.data() } as T ))),
-      tap((response: Array<T>) => this.collData = this.collData.concat(response))
+      tap((response: Array<T>) => {
+        this.collData = this.collData.concat(response);
+        this.itemLast = this.collData.at(-1);
+        // console.log('ba', this.itemLast, this.collData);
+      })
     );
   }
 

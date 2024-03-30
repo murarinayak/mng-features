@@ -53,4 +53,5 @@ export interface FirestoreQuery<T> {
   where?: WhereCondition<T>[];
   // Custom
   page?: number;
+  cached?: boolean;
 }

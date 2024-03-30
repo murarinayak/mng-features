@@ -1,6 +1,16 @@
 # MNGFeatures
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.0.
+- Upgraded to Angular 17
+
+## 2.1.0
+- Added support for RTDB using the modular pattern
+- Also reset data when calling with cached=false, and make fresh API call
+
+## 2.0.0
+- Updated to Modular firebase architecture
+
+
 
 ## Development server
 

@@ -19,7 +19,7 @@
     </a>
     <!-- <h2 class="ms-2 mb-0 fw-normal">{{ headerTitle }}</h2> -->
     <span class="ms-auto">
-      <button mat-icon-button class="ms-autoas" [matMenuTriggerFor]="menuThemes">
+      <button *ngIf="themed" mat-icon-button class="ms-autoas" [matMenuTriggerFor]="menuThemes">
         <mat-icon>format_color_fill</mat-icon>
       </button>
       <button mat-icon-button class="ms-autoas" [matMenuTriggerFor]="menu">

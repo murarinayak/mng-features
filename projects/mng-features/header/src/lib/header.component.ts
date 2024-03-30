@@ -24,6 +24,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   mobileQueryListener: () => void;
   isHandset$: Observable<boolean>;
   isDashboard = true;
+  themed = false;
   themeOptions: Array<IThemeOption> = [];
   
   constructor(
@@ -47,6 +48,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   
   ngOnInit() {
     this.menuItems = this.commonService.getMenuItems();
+    this.themed = this.commonService.getConfigByKey('themed');
     this.mobileQuery.addEventListener('change', this.mobileQueryListener);
     // this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event: NavigationEnd) => {
     this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event: any) => {
@@ -54,7 +56,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.isDashboard = event.urlAfterRedirects === this.browserStorageService.getItem(LocalStorageCommonKeys.APP_DEFAULT_URL);
     });
 
-    if (this.commonService.getConfigByKey('themed')) {
+    if (this.themed) {
       this.themeService.getThemeOptions().subscribe({
         next: (response: Array<IThemeOption>) => {
           // console.log('t', response);

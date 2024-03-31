@@ -45,7 +45,7 @@ export class FileStorageService extends FirestoreService<unknown> {
       (snapshot) => {
         var percent = snapshot.bytesTransferred / snapshot.totalBytes * 100;
         // console.log(percent + "% done");
-        this.updateResponse({ percent });
+        this.updateResponse({ percent, filePath });
       },
       (error) => { console.error(error); },
       () => {

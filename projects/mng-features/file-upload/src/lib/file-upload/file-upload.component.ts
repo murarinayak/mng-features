@@ -13,10 +13,11 @@ export class FileUploadComponent {
 
   @ViewChild('inputFile') inputFile: ElementRef;
 
-  @Output() uploadComplete: EventEmitter<boolean> = new EventEmitter();
+  @Output() uploadComplete: EventEmitter<IFileMetadata> = new EventEmitter();
 
   uploadInProgress = false;
   progress = 0;
+  fileMetadata: IFileMetadata;
 
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
@@ -29,8 +30,9 @@ export class FileUploadComponent {
     const file = event.target.files[0];
     this.fileStorageService.uploadFileAndGetMetadata(file).subscribe({
       next: (response: IFileMetadata) => {
-        // console.log('uf', response);
-        this.progress = response.percent;
+        console.log('uf', response);
+        this.fileMetadata = response;
+        this.progress = this.fileMetadata!.percent;
         this.changeDetectorRef.detectChanges();
       },
       error: (error) => {
@@ -38,7 +40,7 @@ export class FileUploadComponent {
       },
       complete: () => {
         this.uploadInProgress = false;
-        this.uploadComplete.next(true);
+        this.uploadComplete.next(this.fileMetadata);
         this.inputFile.nativeElement.value = '';
         this.changeDetectorRef.detectChanges();
       }

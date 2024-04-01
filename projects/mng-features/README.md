@@ -1,24 +1,30 @@
-# MNGFeatures v1
+# MNGFeatures
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.0.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.0.
+- Upgraded to Angular 17
 
-## Code scaffolding
+## 2.3.0
+- Updated Angular package versions to 17.3.* and other libraries
 
-Run `ng generate component component-name --project mng-features` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project mng-features`.
-> Note: Don't forget to add `--project mng-features` or else it will be added to the default project in your `angular.json` file. 
+## 2.2.0
+- Google Cloud Vision Service updated to support Modular firebase
+- GCV is triggered with functions, which is also supporting Modular firebase
+
+## 2.1.0
+- Added support for RTDB using the modular firebase pattern
+- Also reset data when calling with cached=false, and make fresh API call
+
+## 2.0.0
+- Updated to Modular firebase architecture
+
+-----------------------------------------------
 
 ## Build
 
-Run `ng build mng-features` to build the project. The build artifacts will be stored in the `dist/` directory.
+Run `npm run build` or `ng build mng-features` to build the project. The build artifacts will be stored in the `dist/` directory.
 
 ## Publishing
 
-After building your library with `ng build mng-features`, go to the dist folder `cd dist/mng-features` and run `npm publish`.
+After building your library with `npm run publish` or `ng build mng-features`, go to the dist folder `cd dist/mng-features` and run `npm publish`.
 
-## Running unit tests
 
-Run `ng test mng-features` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.

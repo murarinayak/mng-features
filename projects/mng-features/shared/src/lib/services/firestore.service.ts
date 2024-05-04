@@ -42,7 +42,8 @@ export class FirestoreService<T extends IDocumentModel> { // implements IFiresto
     if (!wheres.length) {
       // wheres.push(where('uidCreatedBy', '==', this.userService.getLoggedInUserID()));
     }
-    const coll = collection(this.ngFirestore, this.collName);
+    const collName: string = qry.collName ?? this.collName;
+    const coll = collection(this.ngFirestore, collName);
     const limitRecords: number = qry.limit ?? this.limitPerPage;
     const queryConstraints: Array<QueryConstraint> = [
       ...wheres,
@@ -129,8 +130,9 @@ export class FirestoreService<T extends IDocumentModel> { // implements IFiresto
     );
   }
 
-  get(id: string): Observable<T> {
-    const ref = doc(this.ngFirestore, this.collName + '/' + id);
+  get(id: string, sCollName?: string): Observable<T> {
+    const collName: string = sCollName ?? this.collName;
+    const ref = doc(this.ngFirestore, collName + '/' + id);
     return from(getDoc(ref)).pipe(
       map(response => {
         if (response.exists()) {
@@ -147,8 +149,9 @@ export class FirestoreService<T extends IDocumentModel> { // implements IFiresto
    * @param item T
    * @returns 
    */
-  set(item: T): Observable<string> {
+  set(item: T, sCollName?: string): Observable<string> {
     // console.log('set called');
+    const collName: string = sCollName ?? this.collName;
     const docID: string = item.id ?? this.generateFirestoreDocID();
     if (!docID) {
       alert('No docID present');
@@ -156,7 +159,7 @@ export class FirestoreService<T extends IDocumentModel> { // implements IFiresto
     }
     const itemSpread: T = { ...item };
     delete itemSpread.id;
-    const ref = doc(this.ngFirestore, this.collName + '/' + docID);
+    const ref = doc(this.ngFirestore, collName + '/' + docID);
     return from(setDoc(ref, itemSpread)).pipe(
       tap(() => item.id = docID),
       map(() => docID)
@@ -168,18 +171,20 @@ export class FirestoreService<T extends IDocumentModel> { // implements IFiresto
     return this.set(item);
   }
 
-  post(item: T): Observable<string> {
+  post(item: T, sCollName?: string): Observable<string> {
+    const collName: string = sCollName ?? this.collName;
     console.log('post called');
     // return of({});
-    return from(addDoc(collection(this.ngFirestore, this.collName), item)).pipe(
+    return from(addDoc(collection(this.ngFirestore, collName), item)).pipe(
       // tap(response => { console.log('fire2 post', response); }),
       map((response: DocumentReference) => response.id)
     );
   }
 
-  delete(id: string) {
+  delete(id: string, sCollName?: string) {
+    const collName: string = sCollName ?? this.collName;
     // return of(true);
-    const ref = doc(this.ngFirestore, this.collName + '/' + id);
+    const ref = doc(this.ngFirestore, collName + '/' + id);
     return from(deleteDoc(ref));
   }
 

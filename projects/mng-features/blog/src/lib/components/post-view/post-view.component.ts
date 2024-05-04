@@ -25,7 +25,7 @@ export class PostViewComponent implements OnInit {
     if (id) {
       this.service.get(id).subscribe({
         next: (response: IWpPost) => {
-          console.log('post', response);
+          // console.log('post', response);
           this.post = response;
         }
       });

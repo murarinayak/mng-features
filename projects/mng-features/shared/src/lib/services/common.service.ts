@@ -49,6 +49,10 @@ export class CommonService {
     };
   }
 
+  getGeneratedImageURL(name: string) {
+    return `https://api.dicebear.com/8.x/bottts/svg?seed=${name}`
+  }
+
   share(summary = '', title = '') { // 
     if (!title) { title = `Share ${this.getAppName()} App`; }
     if (!summary) { summary = `I found an awesome ${this.getAppName()} App!`; }

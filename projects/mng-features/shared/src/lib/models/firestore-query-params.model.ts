@@ -52,6 +52,7 @@ export interface FirestoreQuery<T> {
   orderBy?: OrderByCondition<T>[];
   where?: WhereCondition<T>[];
   // Custom
+  collName?: string;
   page?: number;
   cached?: boolean;
 }

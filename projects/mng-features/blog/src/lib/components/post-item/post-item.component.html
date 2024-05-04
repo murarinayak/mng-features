@@ -1,6 +1,7 @@
 <div class="card post-item" (click)="onLinkClick()">
-  <img [ngSrc]="post.jetpack_featured_media_url" class="card-img-top"
-    [alt]="post?.title.rendered" />
+  <!-- <img [ngSrc]="post.jetpack_featured_media_url" class="card-img-top"
+    [alt]="post?.title.rendered" /> -->
+  <img [src]="post.jetpack_featured_media_url" class="card-img-top" [alt]="post?.title.rendered" />
   <div class="card-body">
     <p class="text-center">
       <span>{{ post.date | date }}</span>

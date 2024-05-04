@@ -18,11 +18,11 @@ export class PostItemComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log('post', this.post);
+    // console.log('post', this.post);
   }
 
   onLinkClick() {
-    console.log('show post view');
+    // console.log('show post view');
     this.router.navigate(['..', this.post.id], { relativeTo: this.activatedRoute });
   }
 

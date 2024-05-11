@@ -4,7 +4,7 @@ import {
   AggregateField, AggregateQuerySnapshot,
   DocumentReference, Firestore, Query, QueryConstraint, addDoc,
   collection, deleteDoc, doc, getCountFromServer, getDoc, getDocs,
-  limit, orderBy, query, setDoc, startAfter, where
+  limit, orderBy, query, setDoc, startAfter, updateDoc, where
 } from '@angular/fire/firestore';
 
 import { FirestoreQuery } from '../models/firestore-query-params.model';
@@ -57,7 +57,9 @@ export class FirestoreService<T extends IDocumentModel> { // implements IFiresto
       ...queryConstraints
     );
     return from(getDocs(queryFn)).pipe(
-      // tap((response) => console.log('fire2list res', response)),
+      // tap((response) => {
+      //   console.log('fire2list res', response);
+      // }),
       map(results => results.docs.map((doc) => {
         return { id: doc.id,  ...doc.data() } as T
       }))
@@ -166,9 +168,28 @@ export class FirestoreService<T extends IDocumentModel> { // implements IFiresto
     );
   }
 
-  put(item: T) {
-    console.log('put called');
-    return this.set(item);
+  /**
+   * Partially update the doc
+   * @param item 
+   * @param sCollName 
+   * @returns 
+   */
+  update(item: { [attr: string]: any }, sCollName?: string) {
+    console.log('put/update called');
+    // return this.set(item);
+    const collName: string = sCollName ?? this.collName;
+    const docID: string = item['id']; //  ?? this.generateFirestoreDocID();
+    if (!docID) {
+      alert('No docID present');
+      return of(null);
+    }
+    const itemSpread: { [attr: string]: any } = { ...item };
+    delete itemSpread['id'];
+    const ref = doc(this.ngFirestore, collName + '/' + docID);
+    return from(updateDoc(ref, itemSpread)).pipe(
+      // tap(() => item.id = docID),
+      map(() => docID)
+    );
   }
 
   post(item: T, sCollName?: string): Observable<string> {

@@ -70,12 +70,12 @@ export interface IAuthUser {
   firstName: string;
   lastName: string;
   displayName: string;
-  locale: string; // might use this for translation
+  locale?: string; // might use this for translation
   phoneNumber: string;
   photoURL: string;
-  isAnonymous: boolean;
+  isAnonymous?: boolean;
   // categories?: Array<IOption>;
-  userType: number;
+  userType?: number;
 }
 
 export interface IEChartClickEventData {

@@ -22,7 +22,7 @@ export class UserService extends FirestoreService<unknown>  {
   constructor(
     // private ngFirestore: AngularFirestore,
     ngFirestore: Firestore,
-    private storageService: MNGBrowserStorageService
+    protected storageService: MNGBrowserStorageService
   ) {
     super(ngFirestore);
     this.collName = CollNameGlobal.USERS;
@@ -53,6 +53,17 @@ export class UserService extends FirestoreService<unknown>  {
   //     tap(() => this.updateInMemory(item))
   //   );
   // }
+
+  override get(id: string) {
+    return super.get(id).pipe(
+      tap((response: IAuthUser) => {
+        if (!response.uid) {
+          // If UID hasn't been set, set it equal to id
+          response.uid = response.id;
+        }
+      })
+    );
+  }
 
   override set(item: IAuthUser) {
     item.id = item.uid;

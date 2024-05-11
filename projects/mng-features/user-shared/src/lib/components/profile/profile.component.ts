@@ -51,7 +51,7 @@ export class ProfileComponent implements OnInit {
       ...this.user,
       ...this.formGroup.value
     };
-    this.userService.put(user).subscribe(
+    this.userService.set(user).subscribe(
       (response) => {
         console.log('r', response);
         this.toastService.success('Save successful');

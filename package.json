@@ -1,6 +1,8 @@
 {
   "name": "mng-features",
   "version": "2.0.0",
+  "description": "A list of components/features to be used in Angular project",
+  "private": false,
   "scripts": {
     "ng": "ng",
     "start": "ng serve --port=4300",
@@ -14,7 +16,6 @@
     "copy:themes": "cp -r ./node_modules/@angular/material/prebuilt-themes/* projects/mng-features/assets/themes/",
     "test": "ng test"
   },
-  "private": false,
   "dependencies": {
     "@angular/animations": "17.3.2",
     "@angular/common": "17.3.2",
@@ -45,5 +46,16 @@
     "karma-jasmine-html-reporter": "2.1.0",
     "ng-packagr": "17.3.0",
     "typescript": "5.4.2"
-  }
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/murarinayak/mng-features.git"
+  },
+  "keywords": ["angular", "library"],
+  "author": "Murari Nayak <murari2nayak@gmail.com>",
+  "bugs": {
+		"url": "https://github.com/murarinayak/mng-features/issues"
+	},
+	"homepage": "https://murarinayak.com"
 }

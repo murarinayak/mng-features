@@ -200,6 +200,16 @@ export class FirestoreService<T extends IDocumentModel> { // implements IFiresto
   //   // return of([]);
   // }
 
+  /**
+   * @deprecated
+   * @param args 
+   * @returns 
+   */
+  put(...args) {
+    console.log(args);
+    return of(null);
+  }
+
 
 
   generateFirestoreDocID() {

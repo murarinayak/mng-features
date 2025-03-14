@@ -1,24 +1,25 @@
-import { Injectable } from '@angular/core';
-import { AngularFireFunctions } from '@angular/fire/compat/functions';
-import { map } from 'rxjs';
+import { inject, Injectable } from '@angular/core';
+import { Functions, httpsCallableData } from '@angular/fire/functions';
+import { from, map } from 'rxjs';
 import { IAudioRequest } from '../models/global.model';
 
 @Injectable()
 export class M2NTextToSpeechService {
 
-  constructor(
-    private fns: AngularFireFunctions,
-  ) {}
+  fns = inject(Functions);
 
   getAudio(docID: string, text: string, voiceName: string) {
-    // text = 'This is a test story designed to test the audio output of the story.';
     const request: IAudioRequest = { docID, text, voiceName };
-    // return httpsCallableData<IAudioRequest, string>(this.functions, 'textToSpeech')(request).pipe(
-    return this.fns.httpsCallable('textToSpeech')(request).pipe(
+    return from(httpsCallableData<IAudioRequest, string>(this.fns, 'textToSpeech')(request)).pipe(
       map((response: string) => {
         // console.log('txt2speech', response);
         return response;
       })
     );
+    // const options: HttpsCallableOptions = { }
+    // from(httpsCallable(this.fns, '')(request)).pipe({
+    //   response => {
+    //   }
+    // })
   }
 }

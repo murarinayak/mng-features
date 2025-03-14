@@ -1,6 +1,13 @@
 # MNGFeatures
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.0.
+
+## 18.1.0
+- Upgraded callableFunctions to use the new firebase modular functions.
+
+## 18.0.0
+- Upgraded to Angular 18
+
 - Upgraded to Angular 17
 
 ## 2.3.0

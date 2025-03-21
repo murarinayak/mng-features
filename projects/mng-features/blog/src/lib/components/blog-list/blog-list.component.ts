@@ -4,7 +4,8 @@ import { BlogService } from '../../services/blog.service';
 
 @Component({
   selector: 'app-blog-list',
-  templateUrl: './blog-list.component.html'
+  templateUrl: './blog-list.component.html',
+  standalone: false
 })
 export class BlogListComponent implements OnInit {
 

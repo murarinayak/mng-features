@@ -3,7 +3,8 @@ import { Component, Input, OnInit } from '@angular/core';
 @Component({
   selector: 'mng-audio-player',
   templateUrl: './audio-player.component.html',
-  styleUrls: ['./audio-player.component.scss']
+  styleUrls: ['./audio-player.component.scss'],
+  standalone: false
 })
 export class MNGAudioPlayerComponent implements OnInit {
 

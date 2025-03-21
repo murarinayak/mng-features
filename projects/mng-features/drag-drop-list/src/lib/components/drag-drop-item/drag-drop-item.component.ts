@@ -5,7 +5,8 @@ import { IDragDropItem } from '../../common/drag-drop-item.model';
 @Component({
   selector: 'mng-drag-drop-item',
   templateUrl: './drag-drop-item.component.html',
-  styleUrls: ['./drag-drop-item.component.css']
+  styleUrls: ['./drag-drop-item.component.css'],
+  standalone: false
 })
 export class DragDropItemComponent {
 

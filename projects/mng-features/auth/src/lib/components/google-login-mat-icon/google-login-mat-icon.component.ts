@@ -12,8 +12,9 @@ import { Component, OnInit } from '@angular/core';
     </svg>
   </mat-icon>`,
   styles: [`
-  mat-icon { vertical-align: middle; }
-  `]
+    mat-icon { vertical-align: middle; }
+  `],
+  standalone: false
 })
 export class GoogleLoginMatIconComponent implements OnInit {
 

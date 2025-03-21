@@ -10,7 +10,8 @@ import { COLORS_DEFAULT } from '../../common/color-picker.constants';
 @Component({
   selector: 'mng-color-palette',
   templateUrl: './color-palette.component.html',
-  styleUrls: ['./color-palette.component.css']
+  styleUrls: ['./color-palette.component.css'],
+  standalone: false
 })
 export class ColorPaletteComponent {
 

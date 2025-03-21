@@ -6,7 +6,7 @@ import { IWpPost } from '../../common/common.model';
 @Component({
   selector: 'app-post-item',
   templateUrl: './post-item.component.html',
-  // animations:
+  standalone: false
 })
 export class PostItemComponent implements OnInit {
 

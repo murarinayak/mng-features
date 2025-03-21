@@ -7,7 +7,8 @@ import { IconPaletteComponent } from '../icon-palette/icon-palette.component';
 @Component({
   selector: 'mng-icon-picker',
   templateUrl: './icon-picker.component.html',
-  styleUrls: ['./icon-picker.component.css']
+  styleUrls: ['./icon-picker.component.css'],
+  standalone: false
 })
 export class MNGIconPickerComponent {
 

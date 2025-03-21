@@ -4,7 +4,8 @@ import { COLORS_DEFAULT } from '../../common/color-picker.constants';
 @Component({
   selector: 'mng-color-picker-1',
   templateUrl: './color-picker.component.html',
-  styleUrls: ['./color-picker.component.css']
+  styleUrls: ['./color-picker.component.css'],
+  standalone: false
 })
 export class MNGColorPickerComponent1 {
 

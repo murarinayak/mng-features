@@ -4,7 +4,8 @@ import { IFirestoreTimestamp } from '../models/common.model';
 import { formatDate } from '../common/utils';
 
 @Pipe({
-  name: 'firestoreDate'
+  name: 'firestoreDate',
+  standalone: false
 })
 export class FirestoreDatePipe implements PipeTransform {
 

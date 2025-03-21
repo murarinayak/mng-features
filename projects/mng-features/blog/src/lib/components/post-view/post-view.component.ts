@@ -6,7 +6,8 @@ import { BlogService } from '../../services/blog.service';
 @Component({
   selector: 'mng-post-view',
   templateUrl: './post-view.component.html',
-  styleUrls: ['./post-view.component.css']
+  styleUrls: ['./post-view.component.css'],
+  standalone: false
 })
 export class PostViewComponent implements OnInit {
 

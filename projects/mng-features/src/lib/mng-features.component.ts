@@ -7,8 +7,8 @@ import { Component } from '@angular/core';
       mng-features works!
     </p>
   `,
-  styles: [
-  ]
+  styles: [],
+  standalone: false
 })
 export class MNGFeaturesComponent {
 

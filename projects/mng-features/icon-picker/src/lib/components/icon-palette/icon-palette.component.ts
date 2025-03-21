@@ -8,7 +8,8 @@ import { DialogRef, DIALOG_DATA } from '@angular/cdk/dialog';
 @Component({
   selector: 'mng-icon-palette',
   templateUrl: './icon-palette.component.html',
-  styleUrls: ['./icon-palette.component.css']
+  styleUrls: ['./icon-palette.component.css'],
+  standalone: false
 })
 export class IconPaletteComponent {
 

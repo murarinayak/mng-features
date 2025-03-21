@@ -3,7 +3,8 @@ import { Component, Input } from '@angular/core';
 @Component({
   selector: 'mng-app-state',
   templateUrl: './app-state.component.html',
-  styleUrls: ['./app-state.component.css']
+  styleUrls: ['./app-state.component.css'],
+  standalone: false
 })
 export class MNGAppStateComponent {
 

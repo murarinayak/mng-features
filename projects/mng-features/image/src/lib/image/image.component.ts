@@ -3,7 +3,8 @@ import { Component, Input } from '@angular/core';
 @Component({
   selector: 'mng-image',
   templateUrl: './image.component.html',
-  styleUrls: ['./image.component.css']
+  styleUrls: ['./image.component.css'],
+  standalone: false
 })
 export class MNGImageComponent {
 

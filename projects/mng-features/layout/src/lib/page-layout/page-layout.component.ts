@@ -7,7 +7,8 @@ import { CommonService, IMenuItem } from 'mng-features/shared';
 
 @Component({
   selector: 'app-page-layout',
-  templateUrl: './page-layout.component.html'
+  templateUrl: './page-layout.component.html',
+  standalone: false
 })
 export class PageLayoutComponent {
 

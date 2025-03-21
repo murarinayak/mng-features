@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-full-layout',
-  templateUrl: './full-layout.component.html'
+  templateUrl: './full-layout.component.html',
+  standalone: false
 })
 export class FullLayoutComponent implements OnInit {
 

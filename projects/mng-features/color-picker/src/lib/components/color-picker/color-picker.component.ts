@@ -5,7 +5,8 @@ import { ColorPaletteComponent } from '../color-palette/color-palette.component'
 @Component({
   selector: 'mng-color-picker',
   templateUrl: './color-picker.component.html',
-  styleUrls: ['./color-picker.component.css']
+  styleUrls: ['./color-picker.component.css'],
+  standalone: false
 })
 export class MNGColorPickerComponent {
 

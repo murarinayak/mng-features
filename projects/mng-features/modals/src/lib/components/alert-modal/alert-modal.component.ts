@@ -5,7 +5,8 @@ import { IDialogData } from '../../common/dialog-data.model';
 @Component({
   selector: 'mng-alert-modal',
   templateUrl: './alert-modal.component.html',
-  styleUrls: ['./alert-modal.component.css']
+  styleUrls: ['./alert-modal.component.css'],
+  standalone: false
 })
 export class AlertModalComponent {
 

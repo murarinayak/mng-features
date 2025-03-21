@@ -10,7 +10,8 @@ import { IThemeOption } from './theme-picker/option.model';
 
 @Component({
   selector: 'mng-header',
-  templateUrl: './header.component.html'
+  templateUrl: './header.component.html',
+  standalone: false
 })
 export class HeaderComponent implements OnInit, OnDestroy {
 

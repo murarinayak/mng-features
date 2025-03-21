@@ -5,7 +5,8 @@ import { BlogService } from '../../services/blog.service';
 @Component({
   selector: 'mng-post-list',
   templateUrl: './post-list.component.html',
-  styleUrls: ['./post-list.component.css']
+  styleUrls: ['./post-list.component.css'],
+  standalone: false
 })
 export class PostListComponent {
 

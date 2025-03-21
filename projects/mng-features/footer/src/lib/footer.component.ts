@@ -3,7 +3,8 @@ import { CommonService } from 'mng-features/shared';
 
 @Component({
   selector: 'app-footer',
-  templateUrl: './footer.component.html'
+  templateUrl: './footer.component.html',
+  standalone: false
 })
 export class FooterComponent {
 

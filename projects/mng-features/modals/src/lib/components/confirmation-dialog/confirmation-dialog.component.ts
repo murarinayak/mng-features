@@ -6,7 +6,8 @@ import { IDialogData } from '../../common/dialog-data.model';
 @Component({
   selector: 'mng-confirmation-dialog',
   templateUrl: './confirmation-dialog.component.html',
-  styleUrls: ['./confirmation-dialog.component.css']
+  styleUrls: ['./confirmation-dialog.component.css'],
+  standalone: false
 })
 export class ConfirmationDialogComponent {
 

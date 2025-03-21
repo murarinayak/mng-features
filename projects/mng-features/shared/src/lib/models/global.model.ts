@@ -1,8 +1,18 @@
 export interface IAudioRequest {
   docID: string;
-  text: string;
-  languageCode?: string;
-  voiceName?: string;
+  audioConfig?: {
+    audioEncoding?: string;
+    effectsProfileId: Array<string>;
+    pitch?: number; // 0 - 1
+    speakingRate?: 1; // 0 - 1
+  };
+  input: {
+    text: string;
+  };
+  voice?: {
+    name?: string;
+    languageCode?: string;
+  };
 }
 
 export interface IProcessedItem {

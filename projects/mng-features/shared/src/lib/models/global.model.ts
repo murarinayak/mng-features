@@ -4,7 +4,7 @@ export interface IAudioRequest {
     audioEncoding?: string;
     effectsProfileId: Array<string>;
     pitch?: number; // 0 - 1
-    speakingRate?: 1; // 0 - 1
+    speakingRate?: number; // 0 - 1
   };
   input: {
     text: string;

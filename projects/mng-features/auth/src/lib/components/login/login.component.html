@@ -15,9 +15,13 @@
       </mat-form-field>
       <button mat-raised-button color="primary" (click)="login(username.value, password.value)">SUBMIT</button>
       <hr>
-      <button mat-stroked-button color="primary" (click)="onLoginWithGoogleClick()">
+      <button mat-stroked-button color="primary" class="mb-2" (click)="onLoginWithGoogleClickP()">
         <app-google-login-mat-icon></app-google-login-mat-icon>
-        <span class="ms-2">Continue with Google</span>
+        <span class="ms-2">Continue with Google P</span>
+      </button>
+      <button mat-stroked-button color="primary" (click)="onLoginWithGoogleClickR()">
+        <app-google-login-mat-icon></app-google-login-mat-icon>
+        <span class="ms-2">Continue with Google R</span>
       </button>
       <ng-container *ngIf="!loginMandatory">
         <hr>

@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import firebase from 'firebase/compat/app';
 
 import { AuthService } from '../../services/auth.service';
-import { MNGBrowserStorageService, UserService, LocalStorageCommonKeys, IResponseModel, User } from 'mng-features/shared';
+import { MNGBrowserStorageService, User, IAuthUser } from 'mng-features/shared';
 import { ToastService } from 'mng-features/toast';
 
 @Component({
@@ -23,12 +23,11 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService,
-    private userService: UserService,
     private toastService: ToastService,
-    private storageService: MNGBrowserStorageService
   ) { }
 
   ngOnInit() {
+    this.handleRedirectResult();
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     if (window.location.href.indexOf('stories') !== -1) {
@@ -55,7 +54,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  onLoginWithGoogleClick() {
+  onLoginWithGoogleClickP() {
     // console.log('open google signin');
     this.authService.signInWithPopup(new firebase.auth.GoogleAuthProvider).subscribe({
       next: (response) => {
@@ -63,6 +62,29 @@ export class LoginComponent implements OnInit {
         this.onLoginSuccess();
       },
       error: this.onError
+    });
+  }
+
+  onLoginWithGoogleClickR() {
+    // console.log('open google signin');
+    this.authService.signInWithRedirect(new firebase.auth.GoogleAuthProvider).subscribe({
+      next: (response) => {
+        console.log('res', response);
+        // this.onLoginSuccess();
+      },
+      error: this.onError
+    });
+  }
+ 
+  /** Handle after redirect */
+  handleRedirectResult() {
+    this.authService.handleRedirectResult().subscribe({
+      next: (response: IAuthUser) => {
+        if (response) {
+          // console.log('User signed in:', response);
+          this.onLoginSuccess();
+        }
+      }
     });
   }
 
@@ -75,7 +97,7 @@ export class LoginComponent implements OnInit {
     //   return;
     // }
     this.router.navigate([this.returnUrl]);
-    setTimeout(() => window.location.reload(), 0);
+    // setTimeout(() => window.location.reload(), 0);
   }
 
   onError = (error) => {

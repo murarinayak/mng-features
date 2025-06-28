@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
 import {
   AdditionalUserInfo, Auth, UserCredential, getAdditionalUserInfo,
-  signInWithEmailAndPassword, signInWithPopup
+  getRedirectResult,
+  signInWithEmailAndPassword, signInWithPopup,
+  signInWithRedirect
 } from '@angular/fire/auth';
-import { Observable, from, map, of, switchMap, tap } from 'rxjs';
+import { Firestore } from '@angular/fire/firestore';
+import { Observable, catchError, from, map, of, switchMap, tap } from 'rxjs';
 import { LoggerService, UserService, IAuthUser, AuthUserType, MNGBrowserStorageService, LocalStorageCommonKeys } from 'mng-features/shared';
 import { Router } from '@angular/router';
 
@@ -16,9 +19,16 @@ export class AuthService {
     private router: Router,
     private loggerService: LoggerService,
     private afAuth: Auth,
+    private afFirestore: Firestore,
     private userService: UserService,
     private browserStorageService: MNGBrowserStorageService,
-  ) { }
+  ) { this.initService(); }
+
+  initService() {
+    // connectAuthEmulator(this.afAuth, "http://localhost:9099");
+    // connectFirestoreEmulator(this.afFirestore, "localhost", 8080);
+    // this.handleRedirectResult().subscribe();
+  }
 
   signInWithPopup(authProvider) {
     let isNewUser = false;
@@ -37,6 +47,42 @@ export class AuthService {
     );
   }
 
+  signInWithRedirect(authProvider) {
+    return from(signInWithRedirect(this.afAuth, authProvider));
+  }
+
+  handleRedirectResult() {
+    let isNewUser = false;
+    return from(getRedirectResult(this.afAuth)).pipe(
+      tap((result) => {
+        if (result?.user) {
+          console.log('User signed in:', result.user);
+        }
+      }),
+      map((response: UserCredential) => {
+        if (response) {
+          const additionalUserInfo: AdditionalUserInfo = getAdditionalUserInfo(response);
+          const authUser: IAuthUser = this.processAuthUser(response, additionalUserInfo);
+          this.loggerService.log('on login', response);
+          isNewUser = additionalUserInfo.isNewUser;
+          return authUser;
+        }
+        return null;
+      }),
+      switchMap((response: IAuthUser) => {
+        // this.loggerService.log('then', response);
+        if (response) {
+          return this.addUpdateInUserColl(response);
+        }
+        return of(null)
+      }),
+      catchError((error) => {
+        console.error('Error during redirect sign-in:', error);
+        return of(null);
+      })
+    );
+  }
+
   addUpdateInUserColl(authUser: IAuthUser): Observable<IAuthUser> {
     return this.userService.get(authUser.uid).pipe(
       switchMap((response: IAuthUser) => {
@@ -44,7 +90,7 @@ export class AuthService {
           this.userService.updateInMemory(response);
           return of(authUser);
         } else {
-          return this.userService.post(authUser).pipe(
+          return this.userService.set(authUser).pipe(
             switchMap(() => this.addUpdateInUserColl(authUser)),
           );
         }
@@ -85,8 +131,8 @@ export class AuthService {
     return {
       uid: data?.user?.uid ?? '',
       email: data?.user?.email ?? '',
-      firstName: additionalUserInfo?.profile['given_name'].toString() ?? '',
-      lastName: additionalUserInfo?.profile['family_name'].toString() ?? '',
+      firstName: additionalUserInfo?.profile['given_name']?.toString() ?? '',
+      lastName: additionalUserInfo?.profile['family_name']?.toString() ?? '',
       displayName: data?.user?.displayName ?? '',
       locale: additionalUserInfo?.profile['locale'].toString() ?? 'en-GB', // might use this for translation
       phoneNumber: data?.user?.phoneNumber ?? '',

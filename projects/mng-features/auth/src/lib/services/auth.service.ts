@@ -134,7 +134,7 @@ export class AuthService {
       firstName: additionalUserInfo?.profile['given_name']?.toString() ?? '',
       lastName: additionalUserInfo?.profile['family_name']?.toString() ?? '',
       displayName: data?.user?.displayName ?? '',
-      locale: additionalUserInfo?.profile['locale'].toString() ?? 'en-GB', // might use this for translation
+      locale: additionalUserInfo?.profile['locale']?.toString() ?? 'en-GB', // might use this for translation
       phoneNumber: data?.user?.phoneNumber ?? '',
       photoURL: data?.user?.photoURL ?? '',
       isAnonymous: data?.user?.isAnonymous ?? false,

@@ -4,9 +4,11 @@
 </div>
 <section class="primary-section container-fluid">
   <div class="row">
-    <div *ngFor="let post of posts" class="col-md-4 col-sm-6 mb-3 hover-scale">
-      <app-post-item [post]="post"></app-post-item>
-    </div>
+    @for (post of posts; track post) {
+      <div class="col-md-4 col-sm-6 mb-3 hover-scale">
+        <app-post-item [post]="post"></app-post-item>
+      </div>
+    }
   </div>
   <div class="text-center my-4">
     <button mat-mini-fab color="accent" (click)="getPosts(1)">

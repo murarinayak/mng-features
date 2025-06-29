@@ -4,7 +4,9 @@
     <div class="col-auto my-2">{{ post?.date | date }}</div>
     <div class="col">
       <mat-chip-listbox>
-        <mat-chip-option *ngFor="let tag of post?.tags">{{ tag }}</mat-chip-option>
+        @for (tag of post?.tags; track tag) {
+          <mat-chip-option>{{ tag }}</mat-chip-option>
+        }
       </mat-chip-listbox>
     </div>
   </div>

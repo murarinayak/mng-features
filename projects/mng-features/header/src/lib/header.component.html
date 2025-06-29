@@ -1,68 +1,75 @@
 <mat-toolbar color="primary" class="main-nav">
   <mat-toolbar-row>
-    <button *ngIf="!isDashboard; else showMenuIcon" mat-icon-button (click)="onBackClick()">
-      <mat-icon>arrow_back</mat-icon>
-    </button>
-    <ng-template #showMenuIcon>
-      <button *ngIf="showLeftNav; else showHomeIcon" mat-icon-button color="" aria-hidden="false" aria-label="Toggle sidenav"
-        (click)="onMenuIconClick()">
-        <mat-icon>sort</mat-icon>
+    @if (!isDashboard) {
+      <button mat-icon-button (click)="onBackClick()">
+        <mat-icon>arrow_back</mat-icon>
       </button>
-    </ng-template>
-    <ng-template #showHomeIcon>
-      <!-- <a mat-icon-button color="" aria-hidden="false" aria-label="home" routerLink="/">
+    } @else {
+      @if (showLeftNav) {
+        <button mat-icon-button color="" aria-hidden="false" aria-label="Toggle sidenav"
+          (click)="onMenuIconClick()">
+          <mat-icon>sort</mat-icon>
+        </button>
+      } @else {
+        <!-- <a mat-icon-button color="" aria-hidden="false" aria-label="home" routerLink="/">
         <mat-icon>home</mat-icon>
       </a> -->
-    </ng-template>
-    <a mat-button class="docs-button" routerLink="/" aria-label="My App">
-      <span>{{ headerTitle }}</span>
-    </a>
-    <!-- <h2 class="ms-2 mb-0 fw-normal">{{ headerTitle }}</h2> -->
-    <span class="ms-auto">
-      <button *ngIf="themed" mat-icon-button class="ms-autoas" [matMenuTriggerFor]="menuThemes">
+    }
+  }
+  <a mat-button class="docs-button" routerLink="/" aria-label="My App">
+    <span>{{ headerTitle }}</span>
+  </a>
+  <!-- <h2 class="ms-2 mb-0 fw-normal">{{ headerTitle }}</h2> -->
+  <span class="ms-auto">
+    @if (themed) {
+      <button mat-icon-button class="ms-autoas" [matMenuTriggerFor]="menuThemes">
         <mat-icon>format_color_fill</mat-icon>
       </button>
-      <button mat-icon-button class="ms-autoas" [matMenuTriggerFor]="menu">
-        <mat-icon>account_circle</mat-icon>
-      </button>
-    </span>
-  </mat-toolbar-row>
+    }
+    <button mat-icon-button class="ms-autoas" [matMenuTriggerFor]="menu">
+      <mat-icon>account_circle</mat-icon>
+    </button>
+  </span>
+</mat-toolbar-row>
 </mat-toolbar>
 
 <mat-menu #menuThemes="matMenu">
-  <ng-container *ngFor="let themeOption of themeOptions">
+  @for (themeOption of themeOptions; track themeOption) {
     <button mat-menu-item (click)="themeChangeHandler(themeOption.value)">
       <!-- <mat-icon>share</mat-icon> -->
       {{ themeOption.label }}
     </button>
-  </ng-container>
+  }
 </mat-menu>
 
 <mat-menu #menu="matMenu">
   <!-- <a mat-menu-item routerLink="us/profile">
-    <mat-icon>manage_accounts</mat-icon>Profile
-  </a> -->
-  <!-- <button *ngIf="!isLoggedIn; else showLoggedInMenu" mat-menu-item (click)="onLoginClick()"> -->
-  <!-- <button *ngIf="!isLoggedIn" mat-menu-item (click)="onLoginClick()">
-    <mat-icon>login</mat-icon>Login
-  </button> -->
-  <button *ngFor="let item of menuItems" mat-menu-item (click)="onMenuItemClick(item)">
+  <mat-icon>manage_accounts</mat-icon>Profile
+</a> -->
+<!-- <button *ngIf="!isLoggedIn; else showLoggedInMenu" mat-menu-item (click)="onLoginClick()"> -->
+<!-- <button *ngIf="!isLoggedIn" mat-menu-item (click)="onLoginClick()">
+<mat-icon>login</mat-icon>Login
+</button> -->
+@for (item of menuItems; track item) {
+  <button mat-menu-item (click)="onMenuItemClick(item)">
     <mat-icon>{{ item.icon }}</mat-icon>
     {{ item.label }}
   </button>
-  <button mat-menu-item (click)="onShareClick()">
-    <mat-icon>share</mat-icon>Share
-  </button>
-  <button *ngIf="!isLoggedIn; else showLoggedInMenu" mat-menu-item (click)="onLoginClick()">
+}
+<button mat-menu-item (click)="onShareClick()">
+  <mat-icon>share</mat-icon>Share
+</button>
+@if (!isLoggedIn) {
+  <button mat-menu-item (click)="onLoginClick()">
     <mat-icon>login</mat-icon>Login
   </button>
-  <ng-template #showLoggedInMenu>
-    <a mat-menu-item routerLink="us/profile">
-      <mat-icon>manage_accounts</mat-icon>Profile
-    </a>
-    <button mat-menu-item (click)="logout()">
-      <mat-icon>logout</mat-icon>
-      Logout
-    </button>
-  </ng-template>
+} @else {
+  <a mat-menu-item routerLink="us/profile">
+    <mat-icon>manage_accounts</mat-icon>Profile
+  </a>
+  <button mat-menu-item (click)="logout()">
+    <mat-icon>logout</mat-icon>
+    Logout
+  </button>
+}
 </mat-menu>

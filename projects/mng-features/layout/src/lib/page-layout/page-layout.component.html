@@ -2,10 +2,12 @@
 <mat-sidenav-container class="example-container">
   <mat-sidenav #drawer role="navigation" [mode]="mobileQuery.matches ? 'over' : 'side'" [opened]="showLeftNav && !mobileQuery.matches">
     <mat-nav-list (click)="onNavListClick(drawer)">
-      <a *ngFor="let link of links" mat-list-item [routerLink]="link.path">
-        <!-- <mat-icon class="mt-2">{{ link.icon }}</mat-icon> -->
-        {{ link.label }}
-      </a>
+      @for (link of links; track link) {
+        <a mat-list-item [routerLink]="link.path">
+          <!-- <mat-icon class="mt-2">{{ link.icon }}</mat-icon> -->
+          {{ link.label }}
+        </a>
+      }
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content class="custom-sidenav">

@@ -3,8 +3,12 @@
     <div class="col-auto pe-0">
       <button mat-icon-button [ngClass]="{ 'invisible': !item.canToggle }" class="icon-small mt-2"
         (click)="toggleBlock(!expanded)">
-        <mat-icon *ngIf="!expanded">chevron_right</mat-icon>
-        <mat-icon *ngIf="expanded">expand_more</mat-icon>
+        @if (!expanded) {
+          <mat-icon>chevron_right</mat-icon>
+        }
+        @if (expanded) {
+          <mat-icon>expand_more</mat-icon>
+        }
       </button>
     </div>
     <div class="col-auto px-0" cdkDragHandle>
@@ -15,18 +19,24 @@
       <p class="subtitle mb-1">{{ item?.value }}</p>
     </div>
     <div class="col-auto">
-      <button *ngIf="item?.actions" mat-icon-button [matMenuTriggerFor]="menu" class="icon-small mt-2">
-        <mat-icon>more_vert</mat-icon>
-      </button>
+      @if (item?.actions) {
+        <button mat-icon-button [matMenuTriggerFor]="menu" class="icon-small mt-2">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+      }
     </div>
   </div>
-  <div *ngIf="expanded" class="ms-4">
-    <ng-content></ng-content>
-  </div>
+  @if (expanded) {
+    <div class="ms-4">
+      <ng-content></ng-content>
+    </div>
+  }
 </mat-card>
 
 <mat-menu #menu="matMenu">
-  <button *ngFor="let item of item?.actions" mat-menu-item color="primary" (click)="onActionItemClick(item)">
-    <mat-icon>{{ item.icon }}</mat-icon>{{ item.label }}
-  </button>
+  @for (item of item?.actions; track item) {
+    <button mat-menu-item color="primary" (click)="onActionItemClick(item)">
+      <mat-icon>{{ item.icon }}</mat-icon>{{ item.label }}
+    </button>
+  }
 </mat-menu>

@@ -1,4 +1,6 @@
 <h5 class="mt-2">File Upload</h5>
 <input type="file" (change)="uploadFile($event)" #inputFile>
-<mat-progress-bar *ngIf="uploadInProgress" class="mt-2" [value]="progress" mode="determinate">
-</mat-progress-bar>
+@if (uploadInProgress) {
+  <mat-progress-bar class="mt-2" [value]="progress" mode="determinate">
+  </mat-progress-bar>
+}

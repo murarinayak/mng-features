@@ -6,18 +6,22 @@
     </div>
     <div class="circle" [ngStyle]="{'background': selection}"></div>
   </div>
-  <div class="opened" *ngIf="show">
-    <div class="colors">
-      <div *ngFor="let paint of colorList" class="circle"
-        [ngStyle]="{'background': paint}" (click)="changeColor(paint)"></div>
-    </div>
-    <div class="hex-code">
-      <p>Hex Code</p>
-      <div class="g-input">
-        <input type="text" maxlength="7" [value]="selection" #paintInput
-          (keyup)="changeColorManual(paintInput.value)"
-          (keydown.enter)="toggleColors()"/>
+  @if (show) {
+    <div class="opened">
+      <div class="colors">
+        @for (paint of colorList; track paint) {
+          <div class="circle"
+          [ngStyle]="{'background': paint}" (click)="changeColor(paint)"></div>
+        }
+      </div>
+      <div class="hex-code">
+        <p>Hex Code</p>
+        <div class="g-input">
+          <input type="text" maxlength="7" [value]="selection" #paintInput
+            (keyup)="changeColorManual(paintInput.value)"
+            (keydown.enter)="toggleColors()"/>
+        </div>
       </div>
     </div>
-  </div>
+  }
 </div>

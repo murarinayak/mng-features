@@ -111,3 +111,6 @@ export const getMonth = (date: Date) => ('0' + (date.getMonth() + 1)).slice(-2);
 export const getDay = (date: Date) => ('0' + date.getDay()).slice(-2);
 export const getYearMonth = (date: Date) => getYear(date) + getMonth(date);
 export const getYearMonthDay = (date: Date) => getYear(date) + getMonth(date) + getDay(date);
+
+export const padStart = (input: number | string, length: number = 2, char: string = '0') => String(input).padStart(length, char);
+export const padEnd = (input: number | string, length: number = 2, char: string = '0') => String(input).padEnd(length, char);

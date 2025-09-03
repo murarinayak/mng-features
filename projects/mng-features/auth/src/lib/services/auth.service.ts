@@ -6,7 +6,7 @@ import {
   signInWithRedirect
 } from '@angular/fire/auth';
 import { Firestore } from '@angular/fire/firestore';
-import { Observable, catchError, from, map, of, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, from, map, of, switchMap, tap } from 'rxjs';
 import { LoggerService, UserService, IAuthUser, AuthUserType, MNGBrowserStorageService, LocalStorageCommonKeys } from 'mng-features/shared';
 import { Router } from '@angular/router';
 
@@ -14,6 +14,9 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthService {
+
+  private authStateChanged: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  authStateChanged$ = this.authStateChanged.asObservable();
 
   constructor(
     private router: Router,
@@ -42,6 +45,7 @@ export class AuthService {
       }),
       switchMap((response: IAuthUser) => {
         // this.loggerService.log('then', response);
+        this.authStateChanged.next(true);
         return this.addUpdateInUserColl(response);
       }),
     );
@@ -147,13 +151,16 @@ export class AuthService {
   }
 
   isLoggedIn() {
-    return this.userService.getLoggedInUserID() !== '';
+    const isLoggedIn = this.userService.getLoggedInUserID() !== '';
+    this.authStateChanged.next(isLoggedIn);
+    return isLoggedIn;
   }
 
   logout() {
     const keysToKeep: Map<string, string> = new Map();
     keysToKeep.set(LocalStorageCommonKeys.APP_DEFAULT_URL, '');
     this.browserStorageService.reset(keysToKeep);
+    this.authStateChanged.next(false);
     // remove user from local storage to log user out
     // localStorage.removeItem('currentUser');
     this.router.navigate(['/']);

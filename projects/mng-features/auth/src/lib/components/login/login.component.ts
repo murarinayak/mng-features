@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import firebase from 'firebase/compat/app';
+import { GoogleAuthProvider } from '@angular/fire/auth';
 
 import { AuthService } from '../../services/auth.service';
-import { MNGBrowserStorageService, User, IAuthUser } from 'mng-features/shared';
+import { User, IAuthUser } from 'mng-features/shared';
 import { ToastService } from 'mng-features/toast';
 
 @Component({
@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
 
   onLoginWithGoogleClickP() {
     // console.log('open google signin');
-    this.authService.signInWithPopup(new firebase.auth.GoogleAuthProvider).subscribe({
+    this.authService.signInWithPopup(new GoogleAuthProvider).subscribe({
       next: (response) => {
         // console.log('res', response);
         this.onLoginSuccess();
@@ -67,7 +67,7 @@ export class LoginComponent implements OnInit {
 
   onLoginWithGoogleClickR() {
     // console.log('open google signin');
-    this.authService.signInWithRedirect(new firebase.auth.GoogleAuthProvider).subscribe({
+    this.authService.signInWithRedirect(new GoogleAuthProvider).subscribe({
       next: (response) => {
         console.log('res', response);
         // this.onLoginSuccess();

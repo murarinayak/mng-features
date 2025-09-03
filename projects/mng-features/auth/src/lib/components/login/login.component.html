@@ -13,7 +13,7 @@
       <mat-form-field>
         <input matInput #password placeholder="Password" type="password" dividerColor="accent">
       </mat-form-field>
-      <button mat-raised-button color="primary" (click)="login(username.value, password.value)">SUBMIT</button>
+      <button matButton="filled" (click)="login(username.value, password.value)">SUBMIT</button>
       <hr>
         <button mat-stroked-button color="primary" class="mb-2" (click)="onLoginWithGoogleClickP()">
           <app-google-login-mat-icon></app-google-login-mat-icon>
@@ -25,7 +25,7 @@
         </button>
         @if (!loginMandatory) {
           <hr>
-            <a mat-stroked-button color="primary" routerLink="/">Continue without Logging In</a>
+            <a matButton="outlined" color="primary" routerLink="/">Continue without Logging In</a>
           }
         </mat-card-content>
         <mat-card-footer>

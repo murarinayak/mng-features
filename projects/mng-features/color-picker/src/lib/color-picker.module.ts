@@ -34,6 +34,7 @@ import { MNGColorPickerComponent1 } from './components/color-picker-1/color-pick
   ],
   exports: [
     MNGColorPickerComponent,
+    MNGColorPickerComponent1,
   ],
   // entryComponents: [
   //   // NgxMatColorPickerContentComponent

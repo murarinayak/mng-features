@@ -1,9 +1,8 @@
 {
   "name": "mng-features",
-  "version": "21.0.0",
+  "version": "21.0.1",
   "peerDependencies": {
-    "@angular/core": "^21.0.0",
-    "@angular/fire": "^21.0.0"
+    "@angular/core": "^21.0.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"

@@ -1,11 +1,13 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
+import { FirebaseApp } from '@angular/fire/app';
 import { Observable, from, map, of, tap } from 'rxjs';
 import {
+  Firestore, getFirestore,
   AggregateField, AggregateQuerySnapshot,
-  DocumentReference, Firestore, Query, QueryConstraint, addDoc,
+  DocumentReference, Query, QueryConstraint, addDoc,
   collection, deleteDoc, doc, getCountFromServer, getDoc, getDocs,
   limit, orderBy, query, setDoc, startAfter, where
-} from '@angular/fire/firestore';
+} from 'firebase/firestore';
 
 import { FirestoreQuery } from '../models/firestore-query-params.model';
 import { ITEMS_PER_PAGE_GLOBAL } from '../common/constants';
@@ -15,6 +17,12 @@ import { IDocumentModel } from '../models/common.model';
   providedIn: 'root'
 })
 export class FirestoreService<T extends IDocumentModel> { // implements IFirestoreService {
+  
+  private firebaseApp = inject(FirebaseApp);
+
+  private get ngFirestore(): Firestore {
+    return getFirestore(this.firebaseApp);
+  }
 
   collName = 'NA';
   limitPerPage = ITEMS_PER_PAGE_GLOBAL;
@@ -23,7 +31,7 @@ export class FirestoreService<T extends IDocumentModel> { // implements IFiresto
   itemLast: T; // DocumentSnapshot<T>; // DocumentReference
   isLastPage = false;
 
-  constructor(private ngFirestore: Firestore) { }
+  // constructor(private ngFirestore: Firestore) { }
 
   list(qry?: FirestoreQuery<T>) {
     // console.log('fire2list called');

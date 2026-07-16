@@ -21,10 +21,11 @@ export class UserService extends FirestoreService<unknown>  {
 
   constructor(
     // private ngFirestore: AngularFirestore,
-    ngFirestore: Firestore,
+    // ngFirestore: Firestore,
     protected storageService: MNGBrowserStorageService
   ) {
-    super(ngFirestore);
+    // super(ngFirestore);
+    super();
     this.collName = CollNameGlobal.USERS;
   }
 

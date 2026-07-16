@@ -1,6 +1,6 @@
 {
   "name": "mng-features",
-  "version": "21.0.1",
+  "version": "21.0.2",
   "peerDependencies": {
     "@angular/core": "^21.0.0"
   },

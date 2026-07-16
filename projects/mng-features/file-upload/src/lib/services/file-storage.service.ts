@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { Firestore } from '@angular/fire/firestore';
+// import { Firestore } from '@angular/fire/firestore';
 import { Storage, UploadTask, deleteObject, getDownloadURL, ref, uploadBytesResumable } from '@angular/fire/storage';
 import { BehaviorSubject, Observable, catchError, from, switchMap, throwError } from 'rxjs';
 
@@ -25,10 +25,11 @@ export class FileStorageService extends FirestoreService<unknown> {
   defaultFolderPath = `${new Date().getUTCFullYear()}${('0' + (new Date().getUTCMonth() + 1)).slice(-2)}`;
 
   constructor(
-    ngFirestore: Firestore,
+    // ngFirestore: Firestore,
     private commonService: CommonService,
   ) {
-    super(ngFirestore);
+    // super(ngFirestore);
+    super();
     this.collName = CollNameGlobal.UPLOADS;
   }
 

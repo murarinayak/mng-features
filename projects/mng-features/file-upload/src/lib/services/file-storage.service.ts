@@ -22,7 +22,7 @@ export class FileStorageService extends FirestoreService<unknown> {
   defaultFolderPath = `${new Date().getUTCFullYear()}${('0' + (new Date().getUTCMonth() + 1)).slice(-2)}`;
 
   constructor(
-    @Inject(FIREBASE_SERVICES) private readonly firebaseServices: FirebaseServices,
+    @Inject(FIREBASE_SERVICES) firebaseServices: FirebaseServices,
     private commonService: CommonService,
   ) {
     super(firebaseServices);

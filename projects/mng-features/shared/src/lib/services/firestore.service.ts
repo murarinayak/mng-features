@@ -19,7 +19,7 @@ import { IDocumentModel } from '../models/common.model';
 })
 export class FirestoreService<T extends IDocumentModel> { // implements IFirestoreService {
 
-  constructor(@Inject(FIREBASE_SERVICES) private readonly firebaseServices: FirebaseServices) {}
+  constructor(@Inject(FIREBASE_SERVICES) protected readonly firebaseServices: FirebaseServices) {}
 
   private get ngFirestore(): Firestore {
     return this.firebaseServices.firestore;

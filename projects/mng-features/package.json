@@ -2,10 +2,10 @@
   "name": "mng-features",
   "version": "21.1.0",
   "peerDependencies": {
-    "@angular/core": "^21.0.0"
+    "@angular/core": "^21.0.0",
+    "firebase": "^12.0.0"
   },
   "dependencies": {
-    "firebase": "12.16.0",
     "tslib": "^2.3.0"
   }
 }

@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EditorModule } from 'mng-features/editor';
 // import { MNGFeaturesModule } from 'projects/mng-features/src/public-api';
 
@@ -20,7 +19,6 @@ import { MNGDragDropListModule } from 'mng-features/drag-drop-list';
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,

@@ -1,4 +1,5 @@
 import { Timestamp } from 'firebase/firestore';
+import { FirebaseServices } from '../services/firebase-services';
 export type IFirestoreTimestamp = Timestamp;
 
 export interface IEnvironment {
@@ -14,6 +15,7 @@ export interface ILibraryConfig {
   menu: Array<IMenuItem>;
   showLeftNav: boolean;
   themed?: boolean;
+  firebaseServices?: FirebaseServices;
 }
 
 export interface IFirebaseConfig {

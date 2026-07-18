@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { from, map, Observable, of } from 'rxjs';
-import { AngularFirestore, CollectionReference, DocumentReference, DocumentSnapshot, QueryFn } from '@angular/fire/compat/firestore';
+import { CollectionReference, DocumentReference, DocumentSnapshot, Firestore, QueryConstraint, addDoc, collection, deleteDoc, doc, getDoc, getDocs, limit, orderBy, query, setDoc, startAfter, updateDoc, where } from 'firebase/firestore';
 import { WhereFilterOp } from '@firebase/firestore-types';
 import firebase from 'firebase/compat/app'
 
 import { ITEMS_PER_PAGE_GLOBAL } from '../common/constants';
+import { FIREBASE_SERVICES, FirebaseServices } from './firebase-services';
 
 // interface IFirestoreService {
 //   collName: string;
@@ -47,7 +48,11 @@ export class FirestoreService<T extends { id?: string }> { // implements IFirest
   itemLast: unknown; // DocumentReference
   isLastPage = false;
 
-  constructor(private ngFirestore: AngularFirestore) { }
+  constructor(@Inject(FIREBASE_SERVICES) private readonly firebaseServices: FirebaseServices) { }
+
+  private get ngFirestore(): Firestore {
+    return this.firebaseServices.firestore;
+  }
 
   listWithParams(params?: IFirestoreQueryParams) {
     const pageNum = 1;
@@ -78,11 +83,13 @@ export class FirestoreService<T extends { id?: string }> { // implements IFirest
 
   list(callback: QueryFn = null): Observable<Array<T>> {
     if (!callback) {
-      callback = (ref: CollectionReference) => ref.orderBy('tsCreatedAt'); // .limit(3)
+      callback = (ref: CollectionReference) => query(ref, orderBy('tsCreatedAt')); // .limit(3)
     }
-    return this.ngFirestore.collection(this.collName, callback).get().pipe(
-      map((response) => response.docs), // firebase.firestore.QuerySnapshot<unknown>
-      map((response: Array<any>) => { // firebase.firestore.QueryDocumentSnapshot<unknown>[]
+    const collectionRef = collection(this.ngFirestore, this.collName);
+    const queryRef = callback(collectionRef);
+    return from(getDocs(queryRef)).pipe(
+      map((response) => response.docs),
+      map((response: Array<any>) => {
         if (response.length) {
           this.collData = this.collData.concat(response);
           this.itemFirst = response[0];
@@ -94,9 +101,9 @@ export class FirestoreService<T extends { id?: string }> { // implements IFirest
   }
 
   get(id: string): Observable<T> {
-    return this.ngFirestore.collection(this.collName).doc(id).get().pipe(
+    return from(getDoc(doc(this.ngFirestore, `${this.collName}/${id}`))).pipe(
       map((item: DocumentSnapshot<T>) => {
-        if (item.exists) {
+        if (item.exists()) {
           return { id: item.id, ...item.data() };
         }
         return item.data(); // this will be undefined
@@ -110,16 +117,16 @@ export class FirestoreService<T extends { id?: string }> { // implements IFirest
    * @returns 
    */
   set(item: T): Observable<string> {
-    const docID: string = item.id ?? this.ngFirestore.createId();
+    const docID: string = item.id ?? doc(collection(this.ngFirestore, this.collName)).id;
     const itemSpread: T = { ...item };
     delete itemSpread.id;
-    return from(this.ngFirestore.collection(this.collName).doc(docID).set(itemSpread)).pipe(
+    return from(setDoc(doc(this.ngFirestore, `${this.collName}/${docID}`), itemSpread)).pipe(
       map(() => docID)
     );
   }
 
   post(item: T) {
-    return from(this.ngFirestore.collection(this.collName).add(item)).pipe(
+    return from(addDoc(collection(this.ngFirestore, this.collName), item)).pipe(
       map((response: DocumentReference<T>) => response.id)
     );
   }
@@ -128,11 +135,11 @@ export class FirestoreService<T extends { id?: string }> { // implements IFirest
     const docID: string = item.id;
     const itemSpread: T = { ...item };
     delete itemSpread.id;
-    return from(this.ngFirestore.collection(this.collName).doc(docID).update(itemSpread));
+    return from(updateDoc(doc(this.ngFirestore, `${this.collName}/${docID}`), itemSpread as Record<string, any>));
   }
 
   delete(itemID: string): Observable<void> {
-    return from(this.ngFirestore.collection(this.collName).doc(itemID).delete());
+    return from(deleteDoc(doc(this.ngFirestore, `${this.collName}/${itemID}`)));
   }
 
   // Paginated Data
@@ -194,7 +201,7 @@ export class FirestoreService<T extends { id?: string }> { // implements IFirest
 
   // Utils
   dbReference = (refPath: string) => {
-    return refPath ? this.ngFirestore.doc(refPath) : this.ngFirestore;
+    return refPath ? doc(this.ngFirestore, refPath) : this.ngFirestore;
   };
   /**
    * ----------------------------------------------------------------------
@@ -210,7 +217,7 @@ export class FirestoreService<T extends { id?: string }> { // implements IFirest
     if (!limit) {
       return query;
     }
-    return query.limit(limit);
+    return query(limit);
   };
   /**
    * ----------------------------------------------------------------------

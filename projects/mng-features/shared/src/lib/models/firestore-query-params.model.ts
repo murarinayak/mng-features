@@ -1,4 +1,4 @@
-import { DocumentSnapshot, OrderByDirection } from '@angular/fire/firestore';
+import { DocumentSnapshot, OrderByDirection } from 'firebase/firestore';
 import { WhereFilterOp } from '@firebase/firestore-types';
 import firebase from 'firebase/compat/app'
 

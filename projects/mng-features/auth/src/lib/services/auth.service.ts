@@ -1,13 +1,12 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import {
   AdditionalUserInfo, Auth, UserCredential, getAdditionalUserInfo,
   getRedirectResult,
   signInWithEmailAndPassword, signInWithPopup,
   signInWithRedirect
-} from '@angular/fire/auth';
-import { Firestore } from '@angular/fire/firestore';
+} from 'firebase/auth';
 import { BehaviorSubject, Observable, catchError, from, map, of, switchMap, tap } from 'rxjs';
-import { LoggerService, UserService, IAuthUser, AuthUserType, MNGBrowserStorageService, LocalStorageCommonKeys } from 'mng-features/shared';
+import { LoggerService, UserService, IAuthUser, AuthUserType, MNGBrowserStorageService, LocalStorageCommonKeys, FIREBASE_SERVICES, FirebaseServices } from 'mng-features/shared';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -21,11 +20,17 @@ export class AuthService {
   constructor(
     private router: Router,
     private loggerService: LoggerService,
-    private afAuth: Auth,
-    private afFirestore: Firestore,
     private userService: UserService,
     private browserStorageService: MNGBrowserStorageService,
+    @Inject(FIREBASE_SERVICES) private readonly firebaseServices: FirebaseServices,
   ) { this.initService(); }
+
+  private get afAuth(): Auth {
+    if (!this.firebaseServices.auth) {
+      throw new Error('Firebase Auth service is not available');
+    }
+    return this.firebaseServices.auth;
+  }
 
   initService() {
     // connectAuthEmulator(this.afAuth, "http://localhost:9099");

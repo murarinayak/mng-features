@@ -1,6 +1,8 @@
-import { Injectable } from '@angular/core';
-import { Database, DatabaseReference, Query, child, endAt, get, limitToFirst, list, orderByChild, query, ref, remove, set, startAt, update } from '@angular/fire/database';
+import { Inject, Injectable } from '@angular/core';
+import { DatabaseReference, child, endAt, get, limitToFirst, orderByChild, query, ref, remove, set, startAt, update } from 'firebase/database';
 import { from, map } from 'rxjs';
+
+import { FIREBASE_SERVICES, FirebaseServices } from './firebase-services';
 
 
 @Injectable({
@@ -11,14 +13,14 @@ export class RTDBService<T> {
   collName = '';
   dbRef: DatabaseReference;
 
-  constructor(private database: Database) {
-    this.dbRef = ref(this.database);
+  constructor(@Inject(FIREBASE_SERVICES) private readonly firebaseServices: FirebaseServices) {
+    this.dbRef = ref(this.firebaseServices.database);
     this.collName = 'stories';
   }
 
   list(start = '', end = '') {
     return from(
-      list(
+      get(
         query(
           child(this.dbRef, this.collName),
           orderByChild('label'),
@@ -28,9 +30,14 @@ export class RTDBService<T> {
         )
       )
     ).pipe(
-      map((response: Array<any>) => response.map(item => {
-        return { value: item.snapshot.key, ...item.snapshot.val() };
-      }))
+      map((response: any) => {
+        const snapshot = response?.snapshot ?? response;
+        if (!snapshot || !snapshot.exists) {
+          return [];
+        }
+        const items = snapshot.val() ?? {};
+        return Object.entries(items).map(([key, value]) => ({ value: key, ...(value as object) }));
+      })
     );
   }
 
@@ -55,7 +62,7 @@ export class RTDBService<T> {
   post(label: string) {
     return from(
       set(
-        ref(this.database, `${this.collName}/`),
+        ref(this.firebaseServices.database, `${this.collName}/`),
         { label }
       )
     );
@@ -64,7 +71,7 @@ export class RTDBService<T> {
   put(id: string, label: string) {
     return from(
       update(
-        ref(this.database, `${this.collName}/${id}`),
+        ref(this.firebaseServices.database, `${this.collName}/${id}`),
         { label }
       )
     );
@@ -73,7 +80,7 @@ export class RTDBService<T> {
   delete(id: string) {
     return from(
       remove(
-        ref(this.database, `${this.collName}/${id}`)
+        ref(this.firebaseServices.database, `${this.collName}/${id}`)
       )
     );
   }

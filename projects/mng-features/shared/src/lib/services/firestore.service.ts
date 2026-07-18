@@ -1,13 +1,14 @@
-import { inject, Injectable } from '@angular/core';
-import { FirebaseApp } from '@angular/fire/app';
+import { Inject, Injectable } from '@angular/core';
 import { Observable, from, map, of, tap } from 'rxjs';
 import {
-  Firestore, getFirestore,
+  Firestore, 
   AggregateField, AggregateQuerySnapshot,
   DocumentReference, Query, QueryConstraint, addDoc,
   collection, deleteDoc, doc, getCountFromServer, getDoc, getDocs,
   limit, orderBy, query, setDoc, startAfter, where
 } from 'firebase/firestore';
+
+import { FIREBASE_SERVICES, FirebaseServices } from './firebase-services';
 
 import { FirestoreQuery } from '../models/firestore-query-params.model';
 import { ITEMS_PER_PAGE_GLOBAL } from '../common/constants';
@@ -17,11 +18,11 @@ import { IDocumentModel } from '../models/common.model';
   providedIn: 'root'
 })
 export class FirestoreService<T extends IDocumentModel> { // implements IFirestoreService {
-  
-  private firebaseApp = inject(FirebaseApp);
+
+  constructor(@Inject(FIREBASE_SERVICES) private readonly firebaseServices: FirebaseServices) {}
 
   private get ngFirestore(): Firestore {
-    return getFirestore(this.firebaseApp);
+    return this.firebaseServices.firestore;
   }
 
   collName = 'NA';

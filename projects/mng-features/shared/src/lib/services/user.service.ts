@@ -1,16 +1,12 @@
-import { Injectable } from '@angular/core';
-// import { AngularFirestore, DocumentSnapshot } from '@angular/fire/compat/firestore';
-// import { from, Observable, of } from 'rxjs';
-// import { map, tap } from 'rxjs/operators';
-import { Firestore } from '@angular/fire/firestore';
+import { Inject, Injectable } from '@angular/core';
 
 import { MNGBrowserStorageService } from './browser-storage.service';
 import { CollNameGlobal } from '../common/constants'
 import { IAuthUser } from '../models/common.model';
 import { LocalStorageCommonKeys } from '../common/browser-storage.keys';
 import { FirestoreService } from './firestore.service';
+import { FIREBASE_SERVICES, FirebaseServices } from './firebase-services';
 import { tap } from 'rxjs';
-// import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -20,12 +16,10 @@ export class UserService extends FirestoreService<unknown>  {
   private loggedInUser: IAuthUser;
 
   constructor(
-    // private ngFirestore: AngularFirestore,
-    // ngFirestore: Firestore,
-    protected storageService: MNGBrowserStorageService
+    protected storageService: MNGBrowserStorageService,
+    @Inject(FIREBASE_SERVICES) firebaseServices: FirebaseServices
   ) {
-    // super(ngFirestore);
-    super();
+    super(firebaseServices);
     this.collName = CollNameGlobal.USERS;
   }
 

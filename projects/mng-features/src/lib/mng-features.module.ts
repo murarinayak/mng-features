@@ -1,7 +1,7 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ILibraryConfig } from 'mng-features/shared';
+import { FIREBASE_SERVICES, FirebaseServices, ILibraryConfig } from 'mng-features/shared';
 import { MNGFeaturesComponent } from './mng-features.component';
 
 @NgModule({
@@ -20,7 +20,11 @@ export class MNGFeaturesModule {
     return {
       ngModule: MNGFeaturesModule,
       providers: [
-        { provide: 'config', useValue: config }
+        { provide: 'config', useValue: config },
+        {
+          provide: FIREBASE_SERVICES,
+          useValue: config.firebaseServices ?? {}
+        }
       ]
     };
   }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { GoogleAuthProvider } from '@angular/fire/auth';
+import { GoogleAuthProvider } from 'firebase/auth';
 
 import { AuthService } from '../../services/auth.service';
 import { User, IAuthUser } from 'mng-features/shared';

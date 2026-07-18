@@ -1,4 +1,4 @@
-import { Timestamp, serverTimestamp } from '@angular/fire/firestore';
+import { Timestamp, serverTimestamp } from 'firebase/firestore';
 
 import { IFirestoreTimestamp, IOption } from '../models/common.model';
 import { RouteParts } from './constants';

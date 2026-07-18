@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IWpPost } from '../../common/common.model';
 import { BlogService } from '../../services/blog.service';
@@ -7,6 +7,7 @@ import { BlogService } from '../../services/blog.service';
   selector: 'mng-post-view',
   templateUrl: './post-view.component.html',
   styleUrls: ['./post-view.component.css'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class PostViewComponent implements OnInit {

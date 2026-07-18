@@ -1,5 +1,6 @@
 import {
-  ChangeDetectorRef, Component, ElementRef, EventEmitter, Output, ViewChild
+  ChangeDetectorRef, Component, ElementRef, EventEmitter, Output, ViewChild,
+  ChangeDetectionStrategy
 } from '@angular/core';
 
 import { FileStorageService, IFileMetadata } from '../services/file-storage.service';
@@ -8,6 +9,7 @@ import { FileStorageService, IFileMetadata } from '../services/file-storage.serv
   selector: 'app-file-upload',
   templateUrl: './file-upload.component.html',
   styleUrls: ['./file-upload.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class FileUploadComponent {

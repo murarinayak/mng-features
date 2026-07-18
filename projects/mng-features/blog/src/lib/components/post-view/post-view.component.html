@@ -1,7 +1,7 @@
-<img [src]="post?.jetpack_featured_media_url" alt="" class="w-100">
+<img [src]="$safeNavigationMigration(post?.jetpack_featured_media_url)" alt="" class="w-100">
 <div class="container my-3">
   <div class="row">
-    <div class="col-auto my-2">{{ post?.date | date }}</div>
+    <div class="col-auto my-2">{{ $safeNavigationMigration(post?.date) | date }}</div>
     <div class="col">
       <mat-chip-listbox>
         @for (tag of post?.tags; track tag) {
@@ -10,6 +10,6 @@
       </mat-chip-listbox>
     </div>
   </div>
-  <h2><span [innerHTML]="post?.title.rendered"></span></h2>
-  <p [innerHtml]="post?.content.rendered"></p>
+  <h2><span [innerHTML]="$safeNavigationMigration(post?.title.rendered)"></span></h2>
+  <p [innerHtml]="$safeNavigationMigration(post?.content.rendered)"></p>
 </div>

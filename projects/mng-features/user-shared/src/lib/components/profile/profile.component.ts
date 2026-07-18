@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 
 import { AuthService } from 'mng-features/auth';
@@ -8,6 +8,7 @@ import { ToastService } from 'mng-features/toast';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class ProfileComponent implements OnInit {

@@ -1,12 +1,12 @@
 <div class="card post-item" (click)="onLinkClick()">
   <!-- <img [ngSrc]="post.jetpack_featured_media_url" class="card-img-top"
     [alt]="post?.title.rendered" /> -->
-  <img [src]="post.jetpack_featured_media_url" class="card-img-top" [alt]="post?.title.rendered" />
+  <img [src]="post.jetpack_featured_media_url" class="card-img-top" [alt]="$safeNavigationMigration(post?.title.rendered)" />
   <div class="card-body">
     <p class="text-center">
       <span>{{ post.date | date }}</span>
     </p>
-    <h3 class="text-center mb-0"><span [innerHTML]="post?.title?.rendered"></span></h3>
+    <h3 class="text-center mb-0"><span [innerHTML]="$safeNavigationMigration(post?.title?.rendered)"></span></h3>
     <!-- <div class="post-footer">
       <p [innerHtml]="post?.excerpt.rendered"></p>
     </div> -->

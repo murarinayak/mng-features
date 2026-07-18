@@ -2,7 +2,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
+    "rootDir": ".",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true,
@@ -12,7 +12,7 @@
     "noImplicitReturns": true,
     "paths": {
       "mng-features/*": [
-        "projects/mng-features/*/src/public-api"
+        "./projects/mng-features/*/src/public-api"
       ]
     },
     "noFallthroughCasesInSwitch": true,

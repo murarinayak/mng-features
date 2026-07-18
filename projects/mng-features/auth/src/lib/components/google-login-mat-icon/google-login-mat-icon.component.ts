@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-google-login-mat-icon',
@@ -14,6 +14,7 @@ import { Component, OnInit } from '@angular/core';
   styles: [`
     mat-icon { vertical-align: middle; }
   `],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class GoogleLoginMatIconComponent implements OnInit {

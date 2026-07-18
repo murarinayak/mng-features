@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { IWpPost } from '../../common/common.model';
 import { BlogService } from '../../services/blog.service';
 
@@ -6,6 +6,7 @@ import { BlogService } from '../../services/blog.service';
   selector: 'mng-post-list',
   templateUrl: './post-list.component.html',
   styleUrls: ['./post-list.component.css'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class PostListComponent {

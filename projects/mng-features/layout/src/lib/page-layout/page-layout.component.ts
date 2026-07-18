@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 // import { NavigationEnd, Router } from '@angular/router';
 import { BreakpointObserver, Breakpoints, MediaMatcher } from '@angular/cdk/layout';
 import { CommonService, IMenuItem } from 'mng-features/shared';
@@ -8,6 +8,7 @@ import { CommonService, IMenuItem } from 'mng-features/shared';
 @Component({
   selector: 'app-page-layout',
   templateUrl: './page-layout.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class PageLayoutComponent {

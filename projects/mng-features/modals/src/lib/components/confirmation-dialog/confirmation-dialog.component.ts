@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, ChangeDetectionStrategy } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { IDialogData } from '../../common/dialog-data.model';
@@ -7,6 +7,7 @@ import { IDialogData } from '../../common/dialog-data.model';
   selector: 'mng-confirmation-dialog',
   templateUrl: './confirmation-dialog.component.html',
   styleUrls: ['./confirmation-dialog.component.css'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class ConfirmationDialogComponent {

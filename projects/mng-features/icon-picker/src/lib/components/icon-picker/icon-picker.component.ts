@@ -1,5 +1,5 @@
 import { Dialog } from '@angular/cdk/dialog';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ChangeDetectionStrategy } from '@angular/core';
 import { IOption } from 'mng-features/shared';
 import { MNGIconPickerService } from '../../icon-picker.service';
 import { IconPaletteComponent } from '../icon-palette/icon-palette.component';
@@ -8,6 +8,7 @@ import { IconPaletteComponent } from '../icon-palette/icon-palette.component';
   selector: 'mng-icon-picker',
   templateUrl: './icon-picker.component.html',
   styleUrls: ['./icon-picker.component.css'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class MNGIconPickerComponent {

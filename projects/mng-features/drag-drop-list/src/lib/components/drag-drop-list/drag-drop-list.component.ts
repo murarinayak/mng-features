@@ -1,10 +1,11 @@
-import { Component, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
+import { Component, EventEmitter, Input, Output, TemplateRef, ChangeDetectionStrategy } from '@angular/core';
 import { IDragDropItem } from '../../common/drag-drop-item.model';
 
 @Component({
   selector: 'mng-drag-drop-list',
   templateUrl: './drag-drop-list.component.html',
   styleUrls: ['./drag-drop-list.component.css'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class DragDropListComponent {

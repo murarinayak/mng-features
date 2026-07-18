@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ChangeDetectionStrategy } from '@angular/core';
 import { IMenuItem } from 'mng-features/shared';
 import { IDragDropItem } from '../../common/drag-drop-item.model';
 
@@ -6,6 +6,7 @@ import { IDragDropItem } from '../../common/drag-drop-item.model';
   selector: 'mng-drag-drop-item',
   templateUrl: './drag-drop-item.component.html',
   styleUrls: ['./drag-drop-item.component.css'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class DragDropItemComponent {

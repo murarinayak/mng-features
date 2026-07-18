@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, ChangeDetectionStrategy } from '@angular/core';
 
 import { MNGIconPickerService } from '../../icon-picker.service';
 
@@ -9,6 +9,7 @@ import { DialogRef, DIALOG_DATA } from '@angular/cdk/dialog';
   selector: 'mng-icon-palette',
   templateUrl: './icon-palette.component.html',
   styleUrls: ['./icon-palette.component.css'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class IconPaletteComponent {

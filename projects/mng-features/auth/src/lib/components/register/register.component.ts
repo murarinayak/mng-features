@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService, User } from 'mng-features/shared';
 import { ToastService } from 'mng-features/toast';
@@ -7,6 +7,7 @@ import { ToastService } from 'mng-features/toast';
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class RegisterComponent {

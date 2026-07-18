@@ -1,6 +1,6 @@
 import { BreakpointObserver, Breakpoints, MediaMatcher } from '@angular/cdk/layout';
 import { Location } from '@angular/common';
-import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { AuthService } from 'mng-features/auth';
 import { MNGBrowserStorageService, CommonService, IMenuItem, LocalStorageCommonKeys } from 'mng-features/shared';
@@ -11,6 +11,7 @@ import { IThemeOption } from './theme-picker/option.model';
 @Component({
   selector: 'mng-header',
   templateUrl: './header.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class HeaderComponent implements OnInit, OnDestroy {

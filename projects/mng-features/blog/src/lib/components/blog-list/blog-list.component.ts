@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { IWpPost } from '../../common/common.model';
 import { BlogService } from '../../services/blog.service';
 
 @Component({
   selector: 'app-blog-list',
   templateUrl: './blog-list.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class BlogListComponent implements OnInit {

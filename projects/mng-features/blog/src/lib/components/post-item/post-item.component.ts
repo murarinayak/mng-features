@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IWpPost } from '../../common/common.model';
 
@@ -6,6 +6,7 @@ import { IWpPost } from '../../common/common.model';
 @Component({
   selector: 'app-post-item',
   templateUrl: './post-item.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class PostItemComponent implements OnInit {

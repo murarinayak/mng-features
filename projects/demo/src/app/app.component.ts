@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { AbstractControl, FormControl } from '@angular/forms';
 import { ThemePalette } from '@angular/material/core';
 
@@ -6,6 +6,7 @@ import { ThemePalette } from '@angular/material/core';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class AppComponent {

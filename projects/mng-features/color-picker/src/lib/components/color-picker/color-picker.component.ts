@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ChangeDetectionStrategy } from '@angular/core';
 import { Dialog } from '@angular/cdk/dialog';
 import { ColorPaletteComponent } from '../color-palette/color-palette.component';
 
@@ -6,6 +6,7 @@ import { ColorPaletteComponent } from '../color-palette/color-palette.component'
   selector: 'mng-color-picker',
   templateUrl: './color-picker.component.html',
   styleUrls: ['./color-picker.component.css'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class MNGColorPickerComponent {
